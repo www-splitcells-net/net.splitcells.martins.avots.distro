@@ -59,13 +59,13 @@ public class Distro {
     private static Config baseConfig() {
         final var config = Config.create().withDetailedXslMenu(DETAILED_XSL_MENU)
                 .withXslWindowMenu(WINDOW_MENU_XSL)
-                .clearAdditionalProgramConfigs()
                 .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)));
         return config;
     }
 
     private static Config websiteConfig(Config config) {
-        config.withAdditionalProgramConfig(programConfig("About This Site"
+        config.clearAdditionalProgramConfigs()
+                .withAdditionalProgramConfig(programConfig("About This Site"
                         , "/net/splitcells/martins/avots/website/info/about-this-site")
                         .withLogoPath(Optional.of("net/splitcells/website/images/white.background.blog.discovery.0.jpg"))
                         .withDescription(Optional.of("History And Purpose Of This Site")))
