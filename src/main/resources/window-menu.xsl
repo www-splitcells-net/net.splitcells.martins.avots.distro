@@ -24,21 +24,21 @@
             <a class="net-splitcells-button-inline">
                 <xsl:attribute name="href">
                     <xsl:value-of
-                            select="s:default-root-relative-url('net/splitcells/website/main-menu.html')"/>
+                            select="s:default-root-relative-url('net/splitcells/website/server/front-menu.html')"/>
                 </xsl:attribute>
                 Menu
             </a>
             <a class="net-splitcells-button-inline">
                 <xsl:attribute name="href">
                     <xsl:value-of
-                            select="s:root-relative-url('/legal/impressum.html')"/>
+                            select="s:default-root-relative-url('net/splitcells/martins/avots/distro/legal/impressum.html')"/>
                 </xsl:attribute>
                 Impressum
             </a>
             <a class="net-splitcells-button-inline">
                 <xsl:attribute name="href">
                     <xsl:value-of
-                            select="s:root-relative-url('/legal/privacy-policy.html')"/>
+                            select="s:default-root-relative-url('net/splitcells/martins/avots/distro/legal/privacy-policy.html').html')"/>
                 </xsl:attribute>
                 Privacy Policy
             </a>
