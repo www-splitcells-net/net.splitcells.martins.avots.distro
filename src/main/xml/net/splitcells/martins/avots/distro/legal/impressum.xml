@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet attribute="text/xsl" href="xofi.html.xslt"?>
+<article
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xi="http://www.w3.org/2001/XInclude"
+        xmlns:xl="http://www.w3.org/1999/xlink"
+        xmlns="http://splitcells.net/sew.xsd"
+        xsi:schemaLocation="http://splitcells.net/sew.xsd sew.xsd">
+    <meta>
+        <title>Impressum</title>
+        <title_detailed>Impressum (required by German law)</title_detailed>
+        <description>This is the impressum of this site.</description>
+        <tags>
+            <tag name="splitcells.net"/>
+        </tags>
+        <related_to>
+            <url>
+                <site_instance_purl/>/2015/03/04/about-this-site
+            </url>
+        </related_to>
+        <toDo>Es wird vermutet, dass eine Telefonnummer im Impressum nicht benötigt wird,
+            sofern ein gleichwertiges Kommunikationsmittel gegeben ist und es keinen Telefonischen Anschluss für Kundenkontakt bereits gibt.
+            (Urteil v. 10.07.2019 – C-649/17 – Amazon).
+            <toDo xl:href="https://www.law-blog.de/2102/sind-telefonnummer-und-e-mail-adresse-im-impressum-pflicht/"/>
+            <toDo xl:href="https://website-check.de/blog/muss-die-telefonnummer-im-impressum-angegeben-werden/"/>
+            <toDo>Andere geben anscheinend auch häufig keine Telefonnummer an.</toDo>
+        </toDo>
+        <publication_date year="2015" month="03" day_of_month="01"/>
+        <arbitrary_publication_date/>
+        <license>standard</license>
+    </meta>
+    <content>
+        <list>
+            <item>An impressum is required by German law.</item>
+            <item>Only contact me via these addresses for legal reasons.</item>
+            <item>Mārtiņš Avots (Martins Avots)</item>
+            <item>Frankenstraße 26</item>
+            <item>97276 Margetshöchheim</item>
+            <item>mobile phone number: ***REMOVED***</item>
+            <item>Email: contacts@splitcells.net</item>
+        </list>
+    </content>
+</article>
