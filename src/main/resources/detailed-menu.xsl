@@ -10,34 +10,37 @@
                 xmlns:xl="http://www.w3.org/1999/xlink"
                 xmlns:ns="http://splitcells.net/namespace.xsd">
     <xsl:variable name="net-splitcells-website-server-config-menu-detailed">
-        <s:option>
-            <s:name>Privacy Policy</s:name>
-            <s:page>/net/splitcells/martins/avots/distro/legal/privacy-policy</s:page>
-        </s:option>
-        <s:option>
-            <s:name>Impressum</s:name>
-            <s:page>/net/splitcells/martins/avots/distro/legal/impressum</s:page>
-        </s:option>
-        <s:option>
-            <s:name>Licensing</s:name>
-            <s:page>/net/splitcells/martins/avots/distro/legal/licensing</s:page>
-        </s:option>
-        <s:option>
-            <s:name>Main Page</s:name>
-            <s:page>/net/splitcells/website/server/front-menu</s:page>
-        </s:option>
-        <div class="messages">
-            <h3>Messages</h3>
-            <div class="noScriptMessage TextCell text_error">
-                Activate Javascript in order to enable all functions of this site.
+        <s:chapter>
+            <s:title>Sections</s:title>
+            <s:option>
+                <s:name>Privacy Policy</s:name>
+                <s:page>/net/splitcells/martins/avots/distro/legal/privacy-policy</s:page>
+            </s:option>
+            <s:option>
+                <s:name>Impressum</s:name>
+                <s:page>/net/splitcells/martins/avots/distro/legal/impressum</s:page>
+            </s:option>
+            <s:option>
+                <s:name>Licensing</s:name>
+                <s:page>/net/splitcells/martins/avots/distro/legal/licensing</s:page>
+            </s:option>
+            <s:option>
+                <s:name>Main Page</s:name>
+                <s:page>/net/splitcells/website/server/front-menu</s:page>
+            </s:option>
+            <div class="messages">
+                <h3>Messages</h3>
+                <div class="noScriptMessage TextCell text_error">
+                    Activate Javascript in order to enable all functions of this site.
+                </div>
+                <br/>
             </div>
-            <br/>
-        </div>
-        <a class="net-splitcells-button net-splitcells-component-priority-3 net-splitcells-network-status">
-            <xsl:attribute name="href">
-                <xsl:value-of
-                        select="s:default-root-relative-url('net/splitcells/network/status.html')"/>
-            </xsl:attribute>
-        </a>
+            <a class="net-splitcells-button net-splitcells-component-priority-3 net-splitcells-network-status">
+                <xsl:attribute name="href">
+                    <xsl:value-of
+                            select="s:default-root-relative-url('net/splitcells/network/status.html')"/>
+                </xsl:attribute>
+            </a>
+        </s:chapter>
     </xsl:variable>
 </xsl:stylesheet>
