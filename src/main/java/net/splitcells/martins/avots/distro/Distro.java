@@ -57,7 +57,8 @@ public class Distro {
     }
 
     private static Config baseConfig() {
-        final var config = Config.create().withDetailedXslMenu(DETAILED_XSL_MENU)
+        final var config = net.splitcells.network.distro.Distro.config()
+                .withDetailedXslMenu(DETAILED_XSL_MENU)
                 .withXslWindowMenu(WINDOW_MENU_XSL)
                 .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)));
         return config;
