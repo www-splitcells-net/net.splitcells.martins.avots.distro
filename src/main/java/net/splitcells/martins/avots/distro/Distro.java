@@ -59,7 +59,6 @@ public class Distro {
     private static Config baseConfig() {
         final var config = Config.create().withDetailedXslMenu(DETAILED_XSL_MENU)
                 .withXslWindowMenu(WINDOW_MENU_XSL)
-                .withAdditionalCssFile("net/splitcells/martins/avots/website/css/theme.css")
                 .clearAdditionalProgramConfigs()
                 .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)));
         return config;
