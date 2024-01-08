@@ -52,7 +52,7 @@ public class Distro {
         return WebsiteViaJar.projectsRenderer(config).httpServer();
     }
 
-    private static void envConfig(Environment env) {
+    public static void envConfig(Environment env) {
         env.config().withInitedOption(HostUtilizationRecordService.class);
     }
 
