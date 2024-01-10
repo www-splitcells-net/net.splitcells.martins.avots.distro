@@ -38,7 +38,7 @@
             <a class="net-splitcells-button-inline">
                 <xsl:attribute name="href">
                     <xsl:value-of
-                            select="s:default-root-relative-url('net/splitcells/martins/avots/distro/legal/privacy-policy.html').html')"/>
+                            select="s:default-root-relative-url('net/splitcells/martins/avots/distro/legal/privacy-policy.html')"/>
                 </xsl:attribute>
                 Privacy Policy
             </a>
