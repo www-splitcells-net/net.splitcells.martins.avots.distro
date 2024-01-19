@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns="http://splitcells.net/sew.xsd">
+    <title>Terms Of Service</title>
+    <paragraph>By using the server you are accepting the
+        <link>
+            <text>privacy policy</text>
+            <post>net/splitcells/martins/avots/distro/legal/privacy-policy</post>
+        </link>
+        of this site.
+        The privacy policy is available at
+        <link>
+            <text>
+                <quote>net/splitcells/martins/avots/distro/legal/privacy-policy</quote>
+            </text>
+            <post>net/splitcells/martins/avots/distro/legal/privacy-policy</post>
+        </link>
+        .
+    </paragraph>
+</chapter>
