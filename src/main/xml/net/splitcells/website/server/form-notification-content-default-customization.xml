@@ -3,9 +3,10 @@
     <title>Terms Of Service</title>
     <paragraph>
         This is a form where data and files can be entered.
-        When this form is submitted,
-        the data and files are uploaded to the server in order to process the request of the user and
+        When you submit this form,
+        the data and files are uploaded to the server in order to process your request and
         to provide the requested functionality.
+        The request, the uploaded data and files are temporarily stored for maintenance purposes.
     </paragraph>
     <paragraph>This is done according to the
         <link>
@@ -13,7 +14,7 @@
             <post>net/splitcells/martins/avots/distro/legal/privacy-policy</post>
         </link>
         of this site.
-        The privacy policy is available at
+        For mor details, the privacy policy is available at
         <link>
             <text>
                 <quote>net/splitcells/martins/avots/distro/legal/privacy-policy</quote>
