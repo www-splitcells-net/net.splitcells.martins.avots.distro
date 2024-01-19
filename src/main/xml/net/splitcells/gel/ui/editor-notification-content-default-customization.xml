@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xmlns="http://splitcells.net/sew.xsd">
     <title>Terms Of Service</title>
-    <paragraph>By using the server you are accepting the
+    <paragraph>
+        This is a form where data and files can be entered.
+        When this form is submitted,
+        the data and files are uploaded to the server in order to process the request of the user and
+        to provide the requested functionality.
+    </paragraph>
+    <paragraph>This is done according to the
         <link>
             <text>privacy policy</text>
             <post>net/splitcells/martins/avots/distro/legal/privacy-policy</post>
