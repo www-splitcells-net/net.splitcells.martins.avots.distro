@@ -13,10 +13,6 @@
         <s:chapter>
             <s:title>Sections</s:title>
             <s:option>
-                <s:name>Privacy Policy</s:name>
-                <s:page>/net/splitcells/martins/avots/distro/legal/privacy-policy</s:page>
-            </s:option>
-            <s:option>
                 <s:name>Impressum</s:name>
                 <s:page>/net/splitcells/martins/avots/distro/legal/impressum</s:page>
             </s:option>
@@ -27,6 +23,10 @@
             <s:option>
                 <s:name>Main Page</s:name>
                 <s:page>/net/splitcells/website/server/front-menu</s:page>
+            </s:option>
+            <s:option>
+                <s:name>Privacy Policy</s:name>
+                <s:page>/net/splitcells/martins/avots/distro/legal/privacy-policy</s:page>
             </s:option>
             <div class="messages">
                 <h3>Messages</h3>
