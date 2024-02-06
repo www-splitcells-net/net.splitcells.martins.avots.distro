@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+# SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
+# SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
+set -e
+currentFolder=$(pwd)
+# Update repos.
+cd ../net.splitcells.network.worker
+bin/repos.pull
+# Build program.
+cd $currentFolder
+bin/build.on.server
+# Deploy program.
+../net.splitcells.network.worker/bin/execute.service \
+  --name-for-execution="net.splitcells.martins.avots.distro" \
+  --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro"
