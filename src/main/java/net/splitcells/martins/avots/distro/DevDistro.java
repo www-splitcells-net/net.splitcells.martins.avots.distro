@@ -29,7 +29,7 @@ import net.splitcells.network.blog.NetworkBlogFileSystem;
 import net.splitcells.network.community.NetworkCommunityFileSystem;
 import net.splitcells.network.log.NetworkLogFileSystem;
 import net.splitcells.network.media.NetworkMediaFileSystem;
-import net.splitcells.network.worker.NetworkWorkerFileSystem;
+import net.splitcells.network.worker.via.java.NetworkWorkerFileSystem;
 import net.splitcells.os.state.interfaces.OsiFileSystem;
 import net.splitcells.os.state.interfaces.lib.OsiLibFileSystem;
 import net.splitcells.project.files.standard.ProjectStandardFileSystem;
