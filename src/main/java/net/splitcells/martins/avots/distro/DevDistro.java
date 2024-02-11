@@ -89,7 +89,7 @@ public class DevDistro {
                                 fileSystemOnLocalHost(PUBLIC_ROOT_PROJECT_REPO)
                                 , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network"))))
                 .withConfigValue(NetworkWorkerFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.worker")))
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.worker.via.java")))
                 .withConfigValue(NetworkBlogFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.blog")))
                 .withConfigValue(OsiFileSystem.class
