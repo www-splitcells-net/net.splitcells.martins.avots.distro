@@ -82,7 +82,7 @@ public class DevDistro {
     public static void main(String... args) {
         System.setProperty(net.splitcells.dem.environment.config.StaticFlags.ENFORCING_UNIT_CONSISTENCY_KEY, "false");
         Dem.process(() -> {
-            if (true) {
+            if (false) {
                 final var network = network();
                 final var currentWorldHistory = worldHistory(WORLD_HISTORY, list(), list());
                 reportRuntime(() -> {
