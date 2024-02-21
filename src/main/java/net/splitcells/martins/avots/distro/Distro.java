@@ -70,10 +70,10 @@ public class Distro {
                         , "/net/splitcells/martins/avots/website/info/about-this-site")
                         .withLogoPath(Optional.of("net/splitcells/website/images/white.background.blog.discovery.0.jpg"))
                         .withDescription(Optional.of("History And Purpose Of This Site")))
-                .withAdditionalProgramConfig(programConfig("Newsfeed"
+                .withAdditionalProgramConfig(programConfig("Technical Newsfeed"
                         , "/net/splitcells/CHANGELOG.global")
                         .withLogoPath(Optional.of("net/splitcells/website/images/average.source.code.image.generator.filling.via.horizontal.100.percent.jpg"))
-                        .withDescription(Optional.of("Site's Global Changelog")))
+                        .withDescription(Optional.of("Site's Technical Global Changelog")))
                 .withAdditionalProgramConfig(programConfig("Splitcells Network"
                         , "/net/splitcells/network/README")
                         .withLogoPath(Optional.of("net/splitcells/website/images/community.2016.12.11.chrom.0.dina4.jpg"))
