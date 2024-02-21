@@ -2,6 +2,11 @@
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 set -e
+currentFolder=$(pwd)
+# Update repos.
+cd ../net.splitcells.network.worker
+bin/repos.pull
+cd $currentFolder
 cd ~/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.network.distro
   bin/build.on.server
 cd ~/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.network.worker
