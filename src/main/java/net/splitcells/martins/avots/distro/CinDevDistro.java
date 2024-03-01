@@ -21,14 +21,11 @@ import net.splitcells.dem.DemApiFileSystem;
 import net.splitcells.dem.DemFileSystem;
 import net.splitcells.dem.data.set.list.List;
 import net.splitcells.dem.environment.Environment;
-import net.splitcells.dem.object.Discoverable;
 import net.splitcells.dem.resource.ContentType;
 import net.splitcells.gel.GelCoreFileSystem;
 import net.splitcells.gel.data.database.Databases;
-import net.splitcells.gel.data.table.Table;
 import net.splitcells.gel.doc.GelDocFileSystem;
 import net.splitcells.gel.ext.GelExtFileSystem;
-import net.splitcells.gel.solution.SolutionView;
 import net.splitcells.gel.solution.Solutions;
 import net.splitcells.gel.ui.GelUiFileSystem;
 import net.splitcells.network.NetworkFileSystem;
@@ -73,7 +70,7 @@ import static net.splitcells.gel.solution.optimization.primitive.OnlineLinearIni
 import static net.splitcells.sep.Network.network;
 import static net.splitcells.website.server.processor.BinaryMessage.binaryMessage;
 
-public class DevDistro {
+public class CinDevDistro {
 
     private static final Path PUBLIC_REPOS = Paths.get(System.getProperty("user.home")).resolve(
             "Documents/projects/net.splitcells.martins.avots.support.system/public/");
@@ -83,6 +80,30 @@ public class DevDistro {
     public static void main(String... args) {
         System.setProperty(net.splitcells.dem.environment.config.StaticFlags.ENFORCING_UNIT_CONSISTENCY_KEY, "false");
         Dem.process(() -> {
+            if (true) {
+                // TODO Make this a declarative service.
+                final var network = network();
+                final var currentWorldHistory = worldHistory(WORLD_HISTORY, list(), list());
+                reportRuntime(() -> {
+                    network.withNode(WORLD_HISTORY, currentWorldHistory);
+                    initWorldHistory(currentWorldHistory);
+                    allocateBlinker(currentWorldHistory);
+                    currentWorldHistory.init();
+                    allocateRestAsDead(currentWorldHistory);
+                }, "Initialize world history.", INFO);
+                reportRuntime(() -> {
+                    network.withOptimization(WORLD_HISTORY, onlineLinearInitialization());
+                    network.withOptimization(WORLD_HISTORY, worldOptimizer(network.node(WORLD_HISTORY)));
+                }, "Initial world history optimization", INFO);
+                reportRuntime(() -> {
+                    network.withExecution(WORLD_HISTORY, wh -> {
+                        addNextTime(wh);
+                        wh.init();
+                    });
+                    network.withOptimization(WORLD_HISTORY, onlineLinearInitialization());
+                    network.withOptimization(WORLD_HISTORY, worldOptimizer(network.node(WORLD_HISTORY)));
+                }, "World history optimization", INFO);
+            }
             try (final var liveService = Distro.liveService()) {
                 liveService.start();
                 Dem.waitIndefinitely();
