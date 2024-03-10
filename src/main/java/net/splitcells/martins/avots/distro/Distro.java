@@ -75,7 +75,7 @@ public class Distro {
                         .withLogoPath(Optional.of("net/splitcells/website/images/average.source.code.image.generator.filling.via.horizontal.100.percent.jpg"))
                         .withDescription(Optional.of("Site's Technical Global Changelog")))
                 .withAdditionalProgramConfig(programConfig("Splitcells Network"
-                        , "/net/splitcells/network/README")
+                        , "/net/splitcells/network/hub/README")
                         .withLogoPath(Optional.of("net/splitcells/website/images/community.2016.12.11.chrom.0.dina4.jpg"))
                         .withDescription(Optional.of("We provide an open source ecosystem centered around optimization and operations research.")))
                 .withAdditionalProgramConfig(programConfig("Personal Projects"
