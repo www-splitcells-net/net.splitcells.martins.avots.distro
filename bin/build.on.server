@@ -9,5 +9,5 @@ bin/worker.repos.pull
 cd $currentFolder
 cd ~/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.network.distro
   bin/build.on.server
-cd ~/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.network.worker
-  bin/execute --name=test --command='sh -c "cd /root/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.martins.avots.distro/ && mvn clean install"'
+cd ~/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.network
+  bin/worker.execute --name=test --command='sh -c "cd /root/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.martins.avots.distro/ && mvn clean install"'
