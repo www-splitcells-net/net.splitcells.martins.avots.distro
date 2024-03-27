@@ -29,7 +29,6 @@ import net.splitcells.gel.ext.GelExtFileSystem;
 import net.splitcells.gel.solution.Solutions;
 import net.splitcells.gel.ui.GelUiFileSystem;
 import net.splitcells.network.NetworkFileSystem;
-import net.splitcells.network.blog.NetworkBlogFileSystem;
 import net.splitcells.network.community.NetworkCommunityFileSystem;
 import net.splitcells.network.distro.NetworkDistroFileSystem;
 import net.splitcells.network.log.NetworkLogFileSystem;
@@ -205,8 +204,6 @@ public class CinDevDistro {
                                 , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network"))))
                 .withConfigValue(NetworkWorkerFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.worker.via.java")))
-                .withConfigValue(NetworkBlogFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.blog")))
                 .withConfigValue(OsiFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.os.state.interface")))
                 .withConfigValue(OsiLibFileSystem.class
