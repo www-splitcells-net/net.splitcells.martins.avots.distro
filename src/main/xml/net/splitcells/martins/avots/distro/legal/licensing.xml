@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://splitcells.net/sew.xsd">
+    <meta>
+        <title>Licensing</title>
+    </meta>
+    <paragraph>See
+        <link>
+            <text>licensing of the core project</text>
+            <post>net/splitcells/network/LICENSE</post>
+        </link>
+        for more info.
+    </paragraph>
+</article>
