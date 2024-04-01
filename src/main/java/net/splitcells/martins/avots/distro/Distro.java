@@ -56,6 +56,14 @@ public class Distro {
         env.config().withInitedOption(HostUtilizationRecordService.class);
     }
 
+    public static Config baseConfig(Config arg) {
+        arg.withDetailedXslMenu(DETAILED_XSL_MENU)
+                .withXslWindowMenu(WINDOW_MENU_XSL)
+                .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)));
+        return arg;
+    }
+
+    @Deprecated
     private static Config baseConfig() {
         final var config = net.splitcells.network.distro.Distro.config()
                 .withDetailedXslMenu(DETAILED_XSL_MENU)
