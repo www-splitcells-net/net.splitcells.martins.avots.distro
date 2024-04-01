@@ -19,6 +19,7 @@ import net.splitcells.cin.CinService;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
+import net.splitcells.gel.GelDev;
 import net.splitcells.system.SystemCell;
 import net.splitcells.website.server.ServerConfig;
 
@@ -44,5 +45,6 @@ public class LiveDistroCell implements Cell {
         net.splitcells.network.distro.java.Distro.config(env.config().configValue(ServerConfig.class));
         net.splitcells.network.distro.Distro.config(env.config().configValue(ServerConfig.class));
         net.splitcells.martins.avots.distro.Distro.baseConfig(env.config().configValue(ServerConfig.class));
+        GelDev.configureForWebserver(env);
     }
 }
