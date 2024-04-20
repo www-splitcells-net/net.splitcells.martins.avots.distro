@@ -16,8 +16,10 @@
 package net.splitcells.martins.avots.distro;
 
 import net.splitcells.dem.Dem;
+import net.splitcells.dem.resource.communication.log.Logs;
 
 import static net.splitcells.dem.Dem.sleepAtLeast;
+import static net.splitcells.dem.lang.perspective.PerspectiveI.perspective;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.acme.Certificate.certificate;
 
@@ -27,7 +29,11 @@ public class LiveDistro {
             try (final var liveService = Distro.liveService()) {
                 liveService.start();
                 sleepAtLeast(3000l);
-                certificate("live.splitcells.net", "contacts@splitcells.net");
+                try {
+                    certificate("live.splitcells.net", "contacts@splitcells.net");
+                } catch (Throwable t) {
+                    Logs.logs().appendWarning(perspective("ACME experiment failed."), t);
+                }
                 Dem.waitIndefinitely();
             }
         }, env -> {
