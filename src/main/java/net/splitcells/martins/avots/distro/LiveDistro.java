@@ -17,13 +17,23 @@ package net.splitcells.martins.avots.distro;
 
 import net.splitcells.dem.Dem;
 
+import static net.splitcells.dem.Dem.sleepAtLeast;
+import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
+import static net.splitcells.network.distro.java.acme.Certificate.certificate;
+
 public class LiveDistro {
     public static void main(String... args) {
         Dem.process(() -> {
             try (final var liveService = Distro.liveService()) {
                 liveService.start();
+                sleepAtLeast(3000l);
+                certificate("live.splitcells.net", "contacts@splitcells.net");
                 Dem.waitIndefinitely();
             }
-        }, Distro::envConfig);
+        }, env -> {
+            net.splitcells.network.distro.Distro.configurator(env);
+            Distro.envConfig(env);
+            ensureSslCertificatePresence(env);
+        });
     }
 }
