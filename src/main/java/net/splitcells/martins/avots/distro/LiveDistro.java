@@ -21,6 +21,7 @@ import net.splitcells.dem.resource.communication.log.Logs;
 import static net.splitcells.dem.Dem.sleepAtLeast;
 import static net.splitcells.dem.lang.perspective.PerspectiveI.perspective;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
+import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.Certificate.certificate;
 
 public class LiveDistro {
@@ -38,6 +39,7 @@ public class LiveDistro {
                 Dem.waitIndefinitely();
             }
         }, env -> {
+            setGlobalUnixStateLogger(env);
             net.splitcells.network.distro.Distro.configurator(env);
             Distro.envConfig(env);
             ensureSslCertificatePresence(env);
