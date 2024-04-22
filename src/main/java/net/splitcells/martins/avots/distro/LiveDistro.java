@@ -28,6 +28,7 @@ public class LiveDistro {
         Dem.process(() -> {
             try (final var liveService = Distro.liveService()) {
                 liveService.start();
+                // TODO Is this sleep really needed?
                 sleepAtLeast(3000l);
                 try {
                     certificate("live.splitcells.net", "contacts@splitcells.net");
