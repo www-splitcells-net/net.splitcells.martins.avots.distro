@@ -5,3 +5,4 @@ set -e
 ../net.splitcells.network/bin/worker.execute \
   --name="net.splitcells.martins.avots.distro" \
   --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro"
+  --port-publishing=8080:8443
