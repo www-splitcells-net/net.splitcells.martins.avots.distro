@@ -16,10 +16,13 @@
 package net.splitcells.martins.avots.distro;
 
 import net.splitcells.dem.Dem;
+import net.splitcells.dem.environment.resource.Console;
 import net.splitcells.dem.resource.communication.log.Logs;
+import net.splitcells.dem.resource.communication.log.MessageFilter;
 
 import static net.splitcells.dem.Dem.sleepAtLeast;
 import static net.splitcells.dem.lang.perspective.PerspectiveI.perspective;
+import static net.splitcells.dem.resource.communication.log.ServerLog.serverLog;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.Certificate.certificate;
@@ -40,6 +43,8 @@ public class LiveDistro {
             }
         }, env -> {
             setGlobalUnixStateLogger(env);
+            env.config().withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
+                    , env.config().configValue(MessageFilter.class)));
             net.splitcells.network.distro.Distro.configurator(env);
             Distro.envConfig(env);
             ensureSslCertificatePresence(env);
