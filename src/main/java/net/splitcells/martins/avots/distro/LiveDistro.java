@@ -16,38 +16,48 @@
 package net.splitcells.martins.avots.distro;
 
 import net.splitcells.dem.Dem;
+import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.Console;
 import net.splitcells.dem.resource.communication.log.Logs;
 import net.splitcells.dem.resource.communication.log.MessageFilter;
+import net.splitcells.website.server.security.IdentityPemStore;
+import net.splitcells.website.server.security.SslEnabled;
+
+import java.util.Optional;
 
 import static net.splitcells.dem.Dem.sleepAtLeast;
 import static net.splitcells.dem.lang.perspective.PerspectiveI.perspective;
 import static net.splitcells.dem.resource.communication.log.ServerLog.serverLog;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
-import static net.splitcells.network.distro.java.acme.Certificate.certificate;
+import static net.splitcells.network.distro.java.acme.Certificate.certificatePem;
 
 public class LiveDistro {
     public static void main(String... args) {
         Dem.process(() -> {
+            final byte[] certificate;
             try (final var liveService = Distro.liveService()) {
                 liveService.start();
-                // TODO Is this sleep really needed?
-                sleepAtLeast(3000l);
-                try {
-                    certificate("live.splitcells.net", "contacts@splitcells.net");
-                } catch (Throwable t) {
-                    Logs.logs().appendWarning(perspective("ACME experiment failed."), t);
-                }
-                Dem.waitIndefinitely();
+                certificate = certificatePem("live.splitcells.net", "contacts@splitcells.net");
             }
-        }, env -> {
-            setGlobalUnixStateLogger(env);
-            env.config().withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
-                    , env.config().configValue(MessageFilter.class)));
-            net.splitcells.network.distro.Distro.configurator(env);
-            Distro.envConfig(env);
-            ensureSslCertificatePresence(env);
-        });
+            Dem.process(() -> {
+                try (final var liveService = Distro.liveService()) {
+                    Dem.waitIndefinitely();
+                }
+            }, env -> {
+                baseConfig(env);
+                env.config().withConfigValue(IdentityPemStore.class, Optional.of(certificate))
+                        .withConfigValue(SslEnabled.class, true);
+            });
+        }, env -> baseConfig(env));
+    }
+
+    private static void baseConfig(Environment env) {
+        setGlobalUnixStateLogger(env);
+        env.config().withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
+                , env.config().configValue(MessageFilter.class)));
+        net.splitcells.network.distro.Distro.configurator(env);
+        Distro.envConfig(env);
+        ensureSslCertificatePresence(env);
     }
 }
