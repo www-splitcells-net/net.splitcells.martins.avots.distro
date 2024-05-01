@@ -20,6 +20,9 @@ import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.Console;
 import net.splitcells.dem.resource.communication.log.Logs;
 import net.splitcells.dem.resource.communication.log.MessageFilter;
+import net.splitcells.network.distro.java.acme.AcmeServerUri;
+import net.splitcells.website.server.config.PublicContactEMailAddress;
+import net.splitcells.website.server.config.PublicDomain;
 import net.splitcells.website.server.security.IdentityPemStore;
 import net.splitcells.website.server.security.SslEnabled;
 
@@ -30,6 +33,7 @@ import static net.splitcells.dem.lang.perspective.PerspectiveI.perspective;
 import static net.splitcells.dem.resource.communication.log.ServerLog.serverLog;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
+import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
 import static net.splitcells.network.distro.java.acme.Certificate.certificatePem;
 
 public class LiveDistro {
@@ -38,7 +42,7 @@ public class LiveDistro {
             final byte[] certificate;
             try (final var liveService = Distro.liveService()) {
                 liveService.start();
-                certificate = certificatePem("live.splitcells.net", "contacts@splitcells.net");
+                certificate = certificatePem();
             }
             Dem.process(() -> {
                 try (final var liveService = Distro.liveService()) {
@@ -55,7 +59,10 @@ public class LiveDistro {
     private static void baseConfig(Environment env) {
         setGlobalUnixStateLogger(env);
         env.config().withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
-                , env.config().configValue(MessageFilter.class)));
+                        , env.config().configValue(MessageFilter.class)))
+                .withConfigValue(PublicDomain.class, Optional.of("live.splitcells.net"))
+                .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
+                .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER);
         net.splitcells.network.distro.Distro.configurator(env);
         Distro.envConfig(env);
         ensureSslCertificatePresence(env);
