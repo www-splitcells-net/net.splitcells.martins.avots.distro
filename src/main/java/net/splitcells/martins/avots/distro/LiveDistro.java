@@ -21,9 +21,11 @@ import net.splitcells.dem.environment.resource.Console;
 import net.splitcells.dem.resource.communication.log.Logs;
 import net.splitcells.dem.resource.communication.log.MessageFilter;
 import net.splitcells.network.distro.java.acme.AcmeServerUri;
+import net.splitcells.network.distro.java.acme.PublicKeyCryptoConfig;
 import net.splitcells.website.server.config.PublicContactEMailAddress;
 import net.splitcells.website.server.config.PublicDomain;
-import net.splitcells.website.server.security.IdentityPemStore;
+import net.splitcells.website.server.security.PrivateIdentityPemStore;
+import net.splitcells.website.server.security.PublicIdentityPemStore;
 import net.splitcells.website.server.security.SslEnabled;
 
 import java.util.Optional;
@@ -35,15 +37,15 @@ import static net.splitcells.dem.resource.communication.log.ServerLog.serverLog;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
-import static net.splitcells.network.distro.java.acme.Certificate.certificatePem;
+import static net.splitcells.network.distro.java.acme.PublicKeyCrypto.publicKeyCryptoConfig;
 
 public class LiveDistro {
     public static void main(String... args) {
         Dem.process(() -> {
-            final byte[] certificate;
+            final PublicKeyCryptoConfig certificate;
             try (final var liveService = Distro.liveService()) {
                 liveService.start();
-                certificate = certificatePem();
+                certificate = publicKeyCryptoConfig();
             }
             Dem.process(() -> {
                 try (final var liveService = Distro.liveService()) {
@@ -52,7 +54,8 @@ public class LiveDistro {
                 }
             }, env -> {
                 baseConfig(env);
-                env.config().withConfigValue(IdentityPemStore.class, Optional.of(certificate))
+                env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
+                        .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
                         .withConfigValue(SslEnabled.class, true);
             });
         }, env -> baseConfig(env));
