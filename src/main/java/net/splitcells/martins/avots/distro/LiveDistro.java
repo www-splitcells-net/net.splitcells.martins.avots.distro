@@ -47,6 +47,7 @@ public class LiveDistro {
             }
             Dem.process(() -> {
                 try (final var liveService = Distro.liveService()) {
+                    liveService.start();
                     Dem.waitIndefinitely();
                 }
             }, env -> {
