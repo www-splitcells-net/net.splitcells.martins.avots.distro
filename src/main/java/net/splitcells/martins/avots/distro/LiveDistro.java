@@ -30,6 +30,7 @@ import java.util.Optional;
 
 import static net.splitcells.dem.Dem.sleepAtLeast;
 import static net.splitcells.dem.lang.perspective.PerspectiveI.perspective;
+import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
 import static net.splitcells.dem.resource.communication.log.ServerLog.serverLog;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
@@ -58,7 +59,9 @@ public class LiveDistro {
 
     private static void baseConfig(Environment env) {
         setGlobalUnixStateLogger(env);
-        env.config().withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
+        env.config()
+                .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
+                .withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
                         , env.config().configValue(MessageFilter.class)))
                 .withConfigValue(PublicDomain.class, Optional.of("live.splitcells.net"))
                 .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
