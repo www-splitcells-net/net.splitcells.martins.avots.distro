@@ -38,7 +38,7 @@ import static net.splitcells.dem.resource.communication.log.ServerLog.serverLog;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
-import static net.splitcells.network.distro.java.acme.PublicKeyCrypto.publicKeyCryptoConfig;
+import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 
 public class LiveDistro {
     public static void main(String... args) {
