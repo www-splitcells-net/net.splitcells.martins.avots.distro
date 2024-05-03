@@ -39,6 +39,7 @@ import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePres
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
+import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
 
 public class LiveDistro {
     public static void main(String... args) {
@@ -54,12 +55,18 @@ public class LiveDistro {
                     Dem.waitIndefinitely();
                 }
             }, env -> {
-                baseConfig(env);
                 env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
                         .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
                         .withConfigValue(SslEnabled.class, true);
+                baseConfig(env);
             });
-        }, env -> baseConfig(env));
+        }, env -> {
+            final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
+            env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
+                    .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
+                    .withConfigValue(SslEnabled.class, true);
+            baseConfig(env);
+        });
     }
 
     private static void baseConfig(Environment env) {
