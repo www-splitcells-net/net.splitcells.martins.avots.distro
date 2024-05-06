@@ -15,19 +15,6 @@
     -->
     <xsl:variable name="net-splitcells-website-server-config-window-menu">
         <xsl:variable name="content">
-            <a class="net-splitcells-button net-splitcells-main-button-project-logo">
-                <xsl:attribute name="href">
-                    <xsl:value-of
-                            select="s:default-root-relative-url('net/splitcells/network/hub/README.html')"/>
-                </xsl:attribute>
-            </a>
-            <a class="net-splitcells-button-inline">
-                <xsl:attribute name="href">
-                    <xsl:value-of
-                            select="s:default-root-relative-url('net/splitcells/website/server/front-menu.html')"/>
-                </xsl:attribute>
-                Menu
-            </a>
             <a class="net-splitcells-button-inline">
                 <xsl:attribute name="href">
                     <xsl:value-of
