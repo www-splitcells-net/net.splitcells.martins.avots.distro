@@ -25,9 +25,9 @@ import net.splitcells.network.distro.java.acme.PublicKeyCryptoConfig;
 import net.splitcells.website.server.RedirectServer;
 import net.splitcells.website.server.config.PublicContactEMailAddress;
 import net.splitcells.website.server.config.PublicDomain;
-import net.splitcells.website.server.security.PrivateIdentityPemStore;
-import net.splitcells.website.server.security.PublicIdentityPemStore;
-import net.splitcells.website.server.security.SslEnabled;
+import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
+import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
+import net.splitcells.website.server.security.encryption.SslEnabled;
 
 import java.util.Optional;
 
