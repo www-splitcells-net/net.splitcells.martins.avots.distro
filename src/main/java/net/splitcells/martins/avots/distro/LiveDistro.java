@@ -56,15 +56,15 @@ public class LiveDistro {
                     Dem.waitIndefinitely();
                 }
             }, env -> {
-                env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
+                env.config().withConfigValue(PasswordAuthenticationEnabled.class, true)
+                        .withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
                         .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
                         .withConfigValue(SslEnabled.class, true);
                 baseConfig(env);
             });
         }, env -> {
             final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
-            env.config().withConfigValue(PasswordAuthenticationEnabled.class, true)
-                    .withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
+            env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
                     .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
                     .withConfigValue(SslEnabled.class, true);
             baseConfig(env);
