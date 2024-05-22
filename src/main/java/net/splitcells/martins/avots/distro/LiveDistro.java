@@ -56,7 +56,7 @@ public class LiveDistro {
                     Dem.waitIndefinitely();
                 }
             }, env -> {
-                env.config().withConfigValue(PasswordAuthenticationEnabled.class, true)
+                env.config()
                         .withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
                         .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
                         .withConfigValue(SslEnabled.class, true);
