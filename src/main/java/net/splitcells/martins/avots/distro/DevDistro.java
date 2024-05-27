@@ -47,7 +47,6 @@ import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
 import net.splitcells.website.server.Config;
-import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.processor.BinaryMessage;
 import net.splitcells.website.server.project.ProjectRenderer;
 import net.splitcells.website.server.project.renderer.DiscoverableMediaRenderer;
@@ -92,7 +91,6 @@ public class DevDistro {
         }, env -> {
             Distro.envConfig(env);
             useLocalFileSystem(env);
-            env.config().withConfigValue(PasswordAuthenticationEnabled.class, true);
             env.config().configValue(Databases.class)
                     .withConnector(database -> ObjectsRenderer.registerObject(new DiscoverableRenderer() {
                         @Override
