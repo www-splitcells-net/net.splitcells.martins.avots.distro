@@ -34,7 +34,7 @@ import java.util.Optional;
 import static net.splitcells.dem.Dem.sleepAtLeast;
 import static net.splitcells.dem.lang.perspective.PerspectiveI.perspective;
 import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
-import static net.splitcells.dem.resource.communication.log.ServerLog.serverLog;
+import static net.splitcells.dem.resource.communication.log.ServerLogger.serverLog;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
