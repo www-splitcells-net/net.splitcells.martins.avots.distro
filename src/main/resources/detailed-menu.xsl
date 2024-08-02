@@ -21,8 +21,12 @@
                 <s:page>/net/splitcells/martins/avots/distro/legal/licensing</s:page>
             </s:option>
             <s:option>
-                <s:name>Main Page</s:name>
+                <s:name>Front Menu</s:name>
                 <s:page>/net/splitcells/website/server/front-menu</s:page>
+            </s:option>
+            <s:option>
+                <s:name>Main Menu</s:name>
+                <s:page>/net/splitcells/website/main-menu</s:page>
             </s:option>
             <s:option>
                 <s:name>Privacy Policy</s:name>
