@@ -20,6 +20,7 @@ import net.splitcells.dem.environment.resource.HostUtilizationRecordService;
 import net.splitcells.dem.environment.resource.Service;
 import net.splitcells.system.WebsiteViaJar;
 import net.splitcells.website.server.Config;
+import net.splitcells.website.server.Server;
 
 import java.util.Optional;
 
@@ -41,7 +42,12 @@ public class Distro {
     }
 
     public static Service liveService() {
-        return WebsiteViaJar.projectsRenderer(liveConfig(baseConfig())).httpServer();
+        final var config = liveConfig(baseConfig());
+        return Server.serveToHttpAt(() -> {
+            final var projectsRenderer = WebsiteViaJar.projectsRenderer(config);
+            projectsRenderer.build();
+            return requestPath -> projectsRenderer.render(requestPath);
+        }, config);
     }
 
     public static Service websiteService() {
