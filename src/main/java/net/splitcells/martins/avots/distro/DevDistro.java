@@ -92,6 +92,10 @@ public class DevDistro {
         }, env -> {
             Distro.envConfig(env);
             useLocalFileSystem(env);
+            /* TODO The ObjectsRenderers' errors cause the server to fail
+               to process editor requests in multithreaded environments.
+               ObjectsRenderers also cause errors in single-threaded environments,
+               but they do cause the server to fail to process editor requests.
             env.config().configValue(Databases.class)
                     .withConnector(database -> ObjectsRenderer.registerObject(new DiscoverableRenderer() {
                         @Override
@@ -156,6 +160,7 @@ public class DevDistro {
                             return path.withAppended(path.removeAt(path.size() - 1) + ".csv");
                         }
                     }));
+             */
         });
     }
 
