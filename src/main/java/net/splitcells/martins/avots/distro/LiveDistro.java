@@ -18,6 +18,7 @@ package net.splitcells.martins.avots.distro;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.Console;
+import net.splitcells.dem.resource.communication.log.LogLevel;
 import net.splitcells.dem.resource.communication.log.Logs;
 import net.splitcells.dem.resource.communication.log.MessageFilter;
 import net.splitcells.network.distro.java.acme.AcmeServerUri;
@@ -28,6 +29,8 @@ import net.splitcells.website.server.config.PublicDomain;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
 import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
+import net.splitcells.website.server.test.HtmlLiveTester;
+import net.splitcells.website.server.test.HtmlLiveTesterCount;
 
 import java.util.Optional;
 
@@ -57,7 +60,9 @@ public class LiveDistro {
                 env.config()
                         .withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
                         .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
-                        .withConfigValue(SslEnabled.class, true);
+                        .withConfigValue(SslEnabled.class, true)
+                        .withInitedOption(HtmlLiveTester.class)
+                        .withConfigValue(MessageFilter.class, logMessage -> true);
                 baseConfig(env);
             });
         }, env -> {
