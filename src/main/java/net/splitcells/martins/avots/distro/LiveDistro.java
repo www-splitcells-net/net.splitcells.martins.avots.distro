@@ -61,6 +61,7 @@ public class LiveDistro {
                         .withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
                         .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
                         .withConfigValue(SslEnabled.class, true)
+                        .withConfigValue(HtmlLiveTesterCount.class, 1) // The default settings crash the container, because not enough memory is being present.
                         .withInitedOption(HtmlLiveTester.class)
                         .withConfigValue(MessageFilter.class, logMessage -> true);
                 baseConfig(env);
