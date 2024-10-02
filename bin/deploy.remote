@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
+# SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
+
+# TODO For some reason pwd is required as a first command. If this is not done, the cd command call has no effect.
+# TODO Create build worker command with project as parameter instead of changing folders.
+ssh -t martins-avots@live.splitcells.net cd '~/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.network && bin/worker.repos.pull'
+ssh -t martins-avots@live.splitcells.net 'cd ~/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.martins.avots.distro/ && bin/build.on.server'
+ssh -t martins-avots@live.splitcells.net 'systemctl --user restart net.splitcells.live.service'
