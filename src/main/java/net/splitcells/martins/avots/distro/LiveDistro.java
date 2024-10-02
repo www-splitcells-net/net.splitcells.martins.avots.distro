@@ -74,6 +74,7 @@ public class LiveDistro {
                         .withInitedOption(HtmlLiveTester.class)
                         .withConfigValue(MessageFilter.class, logMessage -> true)
                         .withConfigValue(HtmlLiveTest.class, () -> {
+                            // TODO Move this optional test to system project.
                             try (final var browser = publicHtmlClient()) {
                                 final var tab = browser.openTab("/net/splitcells/gel/ui/no/code/editor/index.html");
                                 requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-errors").textContent());
