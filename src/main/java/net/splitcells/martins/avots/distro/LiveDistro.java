@@ -21,6 +21,7 @@ import net.splitcells.dem.environment.resource.Console;
 import net.splitcells.dem.resource.communication.log.LogLevel;
 import net.splitcells.dem.resource.communication.log.Logs;
 import net.splitcells.dem.resource.communication.log.MessageFilter;
+import net.splitcells.gel.ui.GelUiCell;
 import net.splitcells.network.distro.java.acme.AcmeServerUri;
 import net.splitcells.network.distro.java.acme.PublicKeyCryptoConfig;
 import net.splitcells.website.server.RedirectServer;
@@ -29,19 +30,25 @@ import net.splitcells.website.server.config.PublicDomain;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
 import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
+import net.splitcells.website.server.test.HtmlLiveTest;
 import net.splitcells.website.server.test.HtmlLiveTester;
 import net.splitcells.website.server.test.HtmlLiveTesterCount;
 
 import java.util.Optional;
 
+import static net.splitcells.dem.Dem.process;
 import static net.splitcells.dem.lang.tree.TreeI.perspective;
 import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
 import static net.splitcells.dem.resource.communication.log.ServerLogger.serverLog;
+import static net.splitcells.dem.testing.Assertions.requireEquals;
+import static net.splitcells.dem.testing.Assertions.waitUntilRequirementIsTrue;
+import static net.splitcells.dem.utils.StringUtils.requireNonEmptyString;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
+import static net.splitcells.website.server.client.HtmlClientImpl.htmlClientImpl;
 
 public class LiveDistro {
     public static void main(String... args) {
@@ -63,7 +70,24 @@ public class LiveDistro {
                         .withConfigValue(SslEnabled.class, true)
                         .withConfigValue(HtmlLiveTesterCount.class, 1) // The default settings crash the container, because not enough memory is being present.
                         .withInitedOption(HtmlLiveTester.class)
-                        .withConfigValue(MessageFilter.class, logMessage -> true);
+                        .withConfigValue(MessageFilter.class, logMessage -> true)
+                        .withConfigValue(HtmlLiveTest.class, () -> {
+                            process(() -> {
+                                        try (final var browser = htmlClientImpl()) {
+                                            final var tab = browser.openTab("/net/splitcells/gel/ui/no/code/editor/index.html");
+                                            requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-errors").textContent());
+                                            requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution").textContent());
+                                            requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution-rating").textContent());
+                                            tab.elementByClass("net-splitcells-website-pop-up-confirmation-button").click();
+                                            tab.elementById("net-splitcells-gel-ui-no-code-editor-calculate-solution-form-submit-1").click();
+                                            waitUntilRequirementIsTrue(1000L * 60, () -> !tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution").value().isEmpty());
+                                            requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-errors").textContent());
+                                            requireNonEmptyString(tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution-rating").textContent());
+                                        }
+                                    }
+                                    , GelUiCell.class);
+                        })
+                ;
                 baseConfig(env);
             });
         }, env -> {
