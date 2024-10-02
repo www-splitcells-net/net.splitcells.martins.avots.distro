@@ -74,25 +74,24 @@ public class LiveDistro {
                         .withInitedOption(HtmlLiveTester.class)
                         .withConfigValue(MessageFilter.class, logMessage -> true)
                         .withConfigValue(HtmlLiveTest.class, () -> {
-                            process(() -> {
-                                        try (final var browser = publicHtmlClient()) {
-                                            final var tab = browser.openTab("/net/splitcells/gel/ui/no/code/editor/index.html");
-                                            requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-errors").textContent());
-                                            requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution").textContent());
-                                            requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution-rating").textContent());
-                                            tab.elementByClass("net-splitcells-website-pop-up-confirmation-button").click();
-                                            tab.elementById("net-splitcells-gel-ui-no-code-editor-calculate-solution-form-submit-1").click();
-                                            waitUntilRequirementIsTrue(1000L * 60, () -> !tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution").value().isEmpty());
-                                            requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-errors").textContent());
-                                            requireNonEmptyString(tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution-rating").textContent());
-                                        }
-                                    }
-                                    , GelUiCell.class);
+                            try (final var browser = publicHtmlClient()) {
+                                final var tab = browser.openTab("/net/splitcells/gel/ui/no/code/editor/index.html");
+                                requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-errors").textContent());
+                                requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution").textContent());
+                                requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution-rating").textContent());
+                                tab.elementByClass("net-splitcells-website-pop-up-confirmation-button").click();
+                                tab.elementById("net-splitcells-gel-ui-no-code-editor-calculate-solution-form-submit-1").click();
+                                waitUntilRequirementIsTrue(1000L * 60, () -> !tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution").value().isEmpty());
+                                requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-errors").textContent());
+                                requireNonEmptyString(tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution-rating").textContent());
+                            }
                         })
                 ;
                 baseConfig(env);
             });
-        }, env -> {
+        }, env ->
+
+        {
             final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
             env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
                     .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
