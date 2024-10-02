@@ -25,6 +25,7 @@ import net.splitcells.gel.ui.GelUiCell;
 import net.splitcells.network.distro.java.acme.AcmeServerUri;
 import net.splitcells.network.distro.java.acme.PublicKeyCryptoConfig;
 import net.splitcells.website.server.RedirectServer;
+import net.splitcells.website.server.client.HtmlClientImpl;
 import net.splitcells.website.server.config.PublicContactEMailAddress;
 import net.splitcells.website.server.config.PublicDomain;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
@@ -49,6 +50,7 @@ import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_A
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
 import static net.splitcells.website.server.client.HtmlClientImpl.htmlClientImpl;
+import static net.splitcells.website.server.client.HtmlClientImpl.publicHtmlClient;
 
 public class LiveDistro {
     public static void main(String... args) {
@@ -73,7 +75,7 @@ public class LiveDistro {
                         .withConfigValue(MessageFilter.class, logMessage -> true)
                         .withConfigValue(HtmlLiveTest.class, () -> {
                             process(() -> {
-                                        try (final var browser = htmlClientImpl()) {
+                                        try (final var browser = publicHtmlClient()) {
                                             final var tab = browser.openTab("/net/splitcells/gel/ui/no/code/editor/index.html");
                                             requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-errors").textContent());
                                             requireEquals("", tab.elementById("net-splitcells-gel-ui-no-code-editor-form-solution").textContent());
