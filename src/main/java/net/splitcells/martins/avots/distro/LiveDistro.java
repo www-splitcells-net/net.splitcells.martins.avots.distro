@@ -26,6 +26,7 @@ import net.splitcells.network.distro.java.acme.AcmeServerUri;
 import net.splitcells.network.distro.java.acme.PublicKeyCryptoConfig;
 import net.splitcells.website.server.RedirectServer;
 import net.splitcells.website.server.client.HtmlClientImpl;
+import net.splitcells.website.server.config.InternalPublicPort;
 import net.splitcells.website.server.config.PublicContactEMailAddress;
 import net.splitcells.website.server.config.PublicDomain;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
@@ -73,6 +74,7 @@ public class LiveDistro {
                         // TODO REMOVE when the Distro is working without this option.withConfigValue(HtmlLiveTesterCount.class, 1) // The default settings crash the container, because not enough memory is being present.
                         .withInitedOption(HtmlLiveTester.class)
                         .withConfigValue(MessageFilter.class, logMessage -> true)
+                        .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
                         .withConfigValue(HtmlLiveTest.class, () -> {
                             // TODO Move this optional test to system project.
                             try (final var browser = publicHtmlClient()) {
