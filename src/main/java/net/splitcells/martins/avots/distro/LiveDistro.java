@@ -18,40 +18,30 @@ package net.splitcells.martins.avots.distro;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.Console;
-import net.splitcells.dem.resource.communication.log.LogLevel;
 import net.splitcells.dem.resource.communication.log.Logs;
 import net.splitcells.dem.resource.communication.log.MessageFilter;
-import net.splitcells.gel.ui.GelUiCell;
 import net.splitcells.network.distro.java.acme.AcmeServerUri;
 import net.splitcells.network.distro.java.acme.PublicKeyCryptoConfig;
 import net.splitcells.website.server.RedirectServer;
-import net.splitcells.website.server.client.HtmlClientImpl;
 import net.splitcells.website.server.config.InternalPublicPort;
 import net.splitcells.website.server.config.PublicContactEMailAddress;
 import net.splitcells.website.server.config.PublicDomain;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
 import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
-import net.splitcells.website.server.test.HtmlLiveTest;
 import net.splitcells.website.server.test.HtmlLiveTester;
-import net.splitcells.website.server.test.HtmlLiveTesterCount;
 
 import java.util.Optional;
 
 import static net.splitcells.dem.Dem.process;
-import static net.splitcells.dem.lang.tree.TreeI.perspective;
+import static net.splitcells.dem.lang.tree.TreeI.tree;
 import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
 import static net.splitcells.dem.resource.communication.log.ServerLogger.serverLog;
-import static net.splitcells.dem.testing.Assertions.requireEquals;
-import static net.splitcells.dem.testing.Assertions.waitUntilRequirementIsTrue;
-import static net.splitcells.dem.utils.StringUtils.requireNonEmptyString;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
-import static net.splitcells.website.server.client.HtmlClientImpl.htmlClientImpl;
-import static net.splitcells.website.server.client.HtmlClientImpl.publicHtmlClient;
 
 public class LiveDistro {
     public static void main(String... args) {
