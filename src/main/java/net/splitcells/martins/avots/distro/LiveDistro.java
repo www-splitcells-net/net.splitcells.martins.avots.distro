@@ -24,6 +24,7 @@ import net.splitcells.network.distro.java.acme.AcmeServerUri;
 import net.splitcells.network.distro.java.acme.PublicKeyCryptoConfig;
 import net.splitcells.website.server.RedirectServer;
 import net.splitcells.website.server.config.InternalPublicPort;
+import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.config.PublicContactEMailAddress;
 import net.splitcells.website.server.config.PublicDomain;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
@@ -64,6 +65,7 @@ public class LiveDistro {
                         .withInitedOption(HtmlLiveTester.class)
                         .withConfigValue(MessageFilter.class, logMessage -> true)
                         .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
+                        .withConfigValue(PasswordAuthenticationEnabled.class, true)
                 ;
                 baseConfig(env);
             });
