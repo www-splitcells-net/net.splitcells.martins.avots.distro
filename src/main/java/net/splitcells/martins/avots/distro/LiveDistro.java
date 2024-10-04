@@ -78,9 +78,7 @@ public class LiveDistro {
                 ;
                 baseConfig(env);
             });
-        }, env ->
-
-        {
+        }, env -> {
             final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
             env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
                     .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
