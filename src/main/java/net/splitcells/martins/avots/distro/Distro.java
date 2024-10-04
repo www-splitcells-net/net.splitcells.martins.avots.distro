@@ -46,7 +46,7 @@ public class Distro {
         return Server.serveToHttpAt(() -> {
             final var projectsRenderer = WebsiteViaJar.projectsRenderer(config);
             projectsRenderer.build();
-            return requestPath -> projectsRenderer.render(requestPath);
+            return projectsRenderer;
         }, config);
     }
 
