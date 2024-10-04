@@ -48,6 +48,7 @@ import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
 import net.splitcells.website.server.Config;
+import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.processor.BinaryMessage;
 import net.splitcells.website.server.project.ProjectRenderer;
 import net.splitcells.website.server.project.renderer.DiscoverableMediaRenderer;
@@ -66,6 +67,7 @@ import static net.splitcells.cin.World.allocateRestAsDead;
 import static net.splitcells.cin.World.initWorldHistory;
 import static net.splitcells.cin.World.worldHistory;
 import static net.splitcells.cin.World.worldOptimizer;
+import static net.splitcells.dem.Dem.configValue;
 import static net.splitcells.dem.data.set.list.Lists.list;
 import static net.splitcells.dem.resource.FileSystemUnion.fileSystemsUnion;
 import static net.splitcells.dem.resource.FileSystems.fileSystemOnLocalHost;
@@ -90,8 +92,8 @@ public class DevDistro {
                 Dem.waitIndefinitely();
             }
         }, env -> {
-            Distro.envConfig(env);
-            useLocalFileSystem(env);
+            env.withConfig(Distro::envConfig)
+                    .withConfig(DevDistro::useLocalFileSystem);
             /* TODO The ObjectsRenderers' errors cause the server to fail
                to process editor requests in multithreaded environments.
                ObjectsRenderers also cause errors in single-threaded environments,
