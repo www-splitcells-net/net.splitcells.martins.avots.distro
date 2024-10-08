@@ -93,7 +93,10 @@ public class DevDistro {
             }
         }, env -> {
             env.withConfig(Distro::envConfig)
-                    .withConfig(DevDistro::useLocalFileSystem);
+                    .withConfig(DevDistro::useLocalFileSystem)
+                    .config()
+                    .withConfigValue(PasswordAuthenticationEnabled.class, true)
+            ;
             /* TODO The ObjectsRenderers' errors cause the server to fail
                to process editor requests in multithreaded environments.
                ObjectsRenderers also cause errors in single-threaded environments,
