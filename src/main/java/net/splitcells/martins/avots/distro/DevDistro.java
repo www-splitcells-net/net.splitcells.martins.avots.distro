@@ -55,6 +55,7 @@ import net.splitcells.website.server.project.renderer.DiscoverableMediaRenderer;
 import net.splitcells.website.server.project.renderer.DiscoverableRenderer;
 import net.splitcells.website.server.project.renderer.ObjectsMediaRenderer;
 import net.splitcells.website.server.project.renderer.ObjectsRenderer;
+import net.splitcells.website.server.security.authentication.Authentication;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -76,6 +77,7 @@ import static net.splitcells.dem.utils.Time.reportRuntime;
 import static net.splitcells.gel.solution.optimization.primitive.OnlineLinearInitialization.onlineLinearInitialization;
 import static net.splitcells.sep.Network.network;
 import static net.splitcells.website.server.processor.BinaryMessage.binaryMessage;
+import static net.splitcells.website.server.security.authentication.AuthenticatorBasedOnFiles.authenticatorBasedOnFiles;
 
 public class DevDistro {
 
@@ -96,6 +98,7 @@ public class DevDistro {
                     .withConfig(DevDistro::useLocalFileSystem)
                     .config()
                     .withConfigValue(PasswordAuthenticationEnabled.class, true)
+                    .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
             ;
             /* TODO The ObjectsRenderers' errors cause the server to fail
                to process editor requests in multithreaded environments.
