@@ -15,7 +15,7 @@
  */
 package net.splitcells.martins.avots.distro;
 
-import net.splitcells.cin.CinService;
+import net.splitcells.cin.deprecated.CinService;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
