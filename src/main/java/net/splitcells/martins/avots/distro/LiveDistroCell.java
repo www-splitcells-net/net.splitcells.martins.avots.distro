@@ -41,7 +41,6 @@ public class LiveDistroCell implements Cell {
     @Override
     public void accept(Environment env) {
         env.withCell(SystemCell.class);
-        env.config().withInitedOption(CinService.class);
         net.splitcells.network.distro.java.Distro.config(env.config().configValue(ServerConfig.class));
         net.splitcells.network.distro.Distro.config(env.config().configValue(ServerConfig.class));
         net.splitcells.martins.avots.distro.Distro.baseConfig(env.config().configValue(ServerConfig.class));
