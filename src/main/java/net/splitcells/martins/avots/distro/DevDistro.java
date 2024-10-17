@@ -27,6 +27,7 @@ import net.splitcells.dem.resource.BootstrapFileSystem;
 import net.splitcells.dem.resource.ContentType;
 import net.splitcells.dem.resource.FileSystems;
 import net.splitcells.gel.GelCoreFileSystem;
+import net.splitcells.gel.data.DatabaseModificationCounter;
 import net.splitcells.gel.data.database.Databases;
 import net.splitcells.gel.data.table.Table;
 import net.splitcells.gel.doc.GelDocFileSystem;
@@ -102,6 +103,7 @@ public class DevDistro {
                     .withConfigValue(PasswordAuthenticationEnabled.class, true)
                     .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
             ;
+            env.config().configValue(DatabaseModificationCounter.class).withInit(env);
             /* TODO The ObjectsRenderers' errors cause the server to fail
                to process editor requests in multithreaded environments.
                ObjectsRenderers also cause errors in single-threaded environments,
