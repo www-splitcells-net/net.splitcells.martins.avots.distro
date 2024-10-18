@@ -27,7 +27,7 @@ import net.splitcells.dem.resource.BootstrapFileSystem;
 import net.splitcells.dem.resource.ContentType;
 import net.splitcells.dem.resource.FileSystems;
 import net.splitcells.gel.GelCoreFileSystem;
-import net.splitcells.gel.data.DatabaseModificationCounter;
+import net.splitcells.gel.data.database.DatabaseModificationCounter;
 import net.splitcells.gel.data.database.Databases;
 import net.splitcells.gel.data.table.Table;
 import net.splitcells.gel.doc.GelDocFileSystem;
