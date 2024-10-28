@@ -23,7 +23,7 @@ import net.splitcells.dem.data.set.list.List;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.resource.ContentType;
 import net.splitcells.gel.GelCoreFileSystem;
-import net.splitcells.gel.data.database.Databases;
+import net.splitcells.gel.data.table.Tables;
 import net.splitcells.gel.doc.GelDocFileSystem;
 import net.splitcells.gel.ext.GelExtFileSystem;
 import net.splitcells.gel.solution.Solutions;
@@ -110,7 +110,7 @@ public class CinDevDistro {
         }, env -> {
             Distro.envConfig(env);
             useLocalFileSystem(env);
-            env.config().configValue(Databases.class)
+            env.config().configValue(Tables.class)
                     .withConnector(database -> ObjectsRenderer.registerObject(new DiscoverableRenderer() {
                         @Override
                         public String render() {
