@@ -43,4 +43,5 @@ its operation system runs is operated by Hetzner Online GmbH.
 # Automated Decision Making Including Profiling
 There is no automated decision-making, including profiling, on the website.
 # Transfer Of Personal Data
-The website will not pass on personal data about you to third parties or third countries.
+The website will not pass on personal data about you to third parties or third countries,
+except if it is required to fulfill legal obligations.

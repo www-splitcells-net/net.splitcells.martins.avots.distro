@@ -44,4 +44,5 @@ wird von der Hetzner Online GmbH betrieben.
 # Automatisierte Entscheidungsfindung einschließlich Profiling
 Eine automatisierten Entscheidungsfindung einschließlich Profiling findet auf der Webseite nicht statt.
 # Weitergabe von personenbezogenen Daten
-Von der Webseite werden personenbezogenen Daten über Sie nicht an Dritte oder Drittländer weitergegeben.
+Von der Webseite werden personenbezogenen Daten über Sie nicht an Dritte oder Drittländer weitergegeben,
+außer dies ist notwendig um gesetzliche Pflichten zu erfüllen.
