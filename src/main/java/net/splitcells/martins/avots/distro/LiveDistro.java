@@ -31,6 +31,7 @@ import net.splitcells.website.server.security.authentication.Authentication;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
 import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
+import net.splitcells.website.server.test.HtmlLiveTest;
 import net.splitcells.website.server.test.HtmlLiveTester;
 
 import java.util.Optional;
@@ -39,6 +40,7 @@ import static net.splitcells.dem.Dem.process;
 import static net.splitcells.dem.lang.tree.TreeI.tree;
 import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
 import static net.splitcells.dem.resource.communication.log.ServerLogger.serverLog;
+import static net.splitcells.gel.ui.no.code.editor.NoCodeSolutionCalculatorTest.TEST_OPTIMIZATION_GUI;
 import static net.splitcells.network.distro.java.Distro.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.Distro.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
@@ -65,6 +67,7 @@ public class LiveDistro {
                         .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
                         .withConfigValue(SslEnabled.class, true)
                         .withInitedOption(HtmlLiveTester.class)
+                        .withConfigValue(HtmlLiveTest.class, TEST_OPTIMIZATION_GUI)
                         .withConfigValue(MessageFilter.class, logMessage -> true)
                         .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
                         .withConfigValue(PasswordAuthenticationEnabled.class, true)
