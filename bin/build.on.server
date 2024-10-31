@@ -6,7 +6,6 @@ currentFolder=$(pwd)
 # Update repos.
 cd ../net.splitcells.network
 bin/worker.repos.pull
-cd $currentFolder
 cd ~/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.network
   bin/worker.execute --name=net.splitcells.martins.avots.distro --command='sh -c "cd /root/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.network.distro/ && bin/build"'
   bin/worker.execute --name=net.splitcells.martins.avots.distro --command='sh -c "cd /root/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.martins.avots.distro/ && mvn clean install"'
