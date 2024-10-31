@@ -6,5 +6,5 @@
 # TODO Create build worker command with project as parameter instead of changing folders.
 ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/repos/net.splitcells.network && bin/worker.repos.pull'
 ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/repos/net.splitcells.network && bin/worker.bootstrap.container'
-ssh -t martins-avots@live.splitcells.net 'cd ~/Documents/projects/net.splitcells.martins.avots.support.system/public/net.splitcells.martins.avots.distro/ && bin/build.on.server'
+ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/repos/net.splitcells.martins.avots.distro/ && bin/build.on.server'
 ssh -t martins-avots@live.splitcells.net 'systemctl --user restart net.splitcells.live.service'
