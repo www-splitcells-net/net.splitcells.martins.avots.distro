@@ -5,4 +5,5 @@ set -e
 ../net.splitcells.network/bin/worker.execute \
   --name="net.splitcells.martins.avots.distro" \
   --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" \
-  --port-publishing=8443:8443,8080:8080
+  --port-publishing=8443:8443,8080:8080 \
+  --only-execute-image=true
