@@ -2,9 +2,10 @@
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 
-# TODO For some reason pwd is required as a first command. If this is not done, the cd command call has no effect.
-# TODO Create build worker command with project as parameter instead of changing folders.
-ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/repos/net.splitcells.network && bin/worker.repos.pull'
-ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/repos/net.splitcells.network && bin/worker.bootstrap.container'
-ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/repos/net.splitcells.martins.avots.distro/ && bin/build.on.server'
-ssh -t martins-avots@live.splitcells.net 'systemctl --user restart net.splitcells.live.service'
+# Update bootstrapping step. This is not needed most of the time.
+  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.bootstrap'
+  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.bootstrap.container'
+# Build software.
+  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.repo.build'
+# Create container image.
+  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.repos/public/net.splitcells.martins.avots.distro && ../net.splitcells.network/bin/worker.execute --name="net.splitcells.martins.avots.distro" --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" --only-build-image=true'
