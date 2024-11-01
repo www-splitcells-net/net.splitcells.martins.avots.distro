@@ -4,8 +4,11 @@
 
 # Update bootstrapping step. This is not needed most of the time.
   ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.bootstrap'
+# Update network worker's repos.
   ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.bootstrap.container'
-# Build software.
-  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.repo.build'
-# Create container image.
+# Build software via network worker.
+  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.repo.build'
+# Create container image via network worker.
   ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.repos/public/net.splitcells.martins.avots.distro && ../net.splitcells.network/bin/worker.execute --name="net.splitcells.martins.avots.distro" --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" --only-build-image=true'
+# Restart and thereby update container.
+  ssh -t martins-avots@live.splitcells.net 'systemctl --user restart net.splitcells.live.service'
