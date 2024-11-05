@@ -32,6 +32,10 @@
                 <s:name>Privacy Policy</s:name>
                 <s:page>/net/splitcells/martins/avots/distro/legal/privacy-policy</s:page>
             </s:option>
+            <s:option>
+                <s:name>User Profile Page</s:name>
+                <s:page>/net/splitcells/website/server/projects/extension/user-profile-page-extension</s:page>
+            </s:option>
             <div class="messages">
                 <h3>Messages</h3>
                 <div class="noScriptMessage TextCell text_error">
