@@ -42,6 +42,7 @@ import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
 import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.security.authentication.Authentication;
+import net.splitcells.website.server.security.authorization.Authorization;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -51,6 +52,7 @@ import static net.splitcells.dem.resource.FileSystemUnion.fileSystemsUnion;
 import static net.splitcells.dem.resource.FileSystems.fileSystemOnLocalHost;
 import static net.splitcells.website.server.processor.BinaryMessage.binaryMessage;
 import static net.splitcells.website.server.security.authentication.AuthenticatorImpl.authenticatorBasedOnFiles;
+import static net.splitcells.website.server.security.authorization.AuthorizerBasedOnFiles.authorizerBasedOnFiles;
 
 public class DevDistro {
 
@@ -73,6 +75,7 @@ public class DevDistro {
                     .withInitedOption(CinService.class)
                     .withConfigValue(PasswordAuthenticationEnabled.class, true)
                     .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
+                    .withConfigValue(Authorization.class, authorizerBasedOnFiles())
             ;
             env.config().configValue(TableModificationCounter.class).withInit(env);
             /* TODO The ObjectsRenderers' errors cause the server to fail
