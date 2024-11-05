@@ -28,6 +28,7 @@ import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.config.PublicContactEMailAddress;
 import net.splitcells.website.server.config.PublicDomain;
 import net.splitcells.website.server.security.authentication.Authentication;
+import net.splitcells.website.server.security.authorization.Authorization;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
 import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
@@ -47,6 +48,7 @@ import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_A
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
 import static net.splitcells.website.server.security.authentication.AuthenticatorImpl.authenticatorBasedOnFiles;
+import static net.splitcells.website.server.security.authorization.AuthorizerBasedOnFiles.authorizerBasedOnFiles;
 
 public class LiveDistro {
     public static void main(String... args) {
@@ -72,6 +74,7 @@ public class LiveDistro {
                         .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
                         .withConfigValue(PasswordAuthenticationEnabled.class, true)
                         .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
+                        .withConfigValue(Authorization.class, authorizerBasedOnFiles())
                 ;
                 baseConfig(env);
             });
