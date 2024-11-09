@@ -77,7 +77,7 @@ public class DevDistro {
                     .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
                     .withConfigValue(Authorization.class, authorizerBasedOnFiles())
             ;
-            env.config().configValue(TableModificationCounter.class).withInit(env);
+            env.config().configValue(TableModificationCounter.class);
             /* TODO The ObjectsRenderers' errors cause the server to fail
                to process editor requests in multithreaded environments.
                ObjectsRenderers also cause errors in single-threaded environments,
