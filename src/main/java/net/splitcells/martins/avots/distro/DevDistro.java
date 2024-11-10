@@ -35,7 +35,7 @@ import net.splitcells.network.presentations.NetworkPresentationsFileSystem;
 import net.splitcells.network.worker.via.java.NetworkWorkerFileSystem;
 import net.splitcells.os.state.interfaces.OsiFileSystem;
 import net.splitcells.os.state.interfaces.lib.OsiLibFileSystem;
-import net.splitcells.project.files.standard.ProjectStandardFileSystem;
+import net.splitcells.project.ProjectFileSystem;
 import net.splitcells.system.SystemsFileSystem;
 import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
@@ -193,7 +193,7 @@ public class DevDistro {
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.martins.avots.distro")))
                 .withConfigValue(NetworkDistroFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.distro/projects/net.splitcells.network.distro")))
-                .withConfigValue(ProjectStandardFileSystem.class
+                .withConfigValue(ProjectFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.project.files.standard")))
                 .withConfigValue(NetworkPresentationsFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.presentations")))
