@@ -194,7 +194,7 @@ public class DevDistro {
                 .withConfigValue(NetworkDistroFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.distro/projects/net.splitcells.network.distro")))
                 .withConfigValue(ProjectFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.project.files.standard")))
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.project")))
                 .withConfigValue(NetworkPresentationsFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.presentations")))
         ;
