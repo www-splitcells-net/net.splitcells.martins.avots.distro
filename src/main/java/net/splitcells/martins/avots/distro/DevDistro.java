@@ -17,6 +17,7 @@ package net.splitcells.martins.avots.distro;
 
 import net.splitcells.cin.CinFileSystem;
 import net.splitcells.cin.CinService;
+import net.splitcells.cin.text.CinTextFileSystem;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.DemApiFileSystem;
 import net.splitcells.dem.DemFileSystem;
@@ -197,6 +198,8 @@ public class DevDistro {
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.project")))
                 .withConfigValue(NetworkPresentationsFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.presentations")))
+                .withConfigValue(CinTextFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.cin.text")))
         ;
     }
 }
