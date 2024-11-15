@@ -63,7 +63,7 @@ public class DevDistro {
     private static final Path PUBLIC_ROOT_SUB_PROJECTS = PUBLIC_ROOT_PROJECT_REPO.resolve("projects");
 
     public static void main(String... args) {
-        System.setProperty(net.splitcells.dem.environment.config.StaticFlags.ENFORCING_UNIT_CONSISTENCY_KEY, "false");
+        System.setProperty(net.splitcells.dem.environment.config.StaticFlags.ENFORCING_UNIT_CONSISTENCY_KEY, "true");
         Dem.process(() -> {
             try (final var liveService = Distro.liveService()) {
                 liveService.start();
