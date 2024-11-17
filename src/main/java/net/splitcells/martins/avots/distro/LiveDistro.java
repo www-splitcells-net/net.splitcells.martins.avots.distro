@@ -34,6 +34,7 @@ import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
 import net.splitcells.website.server.test.HtmlLiveTest;
 import net.splitcells.website.server.test.HtmlLiveTester;
+import net.splitcells.website.server.test.HtmlLiveTesterCount;
 
 import java.util.Optional;
 
@@ -71,6 +72,12 @@ public class LiveDistro {
                         .withInitedOption(HtmlLiveTester.class)
                         .withConfigValue(HtmlLiveTest.class, TEST_OPTIMIZATION_GUI)
                         .withConfigValue(MessageFilter.class, logMessage -> true)
+                        /* The default settings sometimes crash the container,
+                         * because of OutOfMemory, although enough memory is present.
+                         * Furthermore, if OutOfMemory does not appear, the browser still do not work.
+                         * This seems to be a Playwright specific error.
+                         */
+                        .withConfigValue(HtmlLiveTesterCount.class, 1)
                         .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
                         .withConfigValue(PasswordAuthenticationEnabled.class, true)
                         .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
