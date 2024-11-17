@@ -76,6 +76,10 @@ public class LiveDistro {
                          * because of OutOfMemory, although enough memory is present.
                          * Furthermore, if OutOfMemory does not appear, the browser still do not work.
                          * This seems to be a Playwright specific error.
+                         *
+                         * TODO Theory: start 1 Playwright instance first and execute its tests.
+                         * After that, one can use as many Playwright instances as needed.
+                         * The reason for that would be, the Playwright's initial setup has a race condition.
                          */
                         .withConfigValue(HtmlLiveTesterCount.class, 1)
                         .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
