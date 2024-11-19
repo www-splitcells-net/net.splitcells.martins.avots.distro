@@ -17,6 +17,7 @@ package net.splitcells.martins.avots.distro;
 
 import net.splitcells.cin.CinFileSystem;
 import net.splitcells.cin.CinService;
+import net.splitcells.cin.CinServiceInitTest;
 import net.splitcells.cin.text.CinTextFileSystem;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.DemApiFileSystem;
@@ -73,6 +74,7 @@ public class DevDistro {
             env.withConfig(Distro::envConfig)
                     .withConfig(DevDistro::useLocalFileSystem)
                     .config()
+                    .withConfigValue(CinServiceInitTest.class, true)
                     .withInitedOption(CinService.class)
                     .withConfigValue(PasswordAuthenticationEnabled.class, true)
                     .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
