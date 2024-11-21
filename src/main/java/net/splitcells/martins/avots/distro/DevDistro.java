@@ -22,9 +22,11 @@ import net.splitcells.cin.text.CinTextFileSystem;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.DemApiFileSystem;
 import net.splitcells.dem.DemFileSystem;
+import net.splitcells.dem.data.set.list.List;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.gel.GelCoreFileSystem;
 import net.splitcells.gel.data.table.TableModificationCounter;
+import net.splitcells.gel.data.table.Tables;
 import net.splitcells.gel.doc.GelDocFileSystem;
 import net.splitcells.gel.ext.GelExtFileSystem;
 import net.splitcells.gel.ui.GelUiFileSystem;
@@ -43,16 +45,21 @@ import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
 import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
+import net.splitcells.website.server.project.renderer.DiscoverableRenderer;
+import net.splitcells.website.server.project.renderer.ObjectsRenderer;
 import net.splitcells.website.server.security.authentication.Authentication;
 import net.splitcells.website.server.security.authorization.Authorization;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import static net.splitcells.dem.data.set.list.Lists.list;
 import static net.splitcells.dem.resource.FileSystemUnion.fileSystemsUnion;
 import static net.splitcells.dem.resource.FileSystems.fileSystemOnLocalHost;
+import static net.splitcells.gel.data.view.View.MIRROR_NAME;
 import static net.splitcells.website.server.processor.BinaryMessage.binaryMessage;
+import static net.splitcells.website.server.project.renderer.ObjectsRenderer.registerObject;
 import static net.splitcells.website.server.security.authentication.AuthenticatorImpl.authenticatorBasedOnFiles;
 import static net.splitcells.website.server.security.authorization.AuthorizerBasedOnFiles.authorizerBasedOnFiles;
 
@@ -79,8 +86,14 @@ public class DevDistro {
                     .withConfigValue(PasswordAuthenticationEnabled.class, true)
                     .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
                     .withConfigValue(Authorization.class, authorizerBasedOnFiles())
+                    .withInitedOption(TableModificationCounter.class)
             ;
-            env.config().configValue(TableModificationCounter.class);
+            // TODO Move this connector to the core code.
+            env.config().configValue(Tables.class).withConnector(table -> {
+                if (!table.name().equals(MIRROR_NAME)) {
+                    registerObject(table.discoverableRenderer());
+                }
+            });
             /* TODO The ObjectsRenderers' errors cause the server to fail
                to process editor requests in multithreaded environments.
                ObjectsRenderers also cause errors in single-threaded environments,
