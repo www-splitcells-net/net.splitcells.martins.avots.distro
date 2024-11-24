@@ -22,7 +22,6 @@ import net.splitcells.cin.text.CinTextFileSystem;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.DemApiFileSystem;
 import net.splitcells.dem.DemFileSystem;
-import net.splitcells.dem.data.set.list.List;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.gel.GelCoreFileSystem;
 import net.splitcells.gel.data.table.TableModificationCounter;
@@ -37,22 +36,19 @@ import net.splitcells.network.log.NetworkLogFileSystem;
 import net.splitcells.network.media.NetworkMediaFileSystem;
 import net.splitcells.network.presentations.NetworkPresentationsFileSystem;
 import net.splitcells.network.worker.via.java.NetworkWorkerFileSystem;
-import net.splitcells.os.state.interfaces.OsiFileSystem;
-import net.splitcells.os.state.interfaces.lib.OsiLibFileSystem;
+import net.splitcells.shell.OsiFileSystem;
+import net.splitcells.shell.lib.OsiLibFileSystem;
 import net.splitcells.project.ProjectFileSystem;
 import net.splitcells.system.SystemsFileSystem;
 import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
 import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
-import net.splitcells.website.server.project.renderer.DiscoverableRenderer;
-import net.splitcells.website.server.project.renderer.ObjectsRenderer;
 import net.splitcells.website.server.security.authentication.Authentication;
 import net.splitcells.website.server.security.authorization.Authorization;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 
 import static net.splitcells.dem.data.set.list.Lists.list;
 import static net.splitcells.dem.resource.FileSystemUnion.fileSystemsUnion;
@@ -194,9 +190,9 @@ public class DevDistro {
                 .withConfigValue(NetworkWorkerFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.worker.via.java")))
                 .withConfigValue(OsiFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.os.state.interface")))
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell")))
                 .withConfigValue(OsiLibFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.os.state.interface.lib")))
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell.lib")))
                 .withConfigValue(SystemsFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.system")))
                 .withConfigValue(WebsiteServerFileSystem.class

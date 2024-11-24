@@ -34,8 +34,8 @@ import net.splitcells.network.distro.NetworkDistroFileSystem;
 import net.splitcells.network.log.NetworkLogFileSystem;
 import net.splitcells.network.media.NetworkMediaFileSystem;
 import net.splitcells.network.worker.via.java.NetworkWorkerFileSystem;
-import net.splitcells.os.state.interfaces.OsiFileSystem;
-import net.splitcells.os.state.interfaces.lib.OsiLibFileSystem;
+import net.splitcells.shell.OsiFileSystem;
+import net.splitcells.shell.lib.OsiLibFileSystem;
 import net.splitcells.project.ProjectFileSystem;
 import net.splitcells.system.SystemsFileSystem;
 import net.splitcells.website.WebsiteServerFileSystem;
@@ -205,9 +205,9 @@ public class CinDevDistro {
                 .withConfigValue(NetworkWorkerFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.worker.via.java")))
                 .withConfigValue(OsiFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.os.state.interface")))
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell")))
                 .withConfigValue(OsiLibFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.os.state.interface.lib")))
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell.lib")))
                 .withConfigValue(SystemsFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.system")))
                 .withConfigValue(WebsiteServerFileSystem.class
