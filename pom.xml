@@ -12,6 +12,7 @@
     <properties>
         <uber_jar>enabled</uber_jar>
         <main.class>org.springframework.boot.loader.JarLauncher</main.class>
+        <net-splitcells-pom-java-defaults-deployable-jar-folder>true</net-splitcells-pom-java-defaults-deployable-jar-folder>
     </properties>
     <dependencies>
         <dependency>
