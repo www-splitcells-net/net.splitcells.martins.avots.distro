@@ -5,14 +5,13 @@
     <artifactId>distro</artifactId>
     <parent>
         <groupId>net.splitcells</groupId>
-        <artifactId>pom-java-defaults</artifactId>
+        <artifactId>pom-java-deployable</artifactId>
         <version>${revision}</version>
-        <relativePath>../net.splitcells.network/projects/net.splitcells.pom.java.defaults/pom.xml</relativePath>
+        <relativePath>../net.splitcells.network/projects/net.splitcells.pom.java.deployable/pom.xml</relativePath>
     </parent>
     <properties>
         <uber_jar>enabled</uber_jar>
         <main.class>org.springframework.boot.loader.JarLauncher</main.class>
-        <net-splitcells-pom-java-defaults-deployable-jar-folder>true</net-splitcells-pom-java-defaults-deployable-jar-folder>
     </properties>
     <dependencies>
         <dependency>
