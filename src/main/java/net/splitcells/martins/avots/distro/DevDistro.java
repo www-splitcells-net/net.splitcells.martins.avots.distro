@@ -194,7 +194,7 @@ public class DevDistro {
                 .withConfigValue(OsiLibFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell.lib")))
                 .withConfigValue(SystemsFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.system")))
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.system")))
                 .withConfigValue(WebsiteServerFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.website.server")))
                 .withConfigValue(WebsiteContentDefaultsFileSystem.class
