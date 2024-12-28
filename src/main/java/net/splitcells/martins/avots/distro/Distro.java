@@ -18,7 +18,7 @@ package net.splitcells.martins.avots.distro;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.HostUtilizationRecordService;
 import net.splitcells.dem.environment.resource.Service;
-import net.splitcells.system.WebsiteViaJar;
+import net.splitcells.network.system.WebsiteViaJar;
 import net.splitcells.website.server.Config;
 import net.splitcells.website.server.Server;
 

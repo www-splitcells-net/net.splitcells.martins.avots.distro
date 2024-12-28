@@ -39,7 +39,7 @@ import net.splitcells.network.worker.via.java.NetworkWorkerFileSystem;
 import net.splitcells.shell.OsiFileSystem;
 import net.splitcells.shell.lib.OsiLibFileSystem;
 import net.splitcells.project.ProjectFileSystem;
-import net.splitcells.system.SystemsFileSystem;
+import net.splitcells.network.system.SystemsFileSystem;
 import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
