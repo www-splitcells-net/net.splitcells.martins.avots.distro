@@ -81,7 +81,7 @@ public class LiveDistro {
                          * After that, one can use as many Playwright instances as needed.
                          * The reason for that would be, the Playwright's initial setup has a race condition.
                          *
-                         * TODO Remove this, when multiple live testers work at once on live server.
+                         * TODO Remove this, when multiple live testers work at once on live server. -> This seems to be working.
                          *
                          * .withConfigValue(HtmlLiveTesterCount.class, 1)
                          */
