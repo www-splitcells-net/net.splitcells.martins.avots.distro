@@ -82,8 +82,9 @@ public class LiveDistro {
                          * The reason for that would be, the Playwright's initial setup has a race condition.
                          *
                          * TODO Remove this, when multiple live testers work at once on live server.
+                         *
+                         * .withConfigValue(HtmlLiveTesterCount.class, 1)
                          */
-                        //.withConfigValue(HtmlLiveTesterCount.class, 1)
                         .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
                         .withConfigValue(PasswordAuthenticationEnabled.class, true)
                         .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
