@@ -2,13 +2,8 @@
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 set -e
-# Update bootstrapping step. This is not needed most of the time.
-  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.bootstrap'
-# Update network worker's repos.
-  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.bootstrap.container'
-# Build software via network worker.
-  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.repos/public/net.splitcells.network && bin/worker.repos.build'
+net.splitcells.network.worker.bootstrap.remote.at martins-avots@live.splitcells.net
 # Create container image via network worker.
-  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.repos/repos/public/net.splitcells.martins.avots.distro && ../net.splitcells.network/bin/worker.execute --name="net.splitcells.martins.avots.distro" --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" --only-build-image=true'
+  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.network.worker/repos/public/net.splitcells.martins.avots.distro && ../net.splitcells.network/bin/worker.execute --name="net.splitcells.martins.avots.distro" --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" --only-build-image=true'
 # Restart and thereby update container.
   ssh -t martins-avots@live.splitcells.net 'systemctl --user restart net.splitcells.live.service'
