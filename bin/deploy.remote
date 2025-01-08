@@ -4,6 +4,7 @@
 set -e
 net.splitcells.network.worker.bootstrap.remote.at martins-avots@live.splitcells.net
 # Create container image via network worker.
+  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.network.worker/repos/public/net.splitcells.network && bin/worker.repos.build'
   ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.network.worker/repos/public/net.splitcells.martins.avots.distro && ../net.splitcells.network/bin/worker.execute --name="net.splitcells.martins.avots.distro" --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" --only-build-image=true'
 # Restart and thereby update container.
   ssh -t martins-avots@live.splitcells.net 'systemctl --user restart net.splitcells.live.service'
