@@ -18,7 +18,7 @@ package net.splitcells.martins.avots.distro;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.HostUtilizationRecordService;
 import net.splitcells.dem.environment.resource.Service;
-import net.splitcells.network.system.WebsiteViaJar;
+import net.splitcells.network.system.SystemCell;
 import net.splitcells.website.server.Config;
 import net.splitcells.website.server.Server;
 
@@ -44,18 +44,18 @@ public class Distro {
     public static Service liveService() {
         final var config = liveConfig(baseConfig());
         return Server.serveToHttpAt(() -> {
-            final var projectsRenderer = WebsiteViaJar.projectsRenderer(config);
+            final var projectsRenderer = SystemCell.projectsRenderer(config);
             projectsRenderer.build();
             return projectsRenderer;
         }, config);
     }
 
     public static Service websiteService() {
-        return WebsiteViaJar.projectsRenderer(websiteConfig(baseConfig())).httpServer();
+        return SystemCell.projectsRenderer(websiteConfig(baseConfig())).httpServer();
     }
 
     private static Service projectsRenderer(Config config) {
-        return WebsiteViaJar.projectsRenderer(config).httpServer();
+        return SystemCell.projectsRenderer(config).httpServer();
     }
 
     public static void envConfig(Environment env) {
