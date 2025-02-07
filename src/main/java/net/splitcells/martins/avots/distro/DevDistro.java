@@ -40,6 +40,7 @@ import net.splitcells.shell.OsiFileSystem;
 import net.splitcells.shell.lib.OsiLibFileSystem;
 import net.splitcells.project.ProjectFileSystem;
 import net.splitcells.network.system.SystemsFileSystem;
+import net.splitcells.symbiosis.SymbiosisFileSystem;
 import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
@@ -211,6 +212,8 @@ public class DevDistro {
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.presentations")))
                 .withConfigValue(CinTextFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.cin.text")))
+                .withConfigValue(SymbiosisFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.symbiosis")))
         ;
     }
 }

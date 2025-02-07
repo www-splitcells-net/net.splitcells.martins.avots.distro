@@ -19,5 +19,10 @@
             <artifactId>network.distro</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>net.splitcells</groupId>
+            <artifactId>symbiosis</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>
