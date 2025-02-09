@@ -20,6 +20,7 @@ import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.Console;
 import net.splitcells.dem.resource.communication.log.Logs;
 import net.splitcells.dem.resource.communication.log.MessageFilter;
+import net.splitcells.network.distro.DistroCell;
 import net.splitcells.network.distro.java.acme.AcmeServerUri;
 import net.splitcells.network.distro.java.acme.PublicKeyCryptoConfig;
 import net.splitcells.website.server.RedirectServer;
@@ -34,7 +35,6 @@ import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
 import net.splitcells.website.server.test.HtmlLiveTest;
 import net.splitcells.website.server.test.HtmlLiveTester;
-import net.splitcells.website.server.test.HtmlLiveTesterCount;
 
 import java.util.Optional;
 
@@ -111,7 +111,7 @@ public class LiveDistro {
                 .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
                 .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(RedirectServer.class);
-        net.splitcells.network.distro.Distro.configurator(env);
+        DistroCell.configurator(env);
         Distro.envConfig(env);
         ensureSslCertificatePresence(env);
     }

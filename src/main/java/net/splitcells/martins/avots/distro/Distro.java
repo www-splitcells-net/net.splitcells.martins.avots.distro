@@ -18,9 +18,9 @@ package net.splitcells.martins.avots.distro;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.HostUtilizationRecordService;
 import net.splitcells.dem.environment.resource.Service;
+import net.splitcells.network.distro.DistroCell;
 import net.splitcells.network.system.SystemCell;
 import net.splitcells.symbiosis.SymbiosisFileSystem;
-import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
 import net.splitcells.website.server.Config;
 import net.splitcells.website.server.Server;
 
@@ -73,7 +73,7 @@ public class Distro {
 
     @Deprecated
     private static Config baseConfig() {
-        final var config = net.splitcells.network.distro.Distro.config()
+        final var config = DistroCell.config()
                 .withDetailedXslMenu(DETAILED_XSL_MENU)
                 .withXslWindowMenu(WINDOW_MENU_XSL)
                 .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)))
