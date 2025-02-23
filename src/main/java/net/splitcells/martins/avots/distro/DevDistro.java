@@ -35,6 +35,7 @@ import net.splitcells.network.distro.NetworkDistroFileSystem;
 import net.splitcells.network.log.NetworkLogFileSystem;
 import net.splitcells.network.media.NetworkMediaFileSystem;
 import net.splitcells.network.presentations.NetworkPresentationsFileSystem;
+import net.splitcells.network.worker.via.java.NetworkLog;
 import net.splitcells.network.worker.via.java.NetworkWorkerFileSystem;
 import net.splitcells.shell.OsiFileSystem;
 import net.splitcells.shell.lib.OsiLibFileSystem;
@@ -168,6 +169,8 @@ public class DevDistro {
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.media")))
                 .withConfigValue(BinaryFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.website.content.binaries")))
+                .withConfigValue(NetworkLog.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
                 .withConfigValue(NetworkLogFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
                 .withConfigValue(CinFileSystem.class
