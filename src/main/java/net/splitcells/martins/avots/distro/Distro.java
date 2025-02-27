@@ -19,7 +19,9 @@ import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.HostUtilizationRecordService;
 import net.splitcells.dem.environment.resource.Service;
 import net.splitcells.network.distro.DistroCell;
+import net.splitcells.network.log.NetworkLogFileSystem;
 import net.splitcells.network.system.SystemCell;
+import net.splitcells.network.worker.via.java.NetworkWorkerLogFileSystem;
 import net.splitcells.symbiosis.SymbiosisFileSystem;
 import net.splitcells.website.server.Config;
 import net.splitcells.website.server.Server;
@@ -61,6 +63,7 @@ public class Distro {
     }
 
     public static void envConfig(Environment env) {
+        env.config().withConfigValue(NetworkWorkerLogFileSystem.class, env.config().configValue(NetworkLogFileSystem.class));
         env.config().withInitedOption(HostUtilizationRecordService.class);
     }
 
