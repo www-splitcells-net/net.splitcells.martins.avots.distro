@@ -79,7 +79,7 @@ public class DevDistro {
                     .withConfig(DevDistro::useLocalFileSystem)
                     .config()
                     .withConfigValue(CinServiceInitTest.class, true)
-                    .withInitedOption(CinService.class)
+                    // .withInitedOption(CinService.class) TODO Enable this when the ticket #51 Bootstrap game based on optimization networks is being worked on again.
                     .withConfigValue(PasswordAuthenticationEnabled.class, true)
                     .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
                     .withConfigValue(Authorization.class, authorizerBasedOnFiles())
