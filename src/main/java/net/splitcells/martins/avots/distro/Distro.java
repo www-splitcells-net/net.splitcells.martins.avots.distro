@@ -90,10 +90,14 @@ public class Distro {
                         , "/net/splitcells/martins/avots/website/info/about-this-site")
                         .withLogoPath(Optional.of("net/splitcells/website/images/white.background.blog.discovery.0.jpg"))
                         .withDescription(Optional.of("History And Purpose Of This Site")))
-                .withAdditionalProgramConfig(programConfig("Technical Newsfeed"
-                        , "/net/splitcells/CHANGELOG.global")
+                .withAdditionalProgramConfig(programConfig("News"
+                        , "/net/splitcells/website/news")
                         .withLogoPath(Optional.of("net/splitcells/website/images/average.source.code.image.generator.filling.via.horizontal.100.percent.jpg"))
-                        .withDescription(Optional.of("Site's Technical Global Changelog")))
+                        .withDescription(Optional.of("All User and Developer Relevant News in One Place at Your Finger Tips")))
+                .withAdditionalProgramConfig(programConfig("Notifications"
+                        , "/net/splitcells/website/notifications")
+                        .withLogoPath(Optional.of("net/splitcells/website/images/average.source.code.image.generator.filling.via.horizontal.100.percent.jpg"))
+                        .withDescription(Optional.of("All News of This Site for Nerds with an Eye for Details")))
                 .withAdditionalProgramConfig(programConfig("Splitcells Network"
                         , "/net/splitcells/network/hub/README")
                         .withLogoPath(Optional.of("net/splitcells/website/images/community.2016.12.11.chrom.0.dina4.jpg"))
