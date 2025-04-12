@@ -4,7 +4,9 @@
 set -e
 net.splitcells.network.worker.bootstrap.remote.at splitcells@raspberrypi-v2.local
 mvn clean compile exec:java -Dexec.mainClass="net.splitcells.network.worker.via.java.execution.WorkerExecutionMain" \
-  -Dexec.args="--name=net.splitcells.network.worker\
+  -Dexec.args="\
+  --dry-run=false\
+  --name=net.splitcells.network.worker\
 	--executable-path='bin/worker.bootstrap'\
 	--publish-execution-image=true\
   --execute-via-ssh-at=splitcells@raspberrypi-v2.local"
