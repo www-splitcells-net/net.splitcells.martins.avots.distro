@@ -6,6 +6,7 @@ net.splitcells.network.worker.bootstrap.remote.at splitcells@raspberrypi-v2.loca
 mvn clean compile exec:java -Dexec.mainClass="net.splitcells.network.worker.via.java.execution.WorkerExecutionMain" \
   -Dexec.args="\
   --dry-run=false\
+  --verbose=true\
   --name=net.splitcells.network.worker\
 	--executable-path='bin/worker.bootstrap'\
 	--publish-execution-image=true\
