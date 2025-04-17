@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 set -e
 [ ! -d "bin" ] && cd ..
+# TODO net.splitcells.network.worker.bootstrap.remote.at splitcells@raspberrypi-v2.local
 mvn clean compile exec:java \
   -Dexec.mainClass="net.splitcells.network.worker.via.java.NetworkWorkerMain" \
-  -Dexec.args="--test-at-remote=splitcells@raspberrypi-v2.local"
+  -Dexec.args="--bootstrap-remote=splitcells@raspberrypi-v2.local"
