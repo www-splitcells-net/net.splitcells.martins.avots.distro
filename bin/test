@@ -4,5 +4,5 @@
 set -e
 [ ! -d "bin" ] && cd ..
 mvn clean compile exec:java \
-  -Dexec.mainClass="net.splitcells.network.worker.via.java.NetworkWorkerMain" \
+  -Dexec.mainClass="net.splitcells.network.worker.via.java.NetworkWorker" \
   -Dexec.args="--test-at-remote=splitcells@raspberrypi-v2.local"
