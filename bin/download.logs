@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
-mkdir -p target/logs
-cd target/logs
+mkdir -p ../target/logs
 ssh.download.file \
-    --remote-file-address martins-avots@live.splitcells.net:.local/state/net.splitcells.martins.avots.distro/.local/state/net.splitcells.martins.avots.distro.LiveDistro/logs/execution-current.txt \
-    --target-file=./execution-current.txt
+    --remote-file-address martins-avots@live.splitcells.net:.local/state/net.splitcells.martins.avots.distro/.local/state/net.splitcells.martins.avots.distro.LiveDistro/logs \
+    --target-file=../target/logs
