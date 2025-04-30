@@ -6,4 +6,4 @@ set -e
 # TODO net.splitcells.network.worker.bootstrap.remote.at splitcells@raspberrypi-v2.local
 mvn clean compile exec:java \
   -Dexec.mainClass="net.splitcells.network.worker.via.java.NetworkWorker" \
-  -Dexec.args="--bootstrap-remote=splitcells@raspberrypi-v2.local"
+  -Dexec.args="--bootstrap-remote=splitcells@raspberrypi-v2.local --is-daemon=true"
