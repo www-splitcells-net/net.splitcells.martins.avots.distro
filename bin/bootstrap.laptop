@@ -3,6 +3,20 @@
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 set -e
 [ ! -d "bin" ] && cd ..
-mvn clean compile exec:java \
-  -Dexec.mainClass="net.splitcells.network.worker.via.java.NetworkWorker" \
-  -Dexec.args="--bootstrap-remote=splitcells@splitcells-XPS-15-9570"
+bin/worker.execute.py \
+  --name=net.splitcells.martins.avots.distro \
+  --executable-path="bin/worker.bootstrap" \
+  --flat-folders=true \
+  --verbose=true
+bin/worker.execute.py \
+  --name=net.splitcells.martins.avots.distro \
+  --executable-path="bin/repos.build" \
+  --flat-folders=true \
+  --verbose=true
+bin/worker.execute.py \
+  --name=net.splitcells.martins.avots.distro \
+  --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" \
+  --only-build-image=true \
+  --flat-folders=true \
+  --use-playwright=true \
+  --verbose=true
