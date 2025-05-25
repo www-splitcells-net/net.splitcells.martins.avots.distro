@@ -20,3 +20,18 @@ bin/worker.execute.py \
   --flat-folders=true \
   --use-playwright=true \
   --verbose=true
+bin/worker.execute.py \
+  --name=net.splitcells.martins.avots.distro \
+  --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" \
+  --only-execute-image=true \
+  --flat-folders=true \
+  --use-playwright=true \
+  --verbose=true
+bin/worker.execute.py \
+  --name=net.splitcells.martins.avots.distro \
+  --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" \
+  --only-execute-image=true \
+  --is-daemon=true \
+  --flat-folders=true \
+  --use-playwright=true \
+  --verbose=true
