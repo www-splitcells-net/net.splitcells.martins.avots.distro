@@ -18,10 +18,16 @@ bin/worker.execute.py \
 bin/worker.execute.py \
   --name=net.splitcells.martins.avots.distro \
   --build-remote=martins-avots@live.splitcells.net \
+  --port-publishing=8443:8443,8080:8080 \
   --flat-folders=true \
   --verbose=true
+# TODO Start daemon.
 bin/worker.execute.py \
   --name=net.splitcells.martins.avots.distro \
-  TODO Start daemon. \
+  --execute-via-ssh-at=martins-avots@live.splitcells.net \
+  --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" \
+  --only-execute-image=true \
+  --port-publishing=8443:8443,8080:8080 \
   --flat-folders=true \
+  --use-playwright=true \
   --verbose=true
