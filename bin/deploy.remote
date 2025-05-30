@@ -11,22 +11,21 @@ net.splitcells.network.worker.bootstrap.remote.at martins-avots@live.splitcells.
 exit
 # TODO Replace the script with the following, when it is ready.
 bin/worker.execute.py \
-  --name=net.splitcells.martins.avots.distro \
+  --program-name=net.splitcells.martins.avots.distro \
   --bootstrap-remote=martins-avots@live.splitcells.net \
   --flat-folders=true \
   --verbose=true
 bin/worker.execute.py \
-  --name=net.splitcells.martins.avots.distro \
+  --program-name=net.splitcells.martins.avots.distro \
   --build-remote=martins-avots@live.splitcells.net \
-  --port-publishing=8443:8443,8080:8080 \
   --flat-folders=true \
   --verbose=true
 # TODO Start daemon.
 bin/worker.execute.py \
-  --name=net.splitcells.martins.avots.distro \
+  --program-name=net.splitcells.martins.avots.distro \
   --execute-via-ssh-at=martins-avots@live.splitcells.net \
   --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" \
-  --only-execute-image=true \
+  --is-daemon=true \
   --port-publishing=8443:8443,8080:8080 \
   --flat-folders=true \
   --use-playwright=true \
