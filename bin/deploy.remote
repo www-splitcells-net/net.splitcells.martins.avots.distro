@@ -24,7 +24,7 @@ bin/worker.execute.py \
 bin/worker.execute.py \
   --program-name=net.splitcells.martins.avots.distro \
   --execute-via-ssh-at=martins-avots@live.splitcells.net \
-  --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" \
+  --class-for-execution=net.splitcells.martins.avots.distro.LiveDistro \
   --is-daemon=true \
   --port-publishing=8443:8443,8080:8080 \
   --flat-folders=true \
