@@ -2,14 +2,7 @@
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 set -e
-net.splitcells.network.worker.bootstrap.remote.at martins-avots@live.splitcells.net
-# Create container image via network worker.
-  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.network.worker/repos/public/net.splitcells.network && bin/worker.repos.build'
-  ssh -t martins-avots@live.splitcells.net 'cd ~/.local/state/net.splitcells.network.worker/.local/state/net.splitcells.network.worker/repos/public/net.splitcells.martins.avots.distro && ../net.splitcells.network/bin/worker.execute --name="net.splitcells.martins.avots.distro" --class-for-execution="net.splitcells.martins.avots.distro.LiveDistro" --only-build-image=true --use-playwright=true'
-# Restart and thereby update container.
-  ssh -t martins-avots@live.splitcells.net 'systemctl --user restart net.splitcells.live.service'
-exit
-# TODO Replace the script with the following, when it is ready.
+cd ../net.splitcells.network
 bin/worker.execute.py \
   --program-name=net.splitcells.martins.avots.distro \
   --bootstrap-remote=martins-avots@live.splitcells.net \
@@ -20,7 +13,6 @@ bin/worker.execute.py \
   --build-remote=martins-avots@live.splitcells.net \
   --flat-folders=true \
   --verbose=true
-# TODO Start daemon.
 bin/worker.execute.py \
   --program-name=net.splitcells.martins.avots.distro \
   --execute-via-ssh-at=martins-avots@live.splitcells.net \
