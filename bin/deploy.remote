@@ -4,17 +4,18 @@
 set -e
 cd ../net.splitcells.network
 bin/worker.execute.py \
-  --program-name=net.splitcells.martins.avots.distro \
+  --program-name=net.splitcells.martins.avots.distro.livedistro \
   --bootstrap-remote=martins-avots@live.splitcells.net \
   --flat-folders=true \
   --verbose=true
 bin/worker.execute.py \
-  --program-name=net.splitcells.martins.avots.distro \
+  --program-name=net.splitcells.martins.avots.distro.livedistro \
   --build-remote=martins-avots@live.splitcells.net \
   --flat-folders=true \
   --verbose=true
 bin/worker.execute.py \
-  --program-name=net.splitcells.martins.avots.distro \
+  --program-name=net.splitcells.martins.avots.distro.livedistro \
+  --source-repo=net.splitcells.martins.avots.distro \
   --execute-via-ssh-at=martins-avots@live.splitcells.net \
   --class-for-execution=net.splitcells.martins.avots.distro.LiveDistro \
   --is-daemon=true \
