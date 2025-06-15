@@ -6,12 +6,10 @@ cd ../net.splitcells.network
 bin/worker.execute.py \
   --program-name=net.splitcells.martins.avots.distro.livedistro \
   --bootstrap-remote=martins-avots@live.splitcells.net \
-  --flat-folders=true \
   --verbose=true
 bin/worker.execute.py \
   --program-name=net.splitcells.martins.avots.distro.livedistro \
   --build-remote=martins-avots@live.splitcells.net \
-  --flat-folders=true \
   --verbose=true
 bin/worker.execute.py \
   --program-name=net.splitcells.martins.avots.distro.livedistro \
@@ -20,6 +18,5 @@ bin/worker.execute.py \
   --class-for-execution=net.splitcells.martins.avots.distro.LiveDistro \
   --is-daemon=true \
   --port-publishing=8443:8443,8080:8080 \
-  --flat-folders=true \
   --use-playwright=true \
   --verbose=true
