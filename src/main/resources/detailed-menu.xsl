@@ -9,6 +9,10 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xl="http://www.w3.org/1999/xlink"
                 xmlns:ns="http://splitcells.net/namespace.xsd">
+    <!--
+        SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
+        SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
+    -->
     <xsl:variable name="net-splitcells-website-server-config-menu-detailed">
         <s:chapter>
             <s:title>Sections</s:title>
