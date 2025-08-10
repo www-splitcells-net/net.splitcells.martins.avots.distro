@@ -32,8 +32,6 @@ to enable analysis and maintenance of the website for its operation.
 * URL and parameters of user requests
 * Data uploaded by the user
 
-No cookies are used by the website.
-
 Data uploaded by the users via a form on the website,
 is processed in order to fulfill the functionality provided by the form.
 ## Server Hosting
