@@ -32,8 +32,6 @@ um eine Analyse und Wartung der Webseite für derren Betrieb zu ermöglichen.
 * URL und Parameter von Nutzer-Anfragen
 * Vom Nutzer hochgeladene Daten
 
-Es werden keine Cookies auf der Webseite verwendet.
-
 Wenn der Nutzer Daten über ein Formular auf die Webseite hochlädt,
 werden diese verarbeitet,
 um die vom Formular bereitgestellte Funktion zu erfüllen. 
