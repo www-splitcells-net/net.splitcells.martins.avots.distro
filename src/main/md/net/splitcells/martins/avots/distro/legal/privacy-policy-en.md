@@ -21,7 +21,7 @@ This data protection declaration follows [Art. 13 of the Datenschutz-Grundverord
 * According to [Art. 15 Abs. 1 der DSGVO](https://dejure.org/gesetze/DSGVO/15.html),
   you have the right to lodge a complaint with a supervisory authority.
 ## Processing Purposes
-Data processing is carried out for the following purposes:
+Data processing is carried out for the following purposes, in order to process your requests with the [legal basis of Art. 6 b)](https://dejure.org/gesetze/DSGVO/6.html):
 * To provide the content and functions of the website to the user and thus answer the user's requests.
 * Enable analysis and maintenance of the website to ensure its operation.
 * Fulfill legal obligations.

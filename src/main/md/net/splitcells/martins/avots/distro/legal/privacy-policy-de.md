@@ -20,8 +20,8 @@ Diese Datenschutzerklärung erfolgt nach [Art. 13 der Datenschutz-Grundverordnun
   ein Recht der Verarbeitung von personenbezogene Daten über Sie zu widersprechen oder einzuschränken.
 * Sie haben nach [Art. 15 Abs. 1 der DSGVO](https://dejure.org/gesetze/DSGVO/15.html)
   ein Beschwerderecht bei einer Aufsichtsbehörde.
-## Verarbeitungszwecke
-Die Daten-Verarbeitung wird für folgende Zwecke durchgeführt:
+## Verarbeitungszwecke und Rechtsgrundlage
+Die Daten-Verarbeitung wird für folgende Zwecke durchgeführt, um Aufträge von Ihnen mit der [Rechtsgrundlage von Art. 6 b)](https://dejure.org/gesetze/DSGVO/6.html) zu bearbeiten:
 * Inhalte und Funktionen der Webseite für den Nutzer bereitzustellen und somit Anfragen des Nutzers zu beantworten.
 * Eine Analyse und Wartung der Webseite um derren Betrieb zu ermöglichen.
 * Gesetzliche Pflichten erfüllen.
