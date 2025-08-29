@@ -16,7 +16,6 @@
 package net.splitcells.martins.avots.distro;
 
 import net.splitcells.cin.CinFileSystem;
-import net.splitcells.cin.CinService;
 import net.splitcells.cin.CinServiceInitTest;
 import net.splitcells.cin.text.CinTextFileSystem;
 import net.splitcells.dem.Dem;
@@ -71,12 +70,12 @@ public class DevDistro {
     public static void main(String... args) {
         System.setProperty(net.splitcells.dem.environment.config.StaticFlags.ENFORCING_UNIT_CONSISTENCY_KEY, "true");
         Dem.process(() -> {
-            try (final var liveService = Distro.liveService()) {
+            try (final var liveService = DistroCell.liveService()) {
                 liveService.start();
                 Dem.waitIndefinitely();
             }
         }, env -> {
-            env.withConfig(Distro::envConfig)
+            env.withConfig(DistroCell::envConfig)
                     .withConfig(DevDistro::useLocalFileSystem)
                     .config()
                     .withConfigValue(CinServiceInitTest.class, true)

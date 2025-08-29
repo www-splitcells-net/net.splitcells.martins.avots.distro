@@ -17,8 +17,102 @@ package net.splitcells.martins.avots.distro;
 
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
+import net.splitcells.dem.environment.resource.HostUtilizationRecordService;
+import net.splitcells.dem.environment.resource.Service;
+import net.splitcells.network.log.NetworkLogFileSystem;
+import net.splitcells.network.system.SystemCell;
+import net.splitcells.network.worker.via.java.NetworkWorkerLogFileSystem;
+import net.splitcells.symbiosis.SymbiosisFileSystem;
+import net.splitcells.website.server.Config;
+import net.splitcells.website.server.Server;
+
+import java.util.Optional;
+
+import static net.splitcells.dem.Dem.configValue;
+import static net.splitcells.dem.utils.reflection.ClassesRelated.resourceOfClass;
+import static net.splitcells.website.server.ProgramConfig.programConfig;
+import static net.splitcells.website.server.ProjectConfig.projectConfig;
 
 public class DistroCell implements Cell {
+    private static final Optional<String> DETAILED_XSL_MENU = Optional.of(
+            resourceOfClass(DistroCell.class, "detailed-menu.xsl"));
+    private static final Optional<String> WINDOW_MENU_XSL = Optional.of(
+            resourceOfClass(DistroCell.class, "window-menu.xsl"));
+
+    public static Service liveService() {
+        final var config = liveConfig(baseConfig());
+        return Server.serveToHttpAt(() -> {
+            final var projectsRenderer = SystemCell.projectsRenderer(config);
+            projectsRenderer.build();
+            return projectsRenderer;
+        }, config);
+    }
+
+    public static Service websiteService() {
+        return SystemCell.projectsRenderer(websiteConfig(baseConfig())).httpServer();
+    }
+
+    private static Service projectsRenderer(Config config) {
+        return SystemCell.projectsRenderer(config).httpServer();
+    }
+
+    public static void envConfig(Environment env) {
+        env.config().withConfigValue(NetworkWorkerLogFileSystem.class, env.config().configValue(NetworkLogFileSystem.class));
+        env.config().withInitedOption(HostUtilizationRecordService.class);
+    }
+
+    public static Config baseConfig(Config arg) {
+        arg.withDetailedXslMenu(DETAILED_XSL_MENU)
+                .withXslWindowMenu(WINDOW_MENU_XSL)
+                .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)));
+        return arg;
+    }
+
+    @Deprecated
+    private static Config baseConfig() {
+        final var config = net.splitcells.network.distro.DistroCell.config()
+                .withDetailedXslMenu(DETAILED_XSL_MENU)
+                .withXslWindowMenu(WINDOW_MENU_XSL)
+                .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)))
+                .withAdditionalProject(projectConfig("/", configValue(SymbiosisFileSystem.class)));
+        return config;
+    }
+
+    private static Config websiteConfig(Config config) {
+        config.clearAdditionalProgramConfigs()
+                .withAdditionalProgramConfig(programConfig("About This Site"
+                        , "/net/splitcells/martins/avots/website/info/about-this-site")
+                        .withLogoPath(Optional.of("net/splitcells/website/images/white.background.blog.discovery.0.jpg"))
+                        .withDescription(Optional.of("History And Purpose Of This Site")))
+                .withAdditionalProgramConfig(programConfig("News"
+                        , "/net/splitcells/website/news")
+                        .withLogoPath(Optional.of("net/splitcells/website/images/average.source.code.image.generator.filling.via.horizontal.100.percent.jpg"))
+                        .withDescription(Optional.of("All User and Developer Relevant News in One Place at Your Finger Tips")))
+                .withAdditionalProgramConfig(programConfig("Notifications"
+                        , "/net/splitcells/website/notifications")
+                        .withLogoPath(Optional.of("net/splitcells/website/images/average.source.code.image.generator.filling.via.horizontal.100.percent.jpg"))
+                        .withDescription(Optional.of("All News of This Site for Nerds with an Eye for Details")))
+                .withAdditionalProgramConfig(programConfig("Splitcells Network"
+                        , "/net/splitcells/network/hub/README")
+                        .withLogoPath(Optional.of("net/splitcells/website/images/community.2016.12.11.chrom.0.dina4.jpg"))
+                        .withDescription(Optional.of("We provide an open source ecosystem centered around optimization and operations research.")))
+                .withAdditionalProgramConfig(programConfig("Personal Projects"
+                        , "/net/splitcells/martins/avots/website/projects/index")
+                        .withLogoPath(Optional.of("net/splitcells/website/images/starting-to-learn-how-to-draw-a-face.jpg"))
+                        .withDescription(Optional.of("Projects that I support or work on.")));
+        return config;
+    }
+
+    /**
+     * TODO Document why does the distinction between this and {@link #websiteConfig(Config)} exist.
+     *
+     * @param config
+     * @return
+     */
+    private static Config liveConfig(Config config) {
+        return config;
+    }
+
     @Override
     public String groupId() {
         return "net.splitcells.martins.avots";
