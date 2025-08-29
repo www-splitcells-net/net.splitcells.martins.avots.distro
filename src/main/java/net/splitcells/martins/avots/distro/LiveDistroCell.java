@@ -43,7 +43,7 @@ public class LiveDistroCell implements Cell {
         env.withCell(SystemCell.class);
         net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
         DistroCell.config(env.config().configValue(ServerConfig.class));
-        net.splitcells.martins.avots.distro.Distro.baseConfig(env.config().configValue(ServerConfig.class));
+        net.splitcells.martins.avots.distro.DistroCell.baseConfig(env.config().configValue(ServerConfig.class));
         GelDev.configureForWebserver(env);
     }
 }

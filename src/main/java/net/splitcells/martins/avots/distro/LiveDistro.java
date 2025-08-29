@@ -55,12 +55,12 @@ public class LiveDistro {
     public static void main(String... args) {
         Dem.process(() -> {
             final PublicKeyCryptoConfig certificate;
-            try (final var liveService = Distro.liveService()) {
+            try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
                 liveService.start();
                 certificate = publicKeyCryptoConfig();
             }
             Dem.process(() -> {
-                try (final var liveService = Distro.liveService()) {
+                try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
                     liveService.start();
                     Dem.waitIndefinitely();
                 }
@@ -112,7 +112,7 @@ public class LiveDistro {
                 .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(RedirectServer.class);
         DistroCell.configurator(env);
-        Distro.envConfig(env);
+        net.splitcells.martins.avots.distro.DistroCell.envConfig(env);
         ensureSslCertificatePresence(env);
     }
 }

@@ -103,12 +103,12 @@ public class CinDevDistro {
                     network.withOptimization(WORLD_HISTORY, worldOptimizer(network.node(WORLD_HISTORY)));
                 }, "World history optimization", INFO);
             }
-            try (final var liveService = Distro.liveService()) {
+            try (final var liveService = DistroCell.liveService()) {
                 liveService.start();
                 Dem.waitIndefinitely();
             }
         }, env -> {
-            Distro.envConfig(env);
+            DistroCell.envConfig(env);
             useLocalFileSystem(env);
             env.config().configValue(Tables.class)
                     .withConnector(database -> ObjectsRenderer.registerObject(new DiscoverableRenderer() {
