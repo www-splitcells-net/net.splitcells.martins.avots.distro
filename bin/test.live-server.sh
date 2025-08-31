@@ -16,4 +16,4 @@ bin/worker.execute.py \
 bin/worker.execute.py \
   --execute-via-ssh-at=martins-avots@live.splitcells.net \
   --command="cd ~/.local/state/net.splitcells.network.worker/repos/public/net.splitcells.network && bin/repos.test.sh" \
-  --auto-configure-cpu-architecture-explicitly=true
+  --auto-configure-cpu-architecture-explicitly=true > target/del.log
