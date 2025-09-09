@@ -42,7 +42,7 @@ import static net.splitcells.dem.Dem.process;
 import static net.splitcells.dem.lang.tree.TreeI.tree;
 import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
 import static net.splitcells.dem.resource.communication.log.ServerLogger.serverLog;
-import static net.splitcells.gel.ui.editor.code.CodeSolutionCalculatorTest.TEST_OPTIMIZATION_GUI;
+import static net.splitcells.gel.ui.editor.geal.EditorProcessorTest.TEST_OPTIMIZATION_GUI;
 import static net.splitcells.network.distro.java.DistroCell.ensureSslCertificatePresence;
 import static net.splitcells.network.distro.java.DistroCell.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
