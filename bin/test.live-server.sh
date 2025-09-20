@@ -12,7 +12,6 @@ bin/worker.execute.py \
   --build-remote=martins-avots@live.splitcells.net \
   --auto-configure-cpu-architecture-explicitly=true \
   --verbose=true
-# TODO This works until this point.
 bin/worker.execute.py \
   --execute-via-ssh-at=martins-avots@live.splitcells.net \
   --command="cd ~/.local/state/net.splitcells.network.worker/repos/public/net.splitcells.network && bin/repos.test.sh" \
