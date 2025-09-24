@@ -21,6 +21,7 @@ import net.splitcells.cin.text.CinTextFileSystem;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.DemApiFileSystem;
 import net.splitcells.dem.DemFileSystem;
+import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.gel.GelCoreFileSystem;
 import net.splitcells.gel.data.table.TableModificationCounter;
@@ -60,7 +61,7 @@ import static net.splitcells.website.server.project.renderer.ObjectsRenderer.reg
 import static net.splitcells.website.server.security.authentication.AuthenticatorImpl.authenticatorBasedOnFiles;
 import static net.splitcells.website.server.security.authorization.AuthorizerBasedOnFiles.authorizerBasedOnFiles;
 
-public class DevDistro {
+public class DevDistroCell implements Cell {
 
     private static final Path PUBLIC_REPOS = Paths.get(System.getProperty("user.home")).resolve(
             "Documents/projects/net.splitcells.martins.avots.support.system/public/");
@@ -76,7 +77,7 @@ public class DevDistro {
             }
         }, env -> {
             env.withConfig(DistroCell::envConfig)
-                    .withConfig(DevDistro::useLocalFileSystem)
+                    .withConfig(DevDistroCell::useLocalFileSystem)
                     .config()
                     .withConfigValue(CinServiceInitTest.class, true)
                     // .withInitedOption(CinService.class) TODO Enable this when the ticket #51 Bootstrap game based on optimization networks is being worked on again.
@@ -217,5 +218,20 @@ public class DevDistro {
                 .withConfigValue(SymbiosisFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.symbiosis")))
         ;
+    }
+
+    @Override
+    public String groupId() {
+        return "net.splitcells.martins.avots";
+    }
+
+    @Override
+    public String artifactId() {
+        return "distro";
+    }
+
+    @Override
+    public void accept(Environment env) {
+
     }
 }
