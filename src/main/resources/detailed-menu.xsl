@@ -22,7 +22,7 @@
             </s:option>
             <s:option>
                 <s:name>Licensing</s:name>
-                <s:page>/net/splitcells/martins/avots/distro/legal/licensing</s:page>
+                <s:page>/net/splitcells/website/license-page</s:page>
             </s:option>
             <s:option>
                 <s:name>Front Menu</s:name>
