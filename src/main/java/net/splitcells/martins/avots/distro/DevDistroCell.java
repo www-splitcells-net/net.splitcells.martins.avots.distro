@@ -75,7 +75,72 @@ public class DevDistroCell implements Cell {
                 liveService.start();
                 Dem.waitIndefinitely();
             }
-        }, env -> {
+        }, DevDistroCell::config);
+    }
+
+    public static void cellBasedMain(String... args) {
+        System.setProperty(net.splitcells.dem.environment.config.StaticFlags.ENFORCING_UNIT_CONSISTENCY_KEY, "true");
+        Dem.serve(DevDistroCell.class);
+    }
+
+    public static void useLocalFileSystem(Environment env) {
+        env.config().withConfigValue(NetworkMediaFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.media")))
+                .withConfigValue(BinaryFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.website.content.binaries")))
+                .withConfigValue(NetworkWorkerLogFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
+                .withConfigValue(NetworkLogFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
+                .withConfigValue(CinFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.cin")))
+                .withConfigValue(DemFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.dem")))
+                .withConfigValue(DemApiFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.dem.api")))
+                .withConfigValue(GelCoreFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.core")))
+                .withConfigValue(GelDocFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.doc")))
+                .withConfigValue(GelUiFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.ui")))
+                .withConfigValue(GelExtFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.ext")))
+                .withConfigValue(NetworkFileSystem.class
+                        , fileSystemsUnion(
+                                fileSystemOnLocalHost(PUBLIC_ROOT_PROJECT_REPO)
+                                , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network"))))
+                .withConfigValue(NetworkWorkerFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.worker.via.java")))
+                .withConfigValue(OsiFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell")))
+                .withConfigValue(OsiLibFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell.lib")))
+                .withConfigValue(SystemsFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.system")))
+                .withConfigValue(WebsiteServerFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.website.server")))
+                .withConfigValue(WebsiteContentDefaultsFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.website.content.default")))
+                .withConfigValue(NetworkCommunityFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.community")))
+                .withConfigValue(DistroFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.martins.avots.distro")))
+                .withConfigValue(NetworkDistroFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.distro/projects/net.splitcells.network.distro")))
+                .withConfigValue(ProjectFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.project")))
+                .withConfigValue(NetworkPresentationsFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.presentations")))
+                .withConfigValue(CinTextFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.cin.text")))
+                .withConfigValue(SymbiosisFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.symbiosis")))
+        ;
+    }
+
+    private static void config(Environment env) {
+        {
             env.withConfig(DistroCell::envConfig)
                     .withConfig(DevDistroCell::useLocalFileSystem)
                     .config()
@@ -161,63 +226,7 @@ public class DevDistroCell implements Cell {
                         }
                     }));
              */
-        });
-    }
-
-    public static void useLocalFileSystem(Environment env) {
-        env.config().withConfigValue(NetworkMediaFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.media")))
-                .withConfigValue(BinaryFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.website.content.binaries")))
-                .withConfigValue(NetworkWorkerLogFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
-                .withConfigValue(NetworkLogFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
-                .withConfigValue(CinFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.cin")))
-                .withConfigValue(DemFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.dem")))
-                .withConfigValue(DemApiFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.dem.api")))
-                .withConfigValue(GelCoreFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.core")))
-                .withConfigValue(GelDocFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.doc")))
-                .withConfigValue(GelUiFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.ui")))
-                .withConfigValue(GelExtFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.ext")))
-                .withConfigValue(NetworkFileSystem.class
-                        , fileSystemsUnion(
-                                fileSystemOnLocalHost(PUBLIC_ROOT_PROJECT_REPO)
-                                , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network"))))
-                .withConfigValue(NetworkWorkerFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.worker.via.java")))
-                .withConfigValue(OsiFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell")))
-                .withConfigValue(OsiLibFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell.lib")))
-                .withConfigValue(SystemsFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.system")))
-                .withConfigValue(WebsiteServerFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.website.server")))
-                .withConfigValue(WebsiteContentDefaultsFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.website.content.default")))
-                .withConfigValue(NetworkCommunityFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.community")))
-                .withConfigValue(DistroFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.martins.avots.distro")))
-                .withConfigValue(NetworkDistroFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.distro/projects/net.splitcells.network.distro")))
-                .withConfigValue(ProjectFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.project")))
-                .withConfigValue(NetworkPresentationsFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.presentations")))
-                .withConfigValue(CinTextFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.cin.text")))
-                .withConfigValue(SymbiosisFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.symbiosis")))
-        ;
+        }
     }
 
     @Override
@@ -232,6 +241,6 @@ public class DevDistroCell implements Cell {
 
     @Override
     public void accept(Environment env) {
-
+        config(env);
     }
 }
