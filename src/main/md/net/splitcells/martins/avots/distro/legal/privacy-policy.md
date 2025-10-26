@@ -12,3 +12,4 @@
   instead of writing it in the privacy policy.
   This minimizes the probability, that something is incorrectly/obsoletely stated in the privacy policy,
   because of things like server migrations.
+* According to German law it seems, that questions regarding the site's privacy policy are allowed to be answered within 1 month.
