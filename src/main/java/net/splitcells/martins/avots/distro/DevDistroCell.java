@@ -83,7 +83,7 @@ public class DevDistroCell implements Cell {
         Dem.serve(DevDistroCell.class);
     }
 
-    public static void useLocalFileSystem(Environment env) {
+    private static void useLocalFileSystem(Environment env) {
         env.config().withConfigValue(NetworkMediaFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.media")))
                 .withConfigValue(BinaryFileSystem.class
