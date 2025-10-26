@@ -71,16 +71,6 @@ public class DevDistroCell implements Cell {
 
     public static void main(String... args) {
         System.setProperty(net.splitcells.dem.environment.config.StaticFlags.ENFORCING_UNIT_CONSISTENCY_KEY, "true");
-        Dem.process(() -> {
-            try (final var liveService = DistroCell.liveService()) {
-                liveService.start();
-                Dem.waitIndefinitely();
-            }
-        }, DevDistroCell::config);
-    }
-
-    public static void cellBasedMain(String... args) {
-        System.setProperty(net.splitcells.dem.environment.config.StaticFlags.ENFORCING_UNIT_CONSISTENCY_KEY, "true");
         Dem.serve(DevDistroCell.class);
     }
 
