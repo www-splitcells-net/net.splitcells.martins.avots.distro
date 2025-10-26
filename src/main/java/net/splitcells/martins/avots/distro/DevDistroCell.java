@@ -45,6 +45,7 @@ import net.splitcells.symbiosis.SymbiosisFileSystem;
 import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
+import net.splitcells.website.server.ServerConfig;
 import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.security.authentication.Authentication;
 import net.splitcells.website.server.security.authorization.Authorization;
@@ -242,5 +243,6 @@ public class DevDistroCell implements Cell {
     @Override
     public void accept(Environment env) {
         config(env);
+        env.withCell(DistroCell.class);
     }
 }
