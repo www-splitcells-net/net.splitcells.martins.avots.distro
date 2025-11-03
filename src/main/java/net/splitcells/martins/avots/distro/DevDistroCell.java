@@ -27,6 +27,7 @@ import net.splitcells.gel.GelCoreFileSystem;
 import net.splitcells.gel.data.table.TableModificationCounter;
 import net.splitcells.gel.data.table.Tables;
 import net.splitcells.gel.doc.GelDocFileSystem;
+import net.splitcells.gel.editor.GelEditorFileSystem;
 import net.splitcells.gel.ext.GelExtFileSystem;
 import net.splitcells.gel.ui.GelUiFileSystem;
 import net.splitcells.network.NetworkFileSystem;
@@ -93,6 +94,8 @@ public class DevDistroCell implements Cell {
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.core")))
                 .withConfigValue(GelDocFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.doc")))
+                .withConfigValue(GelEditorFileSystem.class
+                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.editor")))
                 .withConfigValue(GelUiFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.ui")))
                 .withConfigValue(GelExtFileSystem.class
