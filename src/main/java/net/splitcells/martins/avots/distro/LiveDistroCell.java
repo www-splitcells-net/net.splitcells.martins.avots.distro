@@ -59,6 +59,8 @@ public class LiveDistroCell implements Cell {
         if (true) {
             // TODO Make main a Purely cell based function.
             Dem.serve(LiveCryptoSetupCell.class);
+            Dem.serve(LiveDistroCell.class);
+            return;
         }
         Dem.process(() -> {
             try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
