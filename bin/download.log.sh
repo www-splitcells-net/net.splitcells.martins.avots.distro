@@ -4,5 +4,5 @@
 [ ! -d "bin" ] && cd ..
 mkdir -p target/logs
 ssh.download.file \
-    --remote-file-address martins-avots@live.splitcells.net:.local/state/net.splitcells.martins.avots.distro.livedistro/logs/execution-current.txt \
+    --remote-file-address martins-avots@live.splitcells.net:.local/state/net.splitcells.martins.avots.distro.livedistrocell/logs/execution-current.txt \
     --target-file=target/logs/execution-current.txt
