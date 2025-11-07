@@ -17,6 +17,15 @@ package net.splitcells.martins.avots.distro;
 
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
+import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
+import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
+import net.splitcells.website.server.security.encryption.SslEnabled;
+
+import java.util.Optional;
+
+import static net.splitcells.martins.avots.distro.LiveDistroCell.baseConfig;
+import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
+import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
 
 public class LiveCryptoSetupCell implements Cell {
     @Override
@@ -30,6 +39,16 @@ public class LiveCryptoSetupCell implements Cell {
     }
 
     @Override public void accept(Environment env) {
+        final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
+        env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
+                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
+                .withConfigValue(SslEnabled.class, true);
+        baseConfig(env);
+    }
 
+    @Override public void run() {
+        try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
+            liveService.start();
+        }
     }
 }

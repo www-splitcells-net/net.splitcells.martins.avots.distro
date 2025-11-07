@@ -56,6 +56,10 @@ import static net.splitcells.website.server.security.authorization.AuthorizerBas
 public class LiveDistroCell implements Cell {
 
     public static void main(String... args) {
+        if (true) {
+            // TODO Make main a Purely cell based function.
+            Dem.serve(LiveCryptoSetupCell.class);
+        }
         Dem.process(() -> {
             final PublicKeyCryptoConfig certificate;
             try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
@@ -67,21 +71,7 @@ public class LiveDistroCell implements Cell {
                     liveService.start();
                     Dem.waitIndefinitely();
                 }
-            }, env -> {
-                env.config()
-                        .withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
-                        .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
-                        .withConfigValue(SslEnabled.class, true)
-                        .withInitedOption(HtmlLiveTester.class)
-                        .withConfigValue(HtmlLiveTest.class, TEST_OPTIMIZATION_GUI)
-                        .withConfigValue(MessageFilter.class, logMessage -> true)
-                        .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
-                        .withConfigValue(PasswordAuthenticationEnabled.class, true)
-                        .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
-                        .withConfigValue(Authorization.class, authorizerBasedOnFiles())
-                ;
-                baseConfig(env);
-            });
+            }, LiveDistroCell::configForPublicServer);
         }, env -> {
             final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
             env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
@@ -91,7 +81,25 @@ public class LiveDistroCell implements Cell {
         });
     }
 
-    private static void baseConfig(Environment env) {
+    protected static void configForPublicServer(Environment env) {
+        final PublicKeyCryptoConfig certificate = publicKeyCryptoConfig();
+        env.config()
+                .withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
+                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
+                .withConfigValue(SslEnabled.class, true)
+                .withInitedOption(HtmlLiveTester.class)
+                .withConfigValue(HtmlLiveTest.class, TEST_OPTIMIZATION_GUI)
+                .withConfigValue(MessageFilter.class, logMessage -> true)
+                .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
+                .withConfigValue(PasswordAuthenticationEnabled.class, true)
+                .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
+                .withConfigValue(Authorization.class, authorizerBasedOnFiles())
+        ;
+        baseConfig(env);
+    }
+
+
+    protected static void baseConfig(Environment env) {
         setGlobalUnixStateLogger(env);
         env.config()
                 .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
