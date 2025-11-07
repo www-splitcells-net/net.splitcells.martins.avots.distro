@@ -61,10 +61,8 @@ public class LiveDistroCell implements Cell {
             Dem.serve(LiveCryptoSetupCell.class);
         }
         Dem.process(() -> {
-            final PublicKeyCryptoConfig certificate;
             try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
                 liveService.start();
-                certificate = publicKeyCryptoConfig();
             }
             Dem.process(() -> {
                 try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
