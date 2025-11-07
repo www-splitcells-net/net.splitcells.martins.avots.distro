@@ -72,13 +72,15 @@ public class LiveDistroCell implements Cell {
                     Dem.waitIndefinitely();
                 }
             }, LiveDistroCell::configForPublicServer);
-        }, env -> {
-            final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
-            env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
-                    .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
-                    .withConfigValue(SslEnabled.class, true);
-            baseConfig(env);
-        });
+        }, LiveDistroCell::configCryptoSetup);
+    }
+
+    protected static void configCryptoSetup(Environment env) {
+        final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
+        env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
+                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
+                .withConfigValue(SslEnabled.class, true);
+        baseConfig(env);
     }
 
     protected static void configForPublicServer(Environment env) {
