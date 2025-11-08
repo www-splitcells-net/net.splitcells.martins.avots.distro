@@ -17,6 +17,7 @@ package net.splitcells.martins.avots.distro;
 
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
+import net.splitcells.network.system.SystemCell;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
 import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
@@ -40,6 +41,7 @@ public class LiveCryptoSetupCell implements Cell {
     }
 
     @Override public void accept(Environment env) {
+        env.withCell(SystemCell.class);
         configCryptoSetup(env);
     }
 
