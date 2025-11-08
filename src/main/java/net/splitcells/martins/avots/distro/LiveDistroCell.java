@@ -117,10 +117,6 @@ public class LiveDistroCell implements Cell {
         ensureSslCertificatePresence(env);
     }
 
-    public static void cellBasedMain(String... args) {
-        Dem.serve(LiveDistroCell.class);
-    }
-
     @Override
     public String groupId() {
         return "net.splitcells";
