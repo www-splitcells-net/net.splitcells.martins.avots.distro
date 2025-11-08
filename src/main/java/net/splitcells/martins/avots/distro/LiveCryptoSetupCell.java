@@ -41,7 +41,7 @@ public class LiveCryptoSetupCell implements Cell {
     }
 
     @Override public void accept(Environment env) {
-        env.withCell(SystemCell.class);
+        env.withCell(DistroCell.class);
         configCryptoSetup(env);
     }
 
