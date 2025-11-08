@@ -84,10 +84,11 @@ public class LiveDistroCell implements Cell {
     }
 
     protected static void configForPublicServer(Environment env) {
-        final PublicKeyCryptoConfig certificate = publicKeyCryptoConfig();
         env.config()
-                .withConfigValue(PublicIdentityPemStore.class, Optional.of(certificate.publicPem()))
-                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(certificate.privatePem()))
+                .withConfigValue(PublicDomain.class, Optional.of("live.splitcells.net"))
+                .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
+                .withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig().publicPem()))
+                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig().privatePem()))
                 .withConfigValue(SslEnabled.class, true)
                 .withInitedOption(HtmlLiveTester.class)
                 .withConfigValue(HtmlLiveTest.class, TEST_OPTIMIZATION_GUI)
