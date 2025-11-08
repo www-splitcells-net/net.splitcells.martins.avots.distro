@@ -46,8 +46,6 @@ public class LiveCryptoSetupCell implements Cell {
     }
 
     @Override public void run() {
-        try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
-            liveService.start();
-        }
+        publicKeyCryptoConfig();
     }
 }
