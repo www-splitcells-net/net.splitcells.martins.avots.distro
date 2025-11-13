@@ -6,3 +6,16 @@ sudo apt-get install -y podman-compose netavark aardvark-dns
 cd src/main/podman
 podman-compose down # Ensure a restart, so that all configs are really applied.
 podman-compose up --detach
+exit
+
+TODO
+
+ssh -L 9000:localhost:3000 martins-avots@live.splitcells.net
+
+admin password
+
+sudo nano /etc/containers/registries.conf
+unqualified-search-registries = ["docker.io"]
+sudo nano /etc/containers/containers.conf
+[network]
+network_backend = "netavark"
