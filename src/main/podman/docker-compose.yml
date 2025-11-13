@@ -51,6 +51,13 @@ services:
     volumes:
       - ./prometheus-config:/etc/prometheus
       - prometheus-data:/prometheus-data
+  pyroscope:
+    image: grafana/pyroscope
+    container_name: pyroscope
+    networks:
+      - monitoring
+    ports:
+      - "4040:4040"
 volumes:
   grafana-data: {}
   prometheus-data: {}
