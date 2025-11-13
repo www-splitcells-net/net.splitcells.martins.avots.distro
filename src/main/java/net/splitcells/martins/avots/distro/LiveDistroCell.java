@@ -42,6 +42,7 @@ import net.splitcells.website.server.test.HtmlLiveTester;
 
 import java.util.Optional;
 
+import static net.splitcells.dem.Dem.startPyroscope;
 import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
 import static net.splitcells.dem.resource.communication.log.ServerLogger.serverLog;
 import static net.splitcells.gel.ui.editor.geal.EditorProcessorTest.TEST_OPTIMIZATION_GUI;
@@ -68,6 +69,7 @@ public class LiveDistroCell implements Cell {
                 publicKeyCryptoConfig();
             }
             Dem.process(() -> {
+                startPyroscope();
                 try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
                     liveService.start();
                     Dem.waitIndefinitely();
