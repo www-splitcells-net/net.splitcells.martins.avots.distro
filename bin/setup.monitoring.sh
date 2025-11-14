@@ -4,8 +4,8 @@
 set -e
 sudo apt-get install -y podman-compose netavark aardvark-dns
 cd src/main/podman
-podman-compose down # Ensure a restart, so that all configs are really applied.
 podman-compose up --detach
+podman-compose restart # Ensure a restart, so that all configs are really applied, if the pods where already running.
 exit
 
 TODO
