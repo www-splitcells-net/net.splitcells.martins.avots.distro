@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
+# SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 global:
   scrape_interval: 15s
 scrape_configs:
