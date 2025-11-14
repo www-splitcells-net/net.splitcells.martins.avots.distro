@@ -10,8 +10,6 @@ exit
 
 TODO
 
-ssh -L 9000:localhost:3000 martins-avots@live.splitcells.net
-
 admin password
 
 sudo nano /etc/containers/registries.conf
