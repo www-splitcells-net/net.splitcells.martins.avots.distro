@@ -21,6 +21,7 @@ import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.Console;
 import net.splitcells.dem.resource.communication.log.Logs;
 import net.splitcells.dem.resource.communication.log.MessageFilter;
+import net.splitcells.dem.resource.profiling.PyroscopeService;
 import net.splitcells.gel.ext.GelExtCell;
 import net.splitcells.network.distro.DistroCell;
 import net.splitcells.network.distro.java.acme.AcmeServerUri;
@@ -42,7 +43,6 @@ import net.splitcells.website.server.test.HtmlLiveTester;
 
 import java.util.Optional;
 
-import static net.splitcells.dem.Dem.startPyroscope;
 import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
 import static net.splitcells.dem.resource.communication.log.ServerLogger.serverLog;
 import static net.splitcells.gel.ui.editor.geal.EditorProcessorTest.TEST_OPTIMIZATION_GUI;
@@ -69,7 +69,6 @@ public class LiveDistroCell implements Cell {
                 publicKeyCryptoConfig();
             }
             Dem.process(() -> {
-                startPyroscope();
                 try (final var liveService = net.splitcells.martins.avots.distro.DistroCell.liveService()) {
                     liveService.start();
                     Dem.waitIndefinitely();
@@ -100,6 +99,7 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(PasswordAuthenticationEnabled.class, true)
                 .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
                 .withConfigValue(Authorization.class, authorizerBasedOnFiles())
+                .withInitedOption(PyroscopeService.class)
         ;
         baseConfig(env);
     }
