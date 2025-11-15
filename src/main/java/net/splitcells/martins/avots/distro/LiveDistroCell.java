@@ -54,6 +54,14 @@ import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoC
 import static net.splitcells.website.server.security.authentication.AuthenticatorImpl.authenticatorBasedOnFiles;
 import static net.splitcells.website.server.security.authorization.AuthorizerBasedOnFiles.authorizerBasedOnFiles;
 
+/**
+ * <p>You can test this {@link Cell} locally with some preparations:</p>
+ * <ol>
+ *     <li>Add `127.0.1.1       live.splitcells.net` to `/etc/hosts`</li>
+ *     <li>Download public crypto keys from live server and store it at
+ *     `/home/splitcells/.local/state/net.splitcells.martins.avots.distro.livedistrocell/config/net/splitcells/network/distro/java/acme/publickeycryptoconfigurator`</li>
+ * </ol>
+ */
 public class LiveDistroCell implements Cell {
 
     public static void main(String... args) {
