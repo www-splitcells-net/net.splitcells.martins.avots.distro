@@ -145,6 +145,7 @@ public class DevDistroCell implements Cell {
                     .withConfigValue(Authorization.class, authorizerBasedOnFiles())
                     .withInitedOption(TableModificationCounter.class)
             ;
+            env.config().configValue(ServerConfig.class).withIsServerForGeneralPublic(false);
             // TODO Move this connector to the core code.
             env.config().configValue(Tables.class).withConnector(table -> {
                 if (!table.name().equals(MIRROR_NAME)) {
