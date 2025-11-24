@@ -67,7 +67,7 @@ public class LiveDistroCell implements Cell {
     public static void main(String... args) {
         if (false) {
             // TODO Make main a Purely cell based function.
-            Dem.serve(LiveCryptoSetupCell.class);
+            // TODO Reenable this: Dem.serve(LiveCryptoSetupCell.class);
             Dem.serve(LiveDistroCell.class);
             return;
         }
