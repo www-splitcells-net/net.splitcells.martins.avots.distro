@@ -13,3 +13,8 @@
   This minimizes the probability, that something is incorrectly/obsoletely stated in the privacy policy,
   because of things like server migrations.
 * According to German law it seems, that questions regarding the site's privacy policy are allowed to be answered within 1 month.
+* Links related to Germany:
+    * https://datenschutzkonferenz-online.de/
+    * https://www.bsi.bund.de
+    * https://www.bfdi.bund.de
+    * https://dsgvo-gesetz.de/
