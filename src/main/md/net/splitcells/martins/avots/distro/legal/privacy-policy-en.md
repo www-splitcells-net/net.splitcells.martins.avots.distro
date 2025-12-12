@@ -9,7 +9,7 @@ This data protection declaration follows [Art. 13 of the Datenschutz-Grundverord
 * Location: 97276 Margetshöchheim
 * Street: Frankenstraße 26
 * E-Mail: contacts@splitcells.net
-* Telephone Number: ***REMOVED***
+* Matrix Channel: [#net.splitcells.martins.avots.webiste.legal:matrix.org](https://matrix.to/#/#net.splitcells.martins.avots.webiste.legal:matrix.org)
 ## Rights Of Those Affected
 * According to [Art. 15 Par. 1 der DSGVO](https://dejure.org/gesetze/DSGVO/15.html),
   you have the right to request information about personal data about you and

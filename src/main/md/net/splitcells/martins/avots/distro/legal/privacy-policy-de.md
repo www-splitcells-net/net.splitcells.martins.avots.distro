@@ -9,7 +9,7 @@ Diese Datenschutzerklärung erfolgt nach [Art. 13 der Datenschutz-Grundverordnun
 * Ort: 97276 Margetshöchheim
 * Straße: Frankenstraße 26
 * Email: contacts@splitcells.net
-* Telefonnummer: ***REMOVED***
+* Matrix Channel: [#net.splitcells.martins.avots.webiste.legal:matrix.org](https://matrix.to/#/#net.splitcells.martins.avots.webiste.legal:matrix.org)
 ## Rechte von Betroffenen
 * Sie haben nach [Art. 15 Abs. 1 der DSGVO](https://dejure.org/gesetze/DSGVO/15.html)
   ein Recht auf Auskunft von personenbezogene Daten über Sie und deren Verarbeitung zu verlangen.
