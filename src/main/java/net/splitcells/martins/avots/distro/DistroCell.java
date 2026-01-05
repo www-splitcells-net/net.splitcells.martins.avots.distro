@@ -23,10 +23,7 @@ import net.splitcells.network.log.NetworkLogFileSystem;
 import net.splitcells.network.system.SystemCell;
 import net.splitcells.network.worker.via.java.NetworkWorkerLogFileSystem;
 import net.splitcells.symbiosis.SymbiosisFileSystem;
-import net.splitcells.website.server.Config;
-import net.splitcells.website.server.Server;
-import net.splitcells.website.server.ServerConfig;
-import net.splitcells.website.server.ServerService;
+import net.splitcells.website.server.*;
 
 import java.util.Optional;
 
@@ -72,7 +69,7 @@ public class DistroCell implements Cell {
 
     @Deprecated
     private static Config baseConfig() {
-        final var config = net.splitcells.network.distro.DistroCell.config()
+        final var config = net.splitcells.network.distro.DistroCell.config(configValue(ServerConfig.class))
                 .withDetailedXslMenu(DETAILED_XSL_MENU)
                 .withXslWindowMenu(WINDOW_MENU_XSL)
                 .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)))
@@ -131,5 +128,6 @@ public class DistroCell implements Cell {
                 .withConfigValue(ServerConfig.class, liveConfig(baseConfig()))
                 .withInitedOption(ServerService.class)
         ;
+        env.withCell(net.splitcells.network.distro.DistroCell.class);
     }
 }
