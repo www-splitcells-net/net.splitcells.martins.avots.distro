@@ -29,6 +29,7 @@ import net.splitcells.network.distro.java.acme.PublicKeyCryptoConfig;
 import net.splitcells.network.system.SystemCell;
 import net.splitcells.website.server.RedirectServer;
 import net.splitcells.website.server.ServerConfig;
+import net.splitcells.website.server.WebsiteServerCell;
 import net.splitcells.website.server.config.InternalPublicPort;
 import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.config.PublicContactEMailAddress;
@@ -81,19 +82,19 @@ public class LiveDistroCell implements Cell {
                     liveService.start();
                     Dem.waitIndefinitely();
                 }
-            }, LiveDistroCell::configForPublicServer);
-        }, LiveDistroCell::configCryptoSetup);
+            }, c -> configForPublicServer(c, false));
+        }, c -> configCryptoSetup(c, false));
     }
 
-    protected static void configCryptoSetup(Environment env) {
+    protected static void configCryptoSetup(Environment env, boolean initViaCells) {
         final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
         env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
                 .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
                 .withConfigValue(SslEnabled.class, true);
-        baseConfig(env);
+        baseConfig(env, initViaCells);
     }
 
-    protected static void configForPublicServer(Environment env) {
+    protected static void configForPublicServer(Environment env, boolean initViaCells) {
         env.config()
                 .withConfigValue(PublicDomain.class, Optional.of("live.splitcells.net"))
                 .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
@@ -109,11 +110,11 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(Authorization.class, authorizerBasedOnFiles())
                 .withInitedOption(PyroscopeService.class)
         ;
-        baseConfig(env);
+        baseConfig(env, initViaCells);
     }
 
 
-    protected static void baseConfig(Environment env) {
+    protected static void baseConfig(Environment env, boolean initViaCells) {
         setGlobalUnixStateLogger(env);
         env.config()
                 .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
@@ -124,6 +125,12 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(RedirectServer.class);
         DistroCell.configurator(env);
+        if (!initViaCells) {
+            WebsiteServerCell.configureNoneCellInit(env);
+            SystemCell.config(env.config().configValue(ServerConfig.class));
+            net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
+            net.splitcells.martins.avots.distro.DistroCell.baseConfig(env.config().configValue(ServerConfig.class));
+        }
         net.splitcells.martins.avots.distro.DistroCell.envConfig(env);
         ensureSslCertificatePresence(env);
     }
@@ -144,6 +151,6 @@ public class LiveDistroCell implements Cell {
         DistroCell.config(env.config().configValue(ServerConfig.class));
         net.splitcells.martins.avots.distro.DistroCell.baseConfig(env.config().configValue(ServerConfig.class));
         GelExtCell.configureForWebserver(env);
-        configForPublicServer(env);
+        configForPublicServer(env, true);
     }
 }
