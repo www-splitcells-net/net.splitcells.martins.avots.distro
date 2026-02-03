@@ -66,9 +66,9 @@ import static net.splitcells.website.server.security.authorization.AuthorizerBas
 public class LiveDistroCell implements Cell {
 
     public static void main(String... args) {
-        if (false) {
+        if (true) {
             // TODO Make main a Purely cell based function.
-            // TODO Reenable this: Dem.serve(LiveCryptoSetupCell.class);
+            Dem.serve(LiveCryptoSetupCell.class);
             Dem.serve(LiveDistroCell.class);
             return;
         }
