@@ -126,7 +126,7 @@ public class LiveDistroCell implements Cell {
                 .withInitedOption(RedirectServer.class);
         DistroCell.configurator(env);
         if (!initViaCells) {
-            WebsiteServerCell.configureNoneCellInit(env);
+            WebsiteServerCell.configureNoneCellInit(env.config().configValue(ServerConfig.class));
             SystemCell.config(env.config().configValue(ServerConfig.class));
             net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
             net.splitcells.martins.avots.distro.DistroCell.baseConfig(env.config().configValue(ServerConfig.class));
