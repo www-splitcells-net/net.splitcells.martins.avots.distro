@@ -13,10 +13,6 @@
         <version>${revision}</version>
         <relativePath>../net.splitcells.network/projects/net.splitcells.pom.java.deployable/pom.xml</relativePath>
     </parent>
-    <properties>
-        <uber_jar>enabled</uber_jar>
-        <main.class>org.springframework.boot.loader.JarLauncher</main.class>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>net.splitcells</groupId>
