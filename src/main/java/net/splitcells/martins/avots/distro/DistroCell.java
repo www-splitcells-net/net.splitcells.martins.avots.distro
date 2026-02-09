@@ -59,38 +59,7 @@ public class DistroCell implements Cell {
                 .withAdditionalProject(projectConfig("/", configValue(SymbiosisFileSystem.class)));
         return config;
     }
-
-    private static Config websiteConfig(Config config) {
-        config.clearAdditionalProgramConfigs()
-                .withAdditionalProgramConfig(programConfig("About This Site"
-                        , "/net/splitcells/martins/avots/website/info/about-this-site")
-                        .withLogoPath(Optional.of("net/splitcells/website/images/white.background.blog.discovery.0.jpg"))
-                        .withDescription(Optional.of("History And Purpose Of This Site")))
-                .withAdditionalProgramConfig(programConfig("News"
-                        , "/net/splitcells/website/news")
-                        .withLogoPath(Optional.of("net/splitcells/website/images/average.source.code.image.generator.filling.via.horizontal.100.percent.jpg"))
-                        .withDescription(Optional.of("All User and Developer Relevant News in One Place at Your Finger Tips")))
-                .withAdditionalProgramConfig(programConfig("Notifications"
-                        , "/net/splitcells/website/notifications")
-                        .withLogoPath(Optional.of("net/splitcells/website/images/average.source.code.image.generator.filling.via.horizontal.100.percent.jpg"))
-                        .withDescription(Optional.of("All News of This Site for Nerds with an Eye for Details")))
-                .withAdditionalProgramConfig(programConfig("Splitcells Network"
-                        , "/net/splitcells/network/hub/README")
-                        .withLogoPath(Optional.of("net/splitcells/website/images/community.2016.12.11.chrom.0.dina4.jpg"))
-                        .withDescription(Optional.of("We provide an open source ecosystem centered around optimization and operations research.")))
-                .withAdditionalProgramConfig(programConfig("Personal Projects"
-                        , "/net/splitcells/martins/avots/website/projects/index")
-                        .withLogoPath(Optional.of("net/splitcells/website/images/starting-to-learn-how-to-draw-a-face.jpg"))
-                        .withDescription(Optional.of("Projects that I support or work on.")));
-        return config;
-    }
-
-    /**
-     * TODO Document why does the distinction between this and {@link #websiteConfig(Config)} exist.
-     *
-     * @param config
-     * @return
-     */
+    
     private static Config liveConfig(Config config) {
         return config;
     }
