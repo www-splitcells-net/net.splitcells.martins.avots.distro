@@ -18,9 +18,7 @@ package net.splitcells.martins.avots.distro;
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.resource.HostUtilizationRecordService;
-import net.splitcells.dem.environment.resource.Service;
 import net.splitcells.network.log.NetworkLogFileSystem;
-import net.splitcells.network.system.SystemCell;
 import net.splitcells.network.worker.via.java.NetworkWorkerLogFileSystem;
 import net.splitcells.symbiosis.SymbiosisFileSystem;
 import net.splitcells.website.server.*;
@@ -29,7 +27,6 @@ import java.util.Optional;
 
 import static net.splitcells.dem.Dem.configValue;
 import static net.splitcells.dem.utils.reflection.ClassesRelated.resourceOfClass;
-import static net.splitcells.website.server.ProgramConfig.programConfig;
 import static net.splitcells.website.server.ProjectConfig.projectConfig;
 
 public class DistroCell implements Cell {
@@ -50,8 +47,7 @@ public class DistroCell implements Cell {
         return arg;
     }
 
-    @Deprecated
-    private static Config baseConfig() {
+    private Config config() {
         final var config = net.splitcells.network.distro.DistroCell.config(configValue(ServerConfig.class))
                 .withDetailedXslMenu(DETAILED_XSL_MENU)
                 .withXslWindowMenu(WINDOW_MENU_XSL)
@@ -59,7 +55,7 @@ public class DistroCell implements Cell {
                 .withAdditionalProject(projectConfig("/", configValue(SymbiosisFileSystem.class)));
         return config;
     }
-    
+
     private static Config liveConfig(Config config) {
         return config;
     }
@@ -77,7 +73,7 @@ public class DistroCell implements Cell {
     @Override
     public void accept(Environment env) {
         env.config()
-                .withConfigValue(ServerConfig.class, liveConfig(baseConfig()))
+                .withConfigValue(ServerConfig.class, liveConfig(config()))
                 .withInitedOption(ServerService.class)
         ;
         env.withCell(net.splitcells.network.distro.DistroCell.class);
