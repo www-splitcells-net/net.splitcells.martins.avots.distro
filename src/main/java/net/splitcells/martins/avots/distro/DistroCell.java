@@ -38,23 +38,6 @@ public class DistroCell implements Cell {
     private static final Optional<String> WINDOW_MENU_XSL = Optional.of(
             resourceOfClass(DistroCell.class, "window-menu.xsl"));
 
-    public static Service liveService() {
-        final var config = liveConfig(baseConfig());
-        return Server.serveToHttpAt(() -> {
-            final var projectsRenderer = SystemCell.projectsRenderer(config);
-            projectsRenderer.build();
-            return projectsRenderer;
-        }, config);
-    }
-
-    public static Service websiteService() {
-        return SystemCell.projectsRenderer(websiteConfig(baseConfig())).httpServer();
-    }
-
-    private static Service projectsRenderer(Config config) {
-        return SystemCell.projectsRenderer(config).httpServer();
-    }
-
     public static void envConfig(Environment env) {
         env.config().withConfigValue(NetworkWorkerLogFileSystem.class, env.config().configValue(NetworkLogFileSystem.class));
         env.config().withInitedOption(HostUtilizationRecordService.class);
