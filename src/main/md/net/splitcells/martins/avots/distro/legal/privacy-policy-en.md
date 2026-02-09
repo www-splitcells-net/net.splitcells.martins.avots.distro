@@ -20,6 +20,8 @@ This data protection declaration follows [Art. 13 of the Datenschutz-Grundverord
   you have the right to object to or restrict the processing of personal data about you.
 * According to [Art. 15 Abs. 1 der DSGVO](https://dejure.org/gesetze/DSGVO/15.html),
   you have the right to lodge a complaint with a supervisory authority.
+  The [Bayerische Landesbeauftragte für den Datenschutz (BayLfD)](https://www.datenschutz-bayern.de/service/complaint.html)
+  is such a supervisory authority.
 ## Processing Purposes
 Data processing is carried out for the following purposes, in order to process your requests with the [legal basis of Art. 6 b)](https://dejure.org/gesetze/DSGVO/6.html):
 * To provide the content and functions of the website to the user and thus answer the user's requests.
