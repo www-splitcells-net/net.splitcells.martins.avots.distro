@@ -25,8 +25,6 @@ import net.splitcells.website.server.security.encryption.SslEnabled;
 import java.util.Optional;
 
 import static net.splitcells.dem.utils.reflection.ClassesRelated.simplifiedName;
-import static net.splitcells.martins.avots.distro.LiveDistroCell.baseConfig;
-import static net.splitcells.martins.avots.distro.LiveDistroCell.configCryptoSetup;
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
 
@@ -46,7 +44,7 @@ public class LiveCryptoSetupCell implements Cell {
 
     @Override public void accept(Environment env) {
         env.withCell(DistroCell.class);
-        configCryptoSetup(env, true);
+        new LiveDistroCell().configCryptoSetup(env, true);
     }
 
     @Override public void run() {

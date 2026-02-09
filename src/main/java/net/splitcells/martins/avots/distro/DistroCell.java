@@ -40,7 +40,7 @@ public class DistroCell implements Cell {
         env.config().withInitedOption(HostUtilizationRecordService.class);
     }
 
-    public static Config baseConfig(Config arg) {
+    public Config config(Config arg) {
         arg.withDetailedXslMenu(DETAILED_XSL_MENU)
                 .withXslWindowMenu(WINDOW_MENU_XSL)
                 .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)));
