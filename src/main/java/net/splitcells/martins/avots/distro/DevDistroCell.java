@@ -65,6 +65,9 @@ import static net.splitcells.website.server.security.authorization.AuthorizerBas
 
 public class DevDistroCell implements Cell {
 
+    /**
+     * TODO Make this configurable.
+     */
     private static final Path PUBLIC_REPOS = Paths.get(System.getProperty("user.home")).resolve(
             "Documents/projects/net.splitcells.martins.avots.support.system/public/");
     private static final Path PUBLIC_ROOT_PROJECT_REPO = PUBLIC_REPOS.resolve("net.splitcells.network");
