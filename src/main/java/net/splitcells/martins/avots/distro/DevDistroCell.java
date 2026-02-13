@@ -98,7 +98,8 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(GelDocFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.doc")))
                 .withConfigValue(GelEditorFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.editor")))
+                        , fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.editor"))
+                                , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.editor/target/classes/net.splitcells.gel.editor.resources"))))
                 .withConfigValue(GelUiFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.ui")))
                 .withConfigValue(GelExtFileSystem.class
