@@ -23,6 +23,7 @@ import net.splitcells.dem.DemApiFileSystem;
 import net.splitcells.dem.DemFileSystem;
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
+import net.splitcells.dem.environment.config.framework.Configuration;
 import net.splitcells.gel.GelCoreFileSystem;
 import net.splitcells.gel.data.table.TableModificationCounter;
 import net.splitcells.gel.data.table.Tables;
@@ -46,6 +47,7 @@ import net.splitcells.symbiosis.SymbiosisFileSystem;
 import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
+import net.splitcells.website.server.Config;
 import net.splitcells.website.server.ServerConfig;
 import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.security.authentication.Authentication;
@@ -78,8 +80,12 @@ public class DevDistroCell implements Cell {
         Dem.serve(DevDistroCell.class);
     }
 
-    private static void useLocalFileSystem(Environment env) {
-        env.config().withConfigValue(NetworkMediaFileSystem.class
+    public static void useLocalFileSystem(Environment env) {
+        useLocalFileSystem(env.config());
+    }
+
+    public static void useLocalFileSystem(Configuration config) {
+        config.withConfigValue(NetworkMediaFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.media")))
                 .withConfigValue(BinaryFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.website.content.binaries")))
