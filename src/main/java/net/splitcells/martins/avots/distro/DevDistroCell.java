@@ -24,6 +24,8 @@ import net.splitcells.dem.DemFileSystem;
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.config.framework.Configuration;
+import net.splitcells.dem.resource.FileSystem;
+import net.splitcells.dem.resource.FileSystemView;
 import net.splitcells.gel.GelCoreFileSystem;
 import net.splitcells.gel.data.table.TableModificationCounter;
 import net.splitcells.gel.data.table.Tables;
@@ -84,62 +86,52 @@ public class DevDistroCell implements Cell {
         useLocalFileSystem(env.config());
     }
 
+    private static FileSystemView publicSourceCodeFilesystem(String projectName) {
+        return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName))
+                , fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
+    }
+
+    private static FileSystemView publicSubSourceCodeFilesystem(String projectName) {
+        return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
+                , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
+    }
+
     public static void useLocalFileSystem(Configuration config) {
         config.withConfigValue(NetworkMediaFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.media")))
+                        , publicSourceCodeFilesystem("net.splitcells.network.media"))
                 .withConfigValue(BinaryFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.website.content.binaries")))
+                        , publicSourceCodeFilesystem("net.splitcells.website.content.binaries"))
                 .withConfigValue(NetworkWorkerLogFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
                 .withConfigValue(NetworkLogFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
-                .withConfigValue(CinFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.cin")))
-                .withConfigValue(DemFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.dem")))
-                .withConfigValue(DemApiFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.dem.api")))
-                .withConfigValue(GelCoreFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.core")))
-                .withConfigValue(GelDocFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.doc")))
-                .withConfigValue(GelEditorFileSystem.class
-                        , fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.editor"))
-                                , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.editor/target/classes/net.splitcells.gel.editor.resources"))))
-                .withConfigValue(GelUiFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.ui")))
-                .withConfigValue(GelExtFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.gel.ext")))
+                .withConfigValue(CinFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.cin"))
+                .withConfigValue(DemFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.dem"))
+                .withConfigValue(DemApiFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.dem.api"))
+                .withConfigValue(GelCoreFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.gel.core"))
+                .withConfigValue(GelDocFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.gel.doc"))
+                .withConfigValue(GelEditorFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.gel.editor"))
+                .withConfigValue(GelUiFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.gel.ui"))
+                .withConfigValue(GelExtFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.gel.ext"))
                 .withConfigValue(NetworkFileSystem.class
                         , fileSystemsUnion(
                                 fileSystemOnLocalHost(PUBLIC_ROOT_PROJECT_REPO)
                                 , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network"))))
-                .withConfigValue(NetworkWorkerFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.worker.via.java")))
-                .withConfigValue(OsiFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell")))
-                .withConfigValue(OsiLibFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.shell.lib")))
-                .withConfigValue(SystemsFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network.system")))
-                .withConfigValue(WebsiteServerFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.website.server")))
-                .withConfigValue(WebsiteContentDefaultsFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.website.content.default")))
-                .withConfigValue(NetworkCommunityFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.community")))
-                .withConfigValue(DistroFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.martins.avots.distro")))
+                .withConfigValue(NetworkWorkerFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.network.worker.via.java"))
+                .withConfigValue(OsiFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.shell"))
+                .withConfigValue(OsiLibFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.shell.lib"))
+                .withConfigValue(SystemsFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.network.system"))
+                .withConfigValue(WebsiteServerFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.website.server"))
+                .withConfigValue(WebsiteContentDefaultsFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.website.content.default"))
+                .withConfigValue(NetworkCommunityFileSystem.class, publicSourceCodeFilesystem("net.splitcells.network.community"))
+                .withConfigValue(DistroFileSystem.class, publicSourceCodeFilesystem("net.splitcells.martins.avots.distro"))
                 .withConfigValue(NetworkDistroFileSystem.class
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.distro/projects/net.splitcells.network.distro")))
                 .withConfigValue(ProjectFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.project")))
-                .withConfigValue(NetworkPresentationsFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.presentations")))
-                .withConfigValue(CinTextFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.cin.text")))
-                .withConfigValue(SymbiosisFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.symbiosis")))
+                        , publicSubSourceCodeFilesystem("net.splitcells.project"))
+                .withConfigValue(NetworkPresentationsFileSystem.class, publicSourceCodeFilesystem("net.splitcells.network.presentations"))
+                .withConfigValue(CinTextFileSystem.class, publicSourceCodeFilesystem("net.splitcells.cin.text"))
+                .withConfigValue(SymbiosisFileSystem.class, publicSourceCodeFilesystem("net.splitcells.symbiosis"))
         ;
     }
 
