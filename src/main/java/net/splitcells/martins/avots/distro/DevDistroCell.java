@@ -113,10 +113,7 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(GelEditorFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.gel.editor"))
                 .withConfigValue(GelUiFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.gel.ui"))
                 .withConfigValue(GelExtFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.gel.ext"))
-                .withConfigValue(NetworkFileSystem.class
-                        , fileSystemsUnion(
-                                fileSystemOnLocalHost(PUBLIC_ROOT_PROJECT_REPO)
-                                , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve("net.splitcells.network"))))
+                .withConfigValue(NetworkFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.network"))
                 .withConfigValue(NetworkWorkerFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.network.worker.via.java"))
                 .withConfigValue(OsiFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.shell"))
                 .withConfigValue(OsiLibFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.shell.lib"))
