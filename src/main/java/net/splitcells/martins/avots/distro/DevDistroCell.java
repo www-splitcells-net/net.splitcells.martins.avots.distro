@@ -36,6 +36,7 @@ import net.splitcells.gel.ui.GelUiFileSystem;
 import net.splitcells.network.NetworkFileSystem;
 import net.splitcells.network.community.NetworkCommunityFileSystem;
 import net.splitcells.network.distro.NetworkDistroFileSystem;
+import net.splitcells.network.hub.NetworkHubFileSystem;
 import net.splitcells.network.log.NetworkLogFileSystem;
 import net.splitcells.network.media.NetworkMediaFileSystem;
 import net.splitcells.network.presentations.NetworkPresentationsFileSystem;
@@ -129,6 +130,8 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(NetworkPresentationsFileSystem.class, publicSourceCodeFilesystem("net.splitcells.network.presentations"))
                 .withConfigValue(CinTextFileSystem.class, publicSourceCodeFilesystem("net.splitcells.cin.text"))
                 .withConfigValue(SymbiosisFileSystem.class, publicSourceCodeFilesystem("net.splitcells.symbiosis"))
+                .withConfigValue(NetworkHubFileSystem.class, fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub"))
+                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub/target/classes/net.splitcells.network.hub.resources"))))
         ;
     }
 
