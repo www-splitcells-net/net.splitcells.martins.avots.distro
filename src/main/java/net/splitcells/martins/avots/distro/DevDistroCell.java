@@ -62,6 +62,7 @@ import java.nio.file.Paths;
 import static net.splitcells.dem.data.set.list.Lists.list;
 import static net.splitcells.dem.resource.FileSystemUnion.fileSystemsUnion;
 import static net.splitcells.dem.resource.FileSystems.fileSystemOnLocalHost;
+import static net.splitcells.dem.utils.ExecutionException.execException;
 import static net.splitcells.gel.data.view.View.MIRROR_NAME;
 import static net.splitcells.website.server.processor.BinaryMessage.binaryMessage;
 import static net.splitcells.website.server.project.renderer.ObjectsRenderer.registerObject;
@@ -88,13 +89,21 @@ public class DevDistroCell implements Cell {
     }
 
     private static FileSystemView publicSourceCodeFilesystem(String projectName) {
-        return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName))
-                , fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
+        try {
+            return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName))
+                    , fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
+        } catch (Throwable t) {
+            throw execException("The project " + projectName + " probably needs to be build first, before you run the dev mode.", t);
+        }
     }
 
     private static FileSystemView publicSubSourceCodeFilesystem(String projectName) {
-        return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
-                , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
+        try {
+            return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
+                    , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
+        } catch (Throwable t) {
+            throw execException("The project " + projectName + " probably needs to be build first, before you run the dev mode.", t);
+        }
     }
 
     public static void useLocalFileSystem(Configuration config) {
