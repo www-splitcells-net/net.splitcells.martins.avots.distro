@@ -56,10 +56,6 @@ public class DistroCell implements Cell {
         return config;
     }
 
-    private static Config liveConfig(Config config) {
-        return config;
-    }
-
     @Override
     public String groupId() {
         return "net.splitcells.martins.avots";
@@ -73,7 +69,7 @@ public class DistroCell implements Cell {
     @Override
     public void accept(Environment env) {
         env.config()
-                .withConfigValue(ServerConfig.class, liveConfig(config()))
+                .withConfigValue(ServerConfig.class, config())
                 .withInitedOption(ServerService.class)
         ;
         env.withCell(net.splitcells.network.distro.DistroCell.class);
