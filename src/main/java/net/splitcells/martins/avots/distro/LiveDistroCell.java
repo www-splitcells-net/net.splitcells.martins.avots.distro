@@ -69,15 +69,15 @@ public class LiveDistroCell implements Cell {
         Dem.serve(LiveDistroCell.class);
     }
 
-    protected void configCryptoSetup(Environment env, boolean initViaCells) {
+    protected void configCryptoSetup(Environment env) {
         final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
         env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
                 .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
                 .withConfigValue(SslEnabled.class, true);
-        baseConfig(env, initViaCells);
+        baseConfig(env);
     }
 
-    protected void configForPublicServer(Environment env, boolean initViaCells) {
+    protected void configForPublicServer(Environment env) {
         env.config()
                 .withConfigValue(PublicDomain.class, Optional.of("live.splitcells.net"))
                 .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
@@ -93,11 +93,11 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(Authorization.class, authorizerBasedOnFiles())
                 .withInitedOption(PyroscopeService.class)
         ;
-        baseConfig(env, initViaCells);
+        baseConfig(env);
     }
 
 
-    protected void baseConfig(Environment env, boolean initViaCells) {
+    protected void baseConfig(Environment env) {
         setGlobalUnixStateLogger(env);
         env.config()
                 .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
@@ -108,11 +108,6 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(RedirectServer.class);
         DistroCell.configurator(env);
-        if (!initViaCells) {
-            WebsiteServerCell.configureNoneCellInit(env.config().configValue(ServerConfig.class));
-            SystemCell.config(env.config().configValue(ServerConfig.class));
-            new net.splitcells.martins.avots.distro.DistroCell().config(env.config().configValue(ServerConfig.class));
-        }
         net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
         net.splitcells.martins.avots.distro.DistroCell.envConfig(env);
         ensureSslCertificatePresence(env);
@@ -134,6 +129,6 @@ public class LiveDistroCell implements Cell {
         DistroCell.config(env.config().configValue(ServerConfig.class));
         new net.splitcells.martins.avots.distro.DistroCell().config(env.config().configValue(ServerConfig.class));
         GelExtCell.configureForWebserver(env);
-        configForPublicServer(env, true);
+        configForPublicServer(env);
     }
 }
