@@ -59,10 +59,14 @@ services:
     # https://grafana.com/docs/pyroscope/latest/configure-client/grafana-alloy/ebpf/setup-docker/
     image: grafana/pyroscope:latest
     container_name: pyroscope
+    command:
+      - '--config.file=/etc/pyroscope/pyroscope.yml'
     networks:
       - monitoring
     ports:
       - "4040:4040"
+    volumes:
+      - ./pyroscope-config:/etc/pyroscope
 volumes:
   grafana-data: {}
   prometheus-data: {}
