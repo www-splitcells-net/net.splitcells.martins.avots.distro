@@ -1,1 +1,5 @@
+# On live server, traffic to extern is blocked, in order to avoid leaks of private data.
+# Reporting sends anonym usage data to Grafana Labs, that do not legally guarantee data leak prevention.
+# Pyroscope logs by default config, that the external reporting server are not reachable.
+# Reporting is disabled, in order to avoid this error message. 
 reporting_enabled: false
