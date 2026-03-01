@@ -4,7 +4,7 @@ version: '3.8'
 networks:
   monitoring: # A bridge network is used, so that the container name can be used as the network name.
     driver: bridge
-    internal: true
+    internal: true # Traffic to the internet is blocked, as there is no need for that, and it may lead to leaks of private data.
 services:
   grafana:
     image: grafana/grafana:latest
