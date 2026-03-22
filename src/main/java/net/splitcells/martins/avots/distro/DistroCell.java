@@ -40,13 +40,6 @@ public class DistroCell implements Cell {
         env.config().withInitedOption(HostUtilizationRecordService.class);
     }
 
-    public Config config(Config arg) {
-        arg.withDetailedXslMenu(DETAILED_XSL_MENU)
-                .withXslWindowMenu(WINDOW_MENU_XSL)
-                .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)));
-        return arg;
-    }
-
     private Config config() {
         final var config = net.splitcells.network.distro.DistroCell.config(configValue(ServerConfig.class))
                 .withDetailedXslMenu(DETAILED_XSL_MENU)
@@ -68,6 +61,7 @@ public class DistroCell implements Cell {
 
     @Override
     public void accept(Environment env) {
+        
         env.config()
                 .withConfigValue(ServerConfig.class, config())
                 .withInitedOption(ServerService.class)

@@ -127,7 +127,6 @@ public class LiveDistroCell implements Cell {
     public void accept(Environment env) {
         env.withCell(SystemCell.class);
         DistroCell.config(env.config().configValue(ServerConfig.class));
-        new net.splitcells.martins.avots.distro.DistroCell().config(env.config().configValue(ServerConfig.class));
         GelExtCell.configureForWebserver(env);
         configForPublicServer(env);
     }
