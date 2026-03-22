@@ -87,7 +87,7 @@ public class DevDistroCell implements Cell {
         useLocalFileSystem(env.config());
     }
 
-    private FileSystemView publicSourceCodeFilesystem(String projectName) {
+    private static FileSystemView publicSourceCodeFilesystem(String projectName) {
         try {
             return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName))
                     , fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
@@ -96,7 +96,7 @@ public class DevDistroCell implements Cell {
         }
     }
 
-    private FileSystemView publicSubSourceCodeFilesystem(String projectName) {
+    private static FileSystemView publicSubSourceCodeFilesystem(String projectName) {
         try {
             return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
                     , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
@@ -105,7 +105,12 @@ public class DevDistroCell implements Cell {
         }
     }
 
-    private void useLocalFileSystem(Configuration config) {
+    /**
+     * TODO Make this private and none-static, when martins.avots.website's source code is made public.
+     * 
+     * @param config
+     */
+    public static void useLocalFileSystem(Configuration config) {
         config.withConfigValue(NetworkMediaFileSystem.class
                         , publicSourceCodeFilesystem("net.splitcells.network.media"))
                 .withConfigValue(BinaryFileSystem.class
