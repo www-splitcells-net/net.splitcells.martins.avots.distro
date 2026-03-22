@@ -109,7 +109,6 @@ public class LiveDistroCell implements Cell {
                 .withInitedOption(RedirectServer.class);
         DistroCell.configurator(env);
         net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
-        net.splitcells.martins.avots.distro.DistroCell.envConfig(env);
         ensureSslCertificatePresence(env);
     }
 

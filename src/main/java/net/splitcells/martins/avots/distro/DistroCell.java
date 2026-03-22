@@ -35,11 +35,6 @@ public class DistroCell implements Cell {
     private static final Optional<String> WINDOW_MENU_XSL = Optional.of(
             resourceOfClass(DistroCell.class, "window-menu.xsl"));
 
-    public static void envConfig(Environment env) {
-        env.config().withConfigValue(NetworkWorkerLogFileSystem.class, env.config().configValue(NetworkLogFileSystem.class));
-        env.config().withInitedOption(HostUtilizationRecordService.class);
-    }
-
     private Config config() {
         final var config = net.splitcells.network.distro.DistroCell.config(configValue(ServerConfig.class))
                 .withDetailedXslMenu(DETAILED_XSL_MENU)
@@ -61,8 +56,9 @@ public class DistroCell implements Cell {
 
     @Override
     public void accept(Environment env) {
-        
         env.config()
+                .withConfigValue(NetworkWorkerLogFileSystem.class, env.config().configValue(NetworkLogFileSystem.class))
+                .withInitedOption(HostUtilizationRecordService.class)
                 .withConfigValue(ServerConfig.class, config())
                 .withInitedOption(ServerService.class)
         ;

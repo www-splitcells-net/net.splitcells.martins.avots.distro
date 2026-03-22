@@ -145,8 +145,7 @@ public class DevDistroCell implements Cell {
 
     private static void config(Environment env) {
         {
-            env.withConfig(DistroCell::envConfig)
-                    .withConfig(DevDistroCell::useLocalFileSystem)
+            env.withConfig(DevDistroCell::useLocalFileSystem)
                     .config()
                     .withConfigValue(CinServiceInitTest.class, true)
                     // .withInitedOption(CinService.class) TODO Enable this when the ticket #51 Bootstrap game based on optimization networks is being worked on again.
