@@ -83,11 +83,11 @@ public class DevDistroCell implements Cell {
         Dem.serve(DevDistroCell.class);
     }
 
-    public static void useLocalFileSystem(Environment env) {
+    private void useLocalFileSystem(Environment env) {
         useLocalFileSystem(env.config());
     }
 
-    private static FileSystemView publicSourceCodeFilesystem(String projectName) {
+    private FileSystemView publicSourceCodeFilesystem(String projectName) {
         try {
             return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName))
                     , fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
@@ -96,7 +96,7 @@ public class DevDistroCell implements Cell {
         }
     }
 
-    private static FileSystemView publicSubSourceCodeFilesystem(String projectName) {
+    private FileSystemView publicSubSourceCodeFilesystem(String projectName) {
         try {
             return fileSystemsUnion(fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
                     , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
@@ -105,7 +105,7 @@ public class DevDistroCell implements Cell {
         }
     }
 
-    public static void useLocalFileSystem(Configuration config) {
+    private void useLocalFileSystem(Configuration config) {
         config.withConfigValue(NetworkMediaFileSystem.class
                         , publicSourceCodeFilesystem("net.splitcells.network.media"))
                 .withConfigValue(BinaryFileSystem.class
@@ -143,9 +143,9 @@ public class DevDistroCell implements Cell {
         ;
     }
 
-    private static void config(Environment env) {
+    private void config(Environment env) {
         {
-            env.withConfig(DevDistroCell::useLocalFileSystem)
+            env.withConfig(this::useLocalFileSystem)
                     .config()
                     .withConfigValue(CinServiceInitTest.class, true)
                     // .withInitedOption(CinService.class) TODO Enable this when the ticket #51 Bootstrap game based on optimization networks is being worked on again.
