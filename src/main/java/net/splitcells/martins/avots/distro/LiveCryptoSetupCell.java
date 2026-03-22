@@ -43,8 +43,11 @@ public class LiveCryptoSetupCell implements Cell {
     }
 
     @Override public void accept(Environment env) {
-        env.withCell(DistroCell.class);
-        new LiveDistroCell().configCryptoSetup(env);
+        env.withCell(LiveDistroCell.class);
+        final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
+        env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
+                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
+                .withConfigValue(SslEnabled.class, true);
     }
 
     @Override public void run() {

@@ -69,15 +69,7 @@ public class LiveDistroCell implements Cell {
         Dem.serve(LiveDistroCell.class);
     }
 
-    protected void configCryptoSetup(Environment env) {
-        final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
-        env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
-                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
-                .withConfigValue(SslEnabled.class, true);
-        baseConfig(env);
-    }
-
-    protected void configForPublicServer(Environment env) {
+    private void configForPublicServer(Environment env) {
         env.config()
                 .withConfigValue(PublicDomain.class, Optional.of("live.splitcells.net"))
                 .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
@@ -97,7 +89,7 @@ public class LiveDistroCell implements Cell {
     }
 
 
-    protected void baseConfig(Environment env) {
+    private void baseConfig(Environment env) {
         setGlobalUnixStateLogger(env);
         env.config()
                 .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
