@@ -89,7 +89,7 @@ public class DevDistroCell implements Cell {
 
     private static FileSystemView publicSourceCodeFilesystem(String projectName) {
         try {
-            return fileSystemUnionView(fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName))
+            return fileSystemUnionView(false, fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName))
                     , fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
         } catch (Throwable t) {
             throw execException("The project " + projectName + " probably needs to be build first, before you run the dev mode.", t);
@@ -98,7 +98,7 @@ public class DevDistroCell implements Cell {
 
     private static FileSystemView publicSubSourceCodeFilesystem(String projectName) {
         try {
-            return fileSystemUnionView(fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
+            return fileSystemUnionView(false, fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
                     , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
         } catch (Throwable t) {
             throw execException("The project " + projectName + " probably needs to be build first, before you run the dev mode.", t);
@@ -143,7 +143,7 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(NetworkPresentationsFileSystem.class, publicSourceCodeFilesystem("net.splitcells.network.presentations"))
                 .withConfigValue(CinTextFileSystem.class, publicSourceCodeFilesystem("net.splitcells.cin.text"))
                 .withConfigValue(SymbiosisFileSystem.class, publicSourceCodeFilesystem("net.splitcells.symbiosis"))
-                .withConfigValue(NetworkHubFileSystem.class, fileSystemUnionView(fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub"))
+                .withConfigValue(NetworkHubFileSystem.class, fileSystemUnionView(false, fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub"))
                         , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub/target/classes/net.splitcells.network.hub.resources"))))
         ;
     }
