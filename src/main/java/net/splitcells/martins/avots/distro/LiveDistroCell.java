@@ -99,7 +99,6 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
                 .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(RedirectServer.class);
-        DistroCell.configurator(env);
         net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
         ensureSslCertificatePresence(env);
     }
