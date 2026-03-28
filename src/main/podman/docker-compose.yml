@@ -27,6 +27,8 @@ services:
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
+    command:
+      - '-no-collector.mdadm' # Prevents the error "source=collector.go:168 msg="collector failed" name=mdadm", by disabling software RAID metrics. 
     depends_on:
       - prometheus
     networks:
