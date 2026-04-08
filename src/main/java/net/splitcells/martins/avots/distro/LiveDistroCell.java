@@ -116,7 +116,6 @@ public class LiveDistroCell implements Cell {
     @Override
     public void accept(Environment env) {
         env.withCell(SystemCell.class);
-        DistroCell.config(env.config().configValue(ServerConfig.class));
         GelExtCell.configureForWebserver(env);
         configForPublicServer(env);
     }

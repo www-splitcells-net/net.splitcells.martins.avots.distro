@@ -36,7 +36,7 @@ public class DistroCell implements Cell {
             resourceOfClass(DistroCell.class, "window-menu.xsl"));
 
     private Config config() {
-        final var config = net.splitcells.network.distro.DistroCell.config(configValue(ServerConfig.class))
+        final var config = configValue(ServerConfig.class)
                 .withDetailedXslMenu(DETAILED_XSL_MENU)
                 .withXslWindowMenu(WINDOW_MENU_XSL)
                 .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)))
