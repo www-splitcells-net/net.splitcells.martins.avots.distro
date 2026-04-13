@@ -4,4 +4,4 @@
 
 echo martins-avots@live.splitcells.net
 echo splitcells@raspberrypi-v2.local
-echo ubuntu@riscv.local
+echo ubuntun@riscv.local
