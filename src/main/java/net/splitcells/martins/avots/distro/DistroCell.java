@@ -47,6 +47,7 @@ public class DistroCell implements Cell {
 
     @Override
     public void accept(Environment env) {
+        env.withCell(net.splitcells.network.distro.DistroCell.class);
         configValue(ServerConfig.class)
                 .withDetailedXslMenu(DETAILED_XSL_MENU)
                 .withXslWindowMenu(WINDOW_MENU_XSL)

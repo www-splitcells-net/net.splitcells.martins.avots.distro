@@ -89,8 +89,6 @@ public class LiveDistroCell implements Cell {
 
 
     private void baseConfig(Environment env) {
-        env.config().configValueTyped(net.splitcells.network.distro.java.DistroCell.class)
-                .setGlobalUnixStateLogger();
         env.config()
                 .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
                 .withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
@@ -115,7 +113,9 @@ public class LiveDistroCell implements Cell {
 
     @Override
     public void accept(Environment env) {
-        env.withCell(SystemCell.class);
+        env.withCell(net.splitcells.martins.avots.distro.DistroCell.class);
+        env.config().configValueTyped(net.splitcells.network.distro.java.DistroCell.class)
+                .setGlobalUnixStateLogger();
         GelExtCell.configureForWebserver(env);
         configForPublicServer(env);
     }
