@@ -47,7 +47,6 @@ import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
 import static net.splitcells.dem.resource.communication.log.ServerLogger.serverLog;
 import static net.splitcells.gel.ui.editor.geal.EditorProcessorTest.TEST_OPTIMIZATION_GUI;
 import static net.splitcells.network.distro.java.DistroCell.ensureSslCertificatePresence;
-import static net.splitcells.network.distro.java.DistroCell.setGlobalUnixStateLogger;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
@@ -90,7 +89,8 @@ public class LiveDistroCell implements Cell {
 
 
     private void baseConfig(Environment env) {
-        setGlobalUnixStateLogger(env);
+        env.config().configValueTyped(net.splitcells.network.distro.java.DistroCell.class)
+                .setGlobalUnixStateLogger();
         env.config()
                 .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
                 .withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
