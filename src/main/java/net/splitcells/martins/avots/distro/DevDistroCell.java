@@ -250,7 +250,7 @@ public class DevDistroCell implements Cell {
 
     @Override
     public void accept(Environment env) {
-        config(env);
         env.withCell(DistroCell.class);
+        config(env);
     }
 }
