@@ -35,15 +35,6 @@ public class DistroCell implements Cell {
     private static final Optional<String> WINDOW_MENU_XSL = Optional.of(
             resourceOfClass(DistroCell.class, "window-menu.xsl"));
 
-    private Config config() {
-        final var config = configValue(ServerConfig.class)
-                .withDetailedXslMenu(DETAILED_XSL_MENU)
-                .withXslWindowMenu(WINDOW_MENU_XSL)
-                .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)))
-                .withAdditionalProject(projectConfig("/", configValue(SymbiosisFileSystem.class)));
-        return config;
-    }
-
     @Override
     public String groupId() {
         return "net.splitcells.martins.avots";
@@ -56,12 +47,15 @@ public class DistroCell implements Cell {
 
     @Override
     public void accept(Environment env) {
+        configValue(ServerConfig.class)
+                .withDetailedXslMenu(DETAILED_XSL_MENU)
+                .withXslWindowMenu(WINDOW_MENU_XSL)
+                .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)))
+                .withAdditionalProject(projectConfig("/", configValue(SymbiosisFileSystem.class)));
         env.config()
                 .withConfigValue(NetworkWorkerLogFileSystem.class, env.config().configValue(NetworkLogFileSystem.class))
                 .withInitedOption(HostUtilizationRecordService.class)
-                .withConfigValue(ServerConfig.class, config())
-                .withInitedOption(ServerService.class)
-        ;
+                .withInitedOption(ServerService.class);
         env.withCell(net.splitcells.network.distro.DistroCell.class);
     }
 }
