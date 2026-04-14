@@ -110,7 +110,7 @@ public class DevDistroCell implements Cell {
      *
      * @param config
      */
-    public static void useLocalFileSystem(Configuration config) {
+    private static void useLocalFileSystem(Configuration config) {
         config.withConfigValue(NetworkMediaFileSystem.class
                         , publicSourceCodeFilesystem("net.splitcells.network.media"))
                 .withConfigValue(BinaryFileSystem.class
@@ -250,7 +250,7 @@ public class DevDistroCell implements Cell {
 
     @Override
     public void accept(Environment env) {
-        env.withCell(DistroCell.class);
         config(env);
+        env.withCell(DistroCell.class);
     }
 }
