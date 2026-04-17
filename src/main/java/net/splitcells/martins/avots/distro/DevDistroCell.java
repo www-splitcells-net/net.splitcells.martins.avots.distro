@@ -24,7 +24,6 @@ import net.splitcells.dem.DemFileSystem;
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.config.framework.Configuration;
-import net.splitcells.dem.resource.FileSystem;
 import net.splitcells.dem.resource.FileSystemView;
 import net.splitcells.gel.GelCoreFileSystem;
 import net.splitcells.gel.data.table.TableModificationCounter;
@@ -50,7 +49,6 @@ import net.splitcells.symbiosis.SymbiosisFileSystem;
 import net.splitcells.website.WebsiteServerFileSystem;
 import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
-import net.splitcells.website.server.Config;
 import net.splitcells.website.server.ServerConfig;
 import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.security.authentication.Authentication;
@@ -61,7 +59,7 @@ import java.nio.file.Paths;
 
 import static net.splitcells.dem.data.set.list.Lists.list;
 import static net.splitcells.dem.resource.FileSystemUnionView.fileSystemUnionView;
-import static net.splitcells.dem.resource.FileSystems.fileSystemOnLocalHost;
+import static net.splitcells.dem.resource.PathFileSystem.pathFileSystem;
 import static net.splitcells.dem.utils.ExecutionException.execException;
 import static net.splitcells.gel.data.view.View.MIRROR_NAME;
 import static net.splitcells.website.server.processor.BinaryMessage.binaryMessage;
@@ -89,8 +87,8 @@ public class DevDistroCell implements Cell {
 
     private static FileSystemView publicSourceCodeFilesystem(String projectName) {
         try {
-            return fileSystemUnionView(false, fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName))
-                    , fileSystemOnLocalHost(PUBLIC_REPOS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
+            return fileSystemUnionView(false, pathFileSystem(PUBLIC_REPOS.resolve(projectName))
+                    , pathFileSystem(PUBLIC_REPOS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
         } catch (Throwable t) {
             throw execException("The project " + projectName + " probably needs to be build first, before you run the dev mode.", t);
         }
@@ -98,8 +96,8 @@ public class DevDistroCell implements Cell {
 
     private static FileSystemView publicSubSourceCodeFilesystem(String projectName) {
         try {
-            return fileSystemUnionView(false, fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
-                    , fileSystemOnLocalHost(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
+            return fileSystemUnionView(false, pathFileSystem(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
+                    , pathFileSystem(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
         } catch (Throwable t) {
             throw execException("The project " + projectName + " probably needs to be build first, before you run the dev mode.", t);
         }
@@ -116,9 +114,9 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(BinaryFileSystem.class
                         , publicSourceCodeFilesystem("net.splitcells.website.content.binaries"))
                 .withConfigValue(NetworkWorkerLogFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
+                        , pathFileSystem(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
                 .withConfigValue(NetworkLogFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
+                        , pathFileSystem(PUBLIC_REPOS.resolve("net.splitcells.network.log")))
                 .withConfigValue(CinFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.cin"))
                 .withConfigValue(DemFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.dem"))
                 .withConfigValue(DemApiFileSystem.class, publicSubSourceCodeFilesystem("net.splitcells.dem.api"))
@@ -137,14 +135,14 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(NetworkCommunityFileSystem.class, publicSourceCodeFilesystem("net.splitcells.network.community"))
                 .withConfigValue(DistroFileSystem.class, publicSourceCodeFilesystem("net.splitcells.martins.avots.distro"))
                 .withConfigValue(NetworkDistroFileSystem.class
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.distro/projects/net.splitcells.network.distro")))
+                        , pathFileSystem(PUBLIC_REPOS.resolve("net.splitcells.network.distro/projects/net.splitcells.network.distro")))
                 .withConfigValue(ProjectFileSystem.class
                         , publicSubSourceCodeFilesystem("net.splitcells.project"))
                 .withConfigValue(NetworkPresentationsFileSystem.class, publicSourceCodeFilesystem("net.splitcells.network.presentations"))
                 .withConfigValue(CinTextFileSystem.class, publicSourceCodeFilesystem("net.splitcells.cin.text"))
                 .withConfigValue(SymbiosisFileSystem.class, publicSourceCodeFilesystem("net.splitcells.symbiosis"))
-                .withConfigValue(NetworkHubFileSystem.class, fileSystemUnionView(false, fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub"))
-                        , fileSystemOnLocalHost(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub/target/classes/net.splitcells.network.hub.resources"))))
+                .withConfigValue(NetworkHubFileSystem.class, fileSystemUnionView(false, pathFileSystem(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub"))
+                        , pathFileSystem(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub/target/classes/net.splitcells.network.hub.resources"))))
         ;
     }
 
