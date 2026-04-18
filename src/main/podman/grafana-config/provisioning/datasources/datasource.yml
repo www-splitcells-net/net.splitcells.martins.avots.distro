@@ -13,3 +13,10 @@ datasources:
     url: http://pyroscope:4040
     jsonData:
       minStep: '15s'
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://localhost:3100
+    jsonData:
+      timeout: 60
+      maxLines: 1000
