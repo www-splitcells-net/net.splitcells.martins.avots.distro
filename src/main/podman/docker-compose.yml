@@ -24,6 +24,10 @@ services:
       - ./grafana-config/provisioning:/etc/grafana/provisioning
       - ./grafana-config/dashboards:/var/lib/grafana/dashboards
       - grafana-data:/var/lib/grafana
+  loki: # Database for logs
+    image: grafana/loki:latest
+    ports:
+      - 3100:3100
   node-exporter: # Collects metrics regarding host server.
     image: prom/node-exporter:latest
     container_name: node-exporter
