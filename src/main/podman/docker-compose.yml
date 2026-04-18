@@ -6,7 +6,7 @@ networks:
     driver: bridge
     internal: true # Traffic to the internet is blocked, as there is no need for that, and it may lead to leaks of private data.
 services:
-  grafana:
+  grafana: # Visualize logs and metrics.
     image: grafana/grafana:latest
     container_name: grafana
     depends_on:
@@ -24,7 +24,7 @@ services:
       - ./grafana-config/provisioning:/etc/grafana/provisioning
       - ./grafana-config/dashboards:/var/lib/grafana/dashboards
       - grafana-data:/var/lib/grafana
-  node-exporter:
+  node-exporter: # Collects metrics regarding host server.
     image: prom/node-exporter:latest
     container_name: node-exporter
     command:
@@ -40,7 +40,7 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
-  prometheus:
+  prometheus: # Time series database for metrics.
     image: prom/prometheus:latest
     container_name: prometheus
     command:
@@ -55,7 +55,7 @@ services:
     volumes:
       - ./prometheus-config:/etc/prometheus
       - prometheus-data:/prometheus-data
-  pyroscope:
+  pyroscope: # Collects profiling data of Java programs.
     # https://grafana.com/docs/pyroscope/latest/configure-client/grafana-alloy/java/
     # https://grafana.com/docs/pyroscope/latest/configure-client/language-sdks/java/
     # https://grafana.com/docs/pyroscope/latest/configure-client/grafana-alloy/ebpf/setup-docker/
