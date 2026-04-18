@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 lsof -ti:9000 | xargs kill -9 # Grafana
