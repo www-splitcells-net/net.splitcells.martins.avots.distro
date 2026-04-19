@@ -25,6 +25,7 @@ import net.splitcells.dem.resource.profiling.PyroscopeService;
 import net.splitcells.gel.ext.GelExtCell;
 import net.splitcells.network.distro.DistroCell;
 import net.splitcells.network.distro.java.acme.AcmeServerUri;
+import net.splitcells.network.distro.java.acme.CurrentAcmeAuthorization;
 import net.splitcells.network.system.SystemCell;
 import net.splitcells.website.server.RedirectServer;
 import net.splitcells.website.server.ServerConfig;
@@ -33,6 +34,7 @@ import net.splitcells.website.server.config.InternalPublicPort;
 import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
 import net.splitcells.website.server.config.PublicContactEMailAddress;
 import net.splitcells.website.server.config.PublicDomain;
+import net.splitcells.website.server.projects.extension.ProjectsRendererExtensions;
 import net.splitcells.website.server.security.authentication.Authentication;
 import net.splitcells.website.server.security.authorization.Authorization;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
@@ -46,7 +48,7 @@ import java.util.Optional;
 import static net.splitcells.dem.resource.communication.log.LogLevel.DEBUG;
 import static net.splitcells.dem.resource.communication.log.ServerLogger.serverLog;
 import static net.splitcells.gel.ui.editor.geal.EditorProcessorTest.TEST_OPTIMIZATION_GUI;
-import static net.splitcells.network.distro.java.DistroCell.ensureSslCertificatePresence;
+import static net.splitcells.network.distro.java.acme.AcmeChallengeFile.acmeChallengeFile;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
@@ -98,7 +100,6 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(RedirectServer.class);
         net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
-        ensureSslCertificatePresence(env);
     }
 
     @Override

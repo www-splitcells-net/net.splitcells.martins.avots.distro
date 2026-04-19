@@ -17,7 +17,9 @@ package net.splitcells.martins.avots.distro;
 
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
+import net.splitcells.network.distro.java.acme.CurrentAcmeAuthorization;
 import net.splitcells.network.system.SystemCell;
+import net.splitcells.website.server.projects.extension.ProjectsRendererExtensions;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
 import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
@@ -25,6 +27,7 @@ import net.splitcells.website.server.security.encryption.SslEnabled;
 import java.util.Optional;
 
 import static net.splitcells.dem.utils.reflection.ClassesRelated.simplifiedName;
+import static net.splitcells.network.distro.java.acme.AcmeChallengeFile.acmeChallengeFile;
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
 
@@ -44,6 +47,10 @@ public class LiveCryptoSetupCell implements Cell {
 
     @Override public void accept(Environment env) {
         env.withCell(LiveDistroCell.class);
+        env.config()
+                .withInitedOption(CurrentAcmeAuthorization.class)
+                .configValue(ProjectsRendererExtensions.class)
+                .withAppended(acmeChallengeFile());
         final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
         env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
                 .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
