@@ -5,3 +5,11 @@
 # Killing processes by title or lsof causes also kills the Firefox browser.
 # Killing all SSH commands is easier.
 killall ssh
+
+set -e
+echo You can now open Grafana via http://localhost:9000.
+ssh -L 9000:localhost:3000 martins-avots@live.splitcells.net &
+echo You can now open Pyroscope via http://localhost:4040.
+ssh -L 4040:localhost:4040 martins-avots@live.splitcells.net &
+echo You can now open Loki via http://localhost:3100.
+ssh -O cancel -L 3100:localhost:3100 martins-avots@live.splitcells.net211
