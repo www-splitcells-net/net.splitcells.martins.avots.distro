@@ -4,3 +4,9 @@
 lsof -ti:9000 | xargs kill -9 # Grafana
 lsof -ti:4040 | xargs kill -9 # Pyroscope
 lsof -ti:3100 | xargs kill -9 # Loki
+
+exit
+# TODO
+# Killing processes by title or lsof causes also kills the Firefox browser.
+# Killing all SSH commands is easier.
+killall ssh
