@@ -89,6 +89,8 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(RedirectServer.class);
         net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
+        // Link validation is disabled, in order to improve the page loading.
+        env.config().configValue(ServerConfig.class).setValidateLinks(false);
     }
 
     @Override
