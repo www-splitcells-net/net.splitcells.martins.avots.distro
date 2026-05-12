@@ -61,8 +61,6 @@ public class LiveDistroCell implements Cell {
 
     private void configForPublicServer(Environment env) {
         env.config()
-                .withConfigValue(PublicDomain.class, Optional.of("live.splitcells.net"))
-                .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
                 .withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig().publicPem()))
                 .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig().privatePem()))
                 .withConfigValue(SslEnabled.class, true)
@@ -84,9 +82,6 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
                 .withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
                         , env.config().configValue(MessageFilter.class)))
-                .withConfigValue(PublicDomain.class, Optional.of("live.splitcells.net"))
-                .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
-                .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(RedirectServer.class);
         net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
         // Link validation is disabled, in order to improve the page loading.

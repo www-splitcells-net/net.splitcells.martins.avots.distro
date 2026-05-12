@@ -22,6 +22,8 @@ import net.splitcells.network.log.NetworkLogFileSystem;
 import net.splitcells.network.worker.via.java.NetworkWorkerLogFileSystem;
 import net.splitcells.symbiosis.SymbiosisFileSystem;
 import net.splitcells.website.server.*;
+import net.splitcells.website.server.config.PublicContactEMailAddress;
+import net.splitcells.website.server.config.PublicDomain;
 
 import java.util.Optional;
 
@@ -54,6 +56,8 @@ public class DistroCell implements Cell {
                 .withAdditionalProject(projectConfig("/", configValue(DistroFileSystem.class)))
                 .withAdditionalProject(projectConfig("/", configValue(SymbiosisFileSystem.class)));
         env.config()
+                .withConfigValue(PublicDomain.class, Optional.of("live.splitcells.net"))
+                .withConfigValue(PublicContactEMailAddress.class, Optional.of("contacts@splitcells.net"))
                 .withConfigValue(NetworkWorkerLogFileSystem.class, env.config().configValue(NetworkLogFileSystem.class))
                 .withInitedOption(HostUtilizationRecordService.class)
                 .withInitedOption(ServerService.class);

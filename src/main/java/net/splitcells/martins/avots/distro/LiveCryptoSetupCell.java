@@ -17,6 +17,8 @@ package net.splitcells.martins.avots.distro;
 
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
+import net.splitcells.network.distro.java.Slf4jCell;
+import net.splitcells.network.distro.java.acme.AcmeServerUri;
 import net.splitcells.network.distro.java.acme.CurrentAcmeAuthorization;
 import net.splitcells.network.system.SystemCell;
 import net.splitcells.website.server.projects.extension.ProjectsRendererExtensions;
@@ -28,6 +30,7 @@ import java.util.Optional;
 
 import static net.splitcells.dem.utils.reflection.ClassesRelated.simplifiedName;
 import static net.splitcells.network.distro.java.acme.AcmeChallengeFile.acmeChallengeFile;
+import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
 
@@ -46,8 +49,11 @@ public class LiveCryptoSetupCell implements Cell {
     }
 
     @Override public void accept(Environment env) {
-        env.withCell(LiveDistroCell.class);
+        env
+                .withCell(net.splitcells.martins.avots.distro.DistroCell.class)
+                .withCell(Slf4jCell.class);
         env.config()
+                .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(CurrentAcmeAuthorization.class)
                 .configValue(ProjectsRendererExtensions.class)
                 .withAppended(acmeChallengeFile());
