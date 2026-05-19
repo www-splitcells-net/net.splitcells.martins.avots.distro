@@ -67,7 +67,6 @@ public class LiveCryptoSetupCell implements Cell {
     }
 
     @Override public void run() {
-        Dem.sleepAtLeast(10000000);
         publicKeyCryptoConfig();
     }
 }
