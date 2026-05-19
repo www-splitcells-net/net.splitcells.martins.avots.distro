@@ -22,6 +22,7 @@ import net.splitcells.network.distro.java.Slf4jCell;
 import net.splitcells.network.distro.java.acme.AcmeServerUri;
 import net.splitcells.network.distro.java.acme.CurrentAcmeAuthorization;
 import net.splitcells.network.system.SystemCell;
+import net.splitcells.website.server.ServerConfig;
 import net.splitcells.website.server.projects.extension.ProjectsRendererExtensions;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
 import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
@@ -58,10 +59,11 @@ public class LiveCryptoSetupCell implements Cell {
                 .withInitedOption(CurrentAcmeAuthorization.class)
                 .configValue(ProjectsRendererExtensions.class)
                 .withAppended(acmeChallengeFile());
+        env.config().configValue(ServerConfig.class).withOpenPort(8080);
         final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
         env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
                 .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
-                .withConfigValue(SslEnabled.class, true);
+                .withConfigValue(SslEnabled.class, false);
     }
 
     @Override public void run() {
