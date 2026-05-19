@@ -15,6 +15,7 @@
  */
 package net.splitcells.martins.avots.distro;
 
+import net.splitcells.dem.Dem;
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
 import net.splitcells.network.distro.java.Slf4jCell;
@@ -64,6 +65,7 @@ public class LiveCryptoSetupCell implements Cell {
     }
 
     @Override public void run() {
+        Dem.sleepAtLeast(10000000);
         publicKeyCryptoConfig();
     }
 }
