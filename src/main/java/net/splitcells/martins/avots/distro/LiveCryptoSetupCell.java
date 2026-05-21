@@ -55,15 +55,12 @@ public class LiveCryptoSetupCell implements Cell {
                 .withCell(net.splitcells.martins.avots.distro.DistroCell.class)
                 .withCell(Slf4jCell.class);
         env.config()
+                .withConfigValue(SslEnabled.class, false)
                 .withConfigValue(AcmeServerUri.class, PRODUCTION_ACME_SERVER)
                 .withInitedOption(CurrentAcmeAuthorization.class)
                 .configValue(ProjectsRendererExtensions.class)
                 .withAppended(acmeChallengeFile());
         env.config().configValue(ServerConfig.class).withOpenPort(8080);
-        final var publicKeyCryptoConfig = selfSignedPublicKeyCryptoConfigurator().selfSignedPublicKeyCryptoConfig();
-        env.config().withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.publicPem()))
-                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig.privatePem()))
-                .withConfigValue(SslEnabled.class, false);
     }
 
     @Override public void run() {

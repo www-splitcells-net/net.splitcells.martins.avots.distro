@@ -3,6 +3,7 @@
  */
 package net.splitcells.martins.avots.distro;
 
+import lombok.val;
 import net.splitcells.dem.Dem;
 import net.splitcells.dem.environment.Cell;
 import net.splitcells.dem.environment.Environment;
@@ -40,6 +41,7 @@ import static net.splitcells.gel.ui.editor.geal.EditorProcessorTest.TEST_OPTIMIZ
 import static net.splitcells.network.distro.java.acme.AcmeChallengeFile.acmeChallengeFile;
 import static net.splitcells.network.distro.java.acme.AcmeServerUri.PRODUCTION_ACME_SERVER;
 import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.publicKeyCryptoConfig;
+import static net.splitcells.network.distro.java.acme.PublicKeyCryptoConfigurator.readPublicKeyCryptoConfig;
 import static net.splitcells.network.distro.java.acme.SelfSignedPublicKeyCryptoConfigurator.selfSignedPublicKeyCryptoConfigurator;
 import static net.splitcells.website.server.security.authentication.AuthenticatorImpl.authenticatorBasedOnFiles;
 import static net.splitcells.website.server.security.authorization.AuthorizerBasedOnFiles.authorizerBasedOnFiles;
@@ -60,9 +62,10 @@ public class LiveDistroCell implements Cell {
     }
 
     private void configForPublicServer(Environment env) {
+        val readPublicKeyCryptoConfig = readPublicKeyCryptoConfig();
         env.config()
-                .withConfigValue(PublicIdentityPemStore.class, Optional.of(publicKeyCryptoConfig().publicPem()))
-                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(publicKeyCryptoConfig().privatePem()))
+                .withConfigValue(PublicIdentityPemStore.class, Optional.of(readPublicKeyCryptoConfig.publicPem()))
+                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(readPublicKeyCryptoConfig.privatePem()))
                 .withConfigValue(SslEnabled.class, true)
                 .withInitedOption(HtmlLiveTester.class)
                 .withConfigValue(HtmlLiveTest.class, TEST_OPTIMIZATION_GUI)
