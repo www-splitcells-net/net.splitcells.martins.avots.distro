@@ -24,6 +24,7 @@ import net.splitcells.network.distro.java.acme.CurrentAcmeAuthorization;
 import net.splitcells.network.system.SystemCell;
 import net.splitcells.website.server.ServerConfig;
 import net.splitcells.website.server.projects.extension.ProjectsRendererExtensions;
+import net.splitcells.website.server.security.authentication.Authentication;
 import net.splitcells.website.server.security.encryption.PrivateIdentityPemStore;
 import net.splitcells.website.server.security.encryption.PublicIdentityPemStore;
 import net.splitcells.website.server.security.encryption.SslEnabled;
@@ -50,6 +51,13 @@ public class LiveCryptoSetupCell implements Cell {
         return "martins.avots.distro";
     }
 
+    /**
+     * No access to the user data is possible, as no {@link Authentication} is configured.
+     * This needs to be the case, because otherwise users would do an authentication to the server unencrypted via HTTP,
+     * which would make their username, password and data visible to others.
+     * 
+     * @param env The configuration that bootstraps this {@link Cell}.
+     */
     @Override public void accept(Environment env) {
         env
                 .withCell(net.splitcells.martins.avots.distro.DistroCell.class)
