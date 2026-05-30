@@ -26,6 +26,7 @@ import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.config.framework.Configuration;
 import net.splitcells.dem.resource.FileSystemView;
 import net.splitcells.gel.GelCoreFileSystem;
+import net.splitcells.gel.data.assignment.Assignmentss;
 import net.splitcells.gel.data.table.TableModificationCounter;
 import net.splitcells.gel.data.table.Tables;
 import net.splitcells.gel.doc.GelDocFileSystem;
@@ -162,6 +163,11 @@ public class DevDistroCell implements Cell {
             env.config().configValue(Tables.class).withConnector(table -> {
                 if (!table.name().equals(MIRROR_NAME)) {
                     registerObject(table.discoverableRenderer());
+                }
+            });
+            env.config().configValue(Assignmentss.class).withConnector(assignments -> {
+                if (!assignments.name().equals(MIRROR_NAME)) {
+                    registerObject(assignments.discoverableRenderer());
                 }
             });
             /* TODO The ObjectsRenderers' errors cause the server to fail
