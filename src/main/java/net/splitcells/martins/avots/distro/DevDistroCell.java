@@ -14,6 +14,7 @@ import net.splitcells.dem.environment.Environment;
 import net.splitcells.dem.environment.config.framework.Configuration;
 import net.splitcells.dem.resource.FileSystemView;
 import net.splitcells.gel.GelCoreFileSystem;
+import net.splitcells.gel.data.RenderCell;
 import net.splitcells.gel.data.assignment.Assignmentss;
 import net.splitcells.gel.data.table.TableModificationCounter;
 import net.splitcells.gel.data.table.Tables;
@@ -147,17 +148,6 @@ public class DevDistroCell implements Cell {
                     .withInitedOption(TableModificationCounter.class)
             ;
             env.config().configValue(ServerConfig.class).withIsServerForGeneralPublic(false);
-            // TODO Move this connector to the core code.
-            env.config().configValue(Tables.class).withConnector(table -> {
-                if (!table.name().equals(MIRROR_NAME)) {
-                    registerObject(table.discoverableRenderer());
-                }
-            });
-            env.config().configValue(Assignmentss.class).withConnector(assignments -> {
-                if (!assignments.name().equals(MIRROR_NAME)) {
-                    registerObject(assignments.discoverableRenderer());
-                }
-            });
             /* TODO The ObjectsRenderers' errors cause the server to fail
                to process editor requests in multithreaded environments.
                ObjectsRenderers also cause errors in single-threaded environments,
@@ -243,6 +233,6 @@ public class DevDistroCell implements Cell {
     @Override
     public void accept(Environment env) {
         config(env);
-        env.withCell(DistroCell.class);
+        env.withCell(DistroCell.class).withCell(RenderCell.class);
     }
 }
