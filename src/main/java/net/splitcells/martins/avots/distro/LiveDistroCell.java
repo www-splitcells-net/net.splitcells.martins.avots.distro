@@ -86,7 +86,7 @@ public class LiveDistroCell implements Cell {
                 .withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
                         , env.config().configValue(MessageFilter.class)))
                 .withInitedOption(RedirectServer.class);
-        net.splitcells.network.distro.java.DistroCell.config(env.config().configValue(ServerConfig.class));
+        env.config().configValue(ServerConfig.class);
         // Link validation is disabled, in order to improve the page loading.
         env.config().configValue(ServerConfig.class).setValidateLinks(false);
     }
