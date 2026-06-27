@@ -75,7 +75,7 @@ public class DevDistroCell implements Cell {
         useLocalFileSystem(env.config());
     }
 
-    private static FileSystemView publicSourceCodeFilesystem(String projectName) {
+    private FileSystemView publicSourceCodeFilesystem(String projectName) {
         try {
             return fileSystemUnionView(false, pathFileSystem(PUBLIC_REPOS.resolve(projectName))
                     , pathFileSystem(PUBLIC_REPOS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
@@ -84,7 +84,7 @@ public class DevDistroCell implements Cell {
         }
     }
 
-    private static FileSystemView publicSubSourceCodeFilesystem(String projectName) {
+    private FileSystemView publicSubSourceCodeFilesystem(String projectName) {
         try {
             return fileSystemUnionView(false, pathFileSystem(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
                     , pathFileSystem(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName + "/target/classes/" + projectName + ".resources")));
@@ -98,7 +98,7 @@ public class DevDistroCell implements Cell {
      *
      * @param config
      */
-    private static void useLocalFileSystem(Configuration config) {
+    private void useLocalFileSystem(Configuration config) {
         config.withConfigValue(NetworkMediaFileSystem.class
                         , publicSourceCodeFilesystem("net.splitcells.network.media"))
                 .withConfigValue(BinaryFileSystem.class
@@ -136,21 +136,6 @@ public class DevDistroCell implements Cell {
         ;
     }
 
-    private void config(Environment env) {
-        {
-            env.withConfig(this::useLocalFileSystem)
-                    .config()
-                    .withConfigValue(CinServiceInitTest.class, true)
-                    // .withInitedOption(CinService.class) TODO Enable this when the ticket #51 Bootstrap game based on optimization networks is being worked on again.
-                    .withConfigValue(PasswordAuthenticationEnabled.class, true)
-                    .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
-                    .withConfigValue(Authorization.class, authorizerBasedOnFiles())
-                    .withInitedOption(TableModificationCounter.class)
-            ;
-            env.config().configValue(ServerConfig.class).withIsServerForGeneralPublic(false);
-        }
-    }
-
     @Override
     public String groupId() {
         return "net.splitcells.martins.avots";
@@ -163,7 +148,16 @@ public class DevDistroCell implements Cell {
 
     @Override
     public void accept(Environment env) {
-        config(env);
+        env.withConfig(this::useLocalFileSystem)
+                .config()
+                .withConfigValue(CinServiceInitTest.class, true)
+                // .withInitedOption(CinService.class) TODO Enable this when the ticket #51 Bootstrap game based on optimization networks is being worked on again.
+                .withConfigValue(PasswordAuthenticationEnabled.class, true)
+                .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
+                .withConfigValue(Authorization.class, authorizerBasedOnFiles())
+                .withInitedOption(TableModificationCounter.class)
+        ;
+        env.config().configValue(ServerConfig.class).withIsServerForGeneralPublic(false);
         env.withCell(DistroCell.class).withCell(RenderCell.class);
     }
 }
