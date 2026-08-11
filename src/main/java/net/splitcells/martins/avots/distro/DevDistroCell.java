@@ -41,12 +41,15 @@ import net.splitcells.website.binaries.BinaryFileSystem;
 import net.splitcells.website.content.defaults.WebsiteContentDefaultsFileSystem;
 import net.splitcells.website.server.ServerConfig;
 import net.splitcells.website.server.config.PasswordAuthenticationEnabled;
+import net.splitcells.website.server.config.PublicDomain;
 import net.splitcells.website.server.security.authentication.Authentication;
 import net.splitcells.website.server.security.authorization.Authorization;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
+import static net.splitcells.dem.Dem.configValue;
 import static net.splitcells.dem.data.set.list.Lists.list;
 import static net.splitcells.dem.resource.FileSystemUnionView.fileSystemUnionView;
 import static net.splitcells.dem.resource.PathFileSystem.pathFileSystem;
@@ -156,6 +159,7 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
                 .withConfigValue(Authorization.class, authorizerBasedOnFiles())
                 .withInitedOption(TableModificationCounter.class)
+                .withConfigValue(PublicDomain.class, Optional.empty())
         ;
         env.config().configValue(ServerConfig.class).withIsServerForGeneralPublic(false);
         env.withCell(DistroCell.class).withCell(RenderCell.class);
