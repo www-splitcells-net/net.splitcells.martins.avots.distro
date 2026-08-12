@@ -159,9 +159,9 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
                 .withConfigValue(Authorization.class, authorizerBasedOnFiles())
                 .withInitedOption(TableModificationCounter.class)
-                .withConfigValue(PublicDomain.class, Optional.empty())
         ;
         env.config().configValue(ServerConfig.class).withIsServerForGeneralPublic(false);
         env.withCell(DistroCell.class).withCell(RenderCell.class);
+        env.config().withConfigValue(PublicDomain.class, Optional.empty());
     }
 }
