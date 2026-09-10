@@ -60,36 +60,7 @@ public class LiveDistroCell implements Cell {
         Dem.serve(LiveCryptoSetupCell.class);
         Dem.serve(LiveDistroCell.class);
     }
-
-    private void configForPublicServer(Environment env) {
-        val readPublicKeyCryptoConfig = readPublicKeyCryptoConfig();
-        env.config()
-                .withConfigValue(PublicIdentityPemStore.class, Optional.of(readPublicKeyCryptoConfig.publicPem()))
-                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(readPublicKeyCryptoConfig.privatePem()))
-                .withConfigValue(SslEnabled.class, true)
-                .withInitedOption(HtmlLiveTester.class)
-                .withConfigValue(HtmlLiveTest.class, TEST_OPTIMIZATION_GUI)
-                .withConfigValue(MessageFilter.class, logMessage -> true)
-                .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
-                .withConfigValue(PasswordAuthenticationEnabled.class, true)
-                .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
-                .withConfigValue(Authorization.class, authorizerBasedOnFiles())
-                .withInitedOption(PyroscopeService.class)
-        ;
-        baseConfig(env);
-    }
-
-
-    private void baseConfig(Environment env) {
-        env.config()
-                .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
-                .withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
-                        , env.config().configValue(MessageFilter.class)))
-                .withInitedOption(RedirectServer.class);
-        env.config().configValue(ServerConfig.class);
-        // Link validation is disabled, in order to improve the page loading.
-        env.config().configValue(ServerConfig.class).setValidateLinks(false);
-    }
+    
 
     @Override
     public String groupId() {
@@ -107,6 +78,26 @@ public class LiveDistroCell implements Cell {
                 .withCell(net.splitcells.martins.avots.distro.DistroCell.class)
                 .withCell(Slf4jCell.class);
         GelExtCell.configureForWebserver(env);
-        configForPublicServer(env);
+        val readPublicKeyCryptoConfig = readPublicKeyCryptoConfig();
+        env.config()
+                .withConfigValue(PublicIdentityPemStore.class, Optional.of(readPublicKeyCryptoConfig.publicPem()))
+                .withConfigValue(PrivateIdentityPemStore.class, Optional.of(readPublicKeyCryptoConfig.privatePem()))
+                .withConfigValue(SslEnabled.class, true)
+                .withInitedOption(HtmlLiveTester.class)
+                .withConfigValue(HtmlLiveTest.class, TEST_OPTIMIZATION_GUI)
+                .withConfigValue(InternalPublicPort.class, Optional.of(8443)) // This is required, because from inside the container, the port is not the public one, but the one in the mapping of the Dockerfile.
+                .withConfigValue(PasswordAuthenticationEnabled.class, true)
+                .withConfigValue(Authentication.class, authenticatorBasedOnFiles())
+                .withConfigValue(Authorization.class, authorizerBasedOnFiles())
+                .withInitedOption(PyroscopeService.class)
+        ;
+        env.config()
+                .withConfigValue(MessageFilter.class, logMessage -> logMessage.priority().greaterThanOrEqual(DEBUG))
+                .withConfigValue(Logs.class, serverLog(env.config().configValue(Console.class)
+                        , env.config().configValue(MessageFilter.class)))
+                .withInitedOption(RedirectServer.class);
+        env.config().configValue(ServerConfig.class);
+        // Link validation is disabled, in order to improve the page loading.
+        env.config().configValue(ServerConfig.class).setValidateLinks(false);
     }
 }
