@@ -54,7 +54,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus-config.yml'
       - '--storage.tsdb.path=/prometheus-data'
       - '--web.enable-lifecycle'
-      - "--log.level=warn"
+      - "--log.level=warn" # Info level is creating quite the spam.
     networks:
       - monitoring
     ports:
