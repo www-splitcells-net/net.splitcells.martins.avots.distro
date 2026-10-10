@@ -50,11 +50,11 @@ services:
   prometheus: # Time series database for metrics.
     image: prom/prometheus:latest
     container_name: prometheus
-    command:
+    command: # Info level is creating quite the spam.
       - '--config.file=/etc/prometheus/prometheus-config.yml'
       - '--storage.tsdb.path=/prometheus-data'
       - '--web.enable-lifecycle'
-      - "--log.level=warn" # Info level is creating quite the spam.
+      - "--log.level=warn"
     networks:
       - monitoring
     ports:
