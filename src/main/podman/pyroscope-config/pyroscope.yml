@@ -7,3 +7,4 @@
 # Reporting is disabled, in order to avoid this error message.
 analytics:
     reporting_enabled: false
+    log_level: warn

@@ -15,6 +15,7 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_LOG_LEVEL=warn
     networks:
       - monitoring
     ports:
@@ -53,6 +54,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus-data'
       - '--web.enable-lifecycle'
+      - "--log.level=warn"
     networks:
       - monitoring
     ports:
