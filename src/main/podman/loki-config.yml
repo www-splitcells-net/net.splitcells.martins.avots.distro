@@ -1,4 +1,24 @@
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
+auth_enabled: false
+common:
+  ring:
+    instance_addr: 127.0.0.1
+    kvstore:
+      store: inmemory
+  replication_factor: 1
+  path_prefix: /tmp/loki
 server:
-    log_level: warn # Info level is creating quite the spam.
+  log_level: warn # Info level is creating quite the spam.
+schema_config:
+  configs:
+    - from: 2020-05-15
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+storage_config:
+  filesystem:
+    directory: /tmp/loki/chunks
