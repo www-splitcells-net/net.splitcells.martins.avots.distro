@@ -5,6 +5,8 @@ set -e
 # For the monitoring services the systemd config points to the distro's repo
 # that is stored at the program `net.splitcells.martins.avots.distro.livedistrocell`.
 # Therefore, deploying this and restarting the services applies changes of the Podman config as well.
+# See `setup.monitoring.sh`.
+# TODO Integrate `setup.monitoring.sh` into this script. 
 cd ../net.splitcells.network
 bin/worker.execute.py \
   --program-name=net.splitcells.martins.avots.distro.livedistrocell \
