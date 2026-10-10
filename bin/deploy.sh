@@ -2,6 +2,9 @@
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 set -e
+# For the monitoring services the systemd config points to the distro's repo
+# that is stored at the program `net.splitcells.martins.avots.distro.livedistrocell`.
+# Therefore, deploying this and restarting the services applies changes of the Podman config as well.
 cd ../net.splitcells.network
 bin/worker.execute.py \
   --program-name=net.splitcells.martins.avots.distro.livedistrocell \
