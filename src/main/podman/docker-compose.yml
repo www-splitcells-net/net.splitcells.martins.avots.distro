@@ -31,6 +31,7 @@ services:
       - 3100:3100
     volumes:
       - ./loki-config.yml:/etc/loki/local-config.yaml:ro
+      - loki-data:/tmp/loki
   node-exporter: # Collects metrics regarding host server.
     image: prom/node-exporter:latest
     container_name: node-exporter
@@ -80,3 +81,4 @@ services:
 volumes:
   grafana-data: {}
   prometheus-data: {}
+  loki-data: {}
