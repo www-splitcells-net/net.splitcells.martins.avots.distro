@@ -1,3 +1,4 @@
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
 # SPDX-FileCopyrightText: Contributors To The `net.splitcells.*` Projects
 log_level: warn # Info level is creating quite the spam.
+  - ./loki-config.yml:/etc/loki/local-config.yaml:ro

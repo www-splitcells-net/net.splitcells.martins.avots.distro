@@ -51,7 +51,7 @@ services:
     image: prom/prometheus:latest
     container_name: prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--config.file=/etc/prometheus/prometheus-config.yml'
       - '--storage.tsdb.path=/prometheus-data'
       - '--web.enable-lifecycle'
       - "--log.level=warn"
@@ -61,7 +61,7 @@ services:
       - "9091:9090" # 9090 Is already used for cockpit.
     restart: unless-stopped
     volumes:
-      - ./prometheus-config:/etc/prometheus
+      - ./prometheus-config.yml:/etc/prometheus/prometheus-config.yml:ro
       - prometheus-data:/prometheus-data
   pyroscope: # Collects profiling data of Java programs.
     # https://grafana.com/docs/pyroscope/latest/configure-client/grafana-alloy/java/
@@ -70,13 +70,13 @@ services:
     image: grafana/pyroscope:latest
     container_name: pyroscope
     command:
-      - '--config.file=/etc/pyroscope/pyroscope.yml'
+      - '--config.file=/etc/pyroscope/pyroscope-config.yml'
     networks:
       - monitoring
     ports:
       - "4040:4040"
     volumes:
-      - ./pyroscope-config:/etc/pyroscope
+      - ./pyroscope-config.yml:/etc/pyroscope/pyroscope-config.yml:ro
 volumes:
   grafana-data: {}
   prometheus-data: {}
