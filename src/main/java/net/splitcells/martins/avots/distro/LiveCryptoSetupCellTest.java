@@ -66,7 +66,7 @@ public class LiveCryptoSetupCellTest {
                             * openPort: 8080
                             * generationStyle: standard
                             * cssFiles: [net/splitcells/website/css/tabulator.min.css, net/splitcells/website/css/dragula.min.css, net/splitcells/website/css/highlight.css, net/splitcells/website/css/theme.white.variables.css, net/splitcells/website/css/basic.themed.css, net/splitcells/website/css/basic.css, net/splitcells/website/css/den.css, net/splitcells/website/css/layout.default.css, net/splitcells/website/css/theme.css, net/splitcells/website/css/jquery-fancytree-all-deps.min.css]
-                            * jsBackgroundFiles: [net/splitcells/website/js/dragula.min.js, net/splitcells/website/js/codemirror-editor-bundle.js, net/splitcells/website/js/jquery.js, net/splitcells/website/js/highlight.js, net/splitcells/website/js/basic.js, net/splitcells/website/js/basic.default.js, net/splitcells/website/js/tabulator.min.js, net/splitcells/website/js/tabulator.injection.js, net/splitcells/website/js/jquery-fancytree-all-deps.min.js, net/splitcells/website/js/jquery-fancytree-all-deps-injection.min.js]
+                            * jsBackgroundFiles: [net/splitcells/website/js/dragula.min.js, net/splitcells/website/js/codemirror-editor-bundle.js, net/splitcells/website/js/jquery.js, net/splitcells/website/js/highlight.js, net/splitcells/website/js/basic.js, net/splitcells/website/js/basic.default.js, net/splitcells/website/js/tabulator.min.js, net/splitcells/website/js/tabulator.injection.js, net/splitcells/website/js/fancytree-all-deps.min.js]
                             * siteFolder: null
                             * rootPath: /
                             * sitesName: splitcells.net
