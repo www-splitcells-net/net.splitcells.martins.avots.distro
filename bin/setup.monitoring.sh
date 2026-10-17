@@ -13,7 +13,7 @@
 set -e
 
 sudo apt-get install -y podman-compose netavark aardvark-dns
-cd src/main/podman
+cd src/main/podman # Folder on the server: ~/.local/state/net.splitcells.network.worker/repos/public/net.splitcells.martins.avots.distro/src/main/podman
 podman-compose up --detach
 podman-compose --podman-run-args=--replace up --detach # Ensure a restart, so that all configs are really applied, if the pods where already running.
 # You can restart one container via `podman-compose restart [container]`
