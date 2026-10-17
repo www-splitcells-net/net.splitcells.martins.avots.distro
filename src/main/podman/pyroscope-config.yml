@@ -8,4 +8,4 @@
 analytics:
     reporting_enabled: false
 server:
-    log_level: warn  # Info level is creating quite the spam.
+    log_level: warn # Info level is creating quite the spam.
