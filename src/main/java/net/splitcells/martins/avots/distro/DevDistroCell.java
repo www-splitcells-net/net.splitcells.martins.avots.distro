@@ -87,6 +87,15 @@ public class DevDistroCell implements Cell {
         }
     }
 
+    private FileSystemView publicSubSourceCodeFilesystem(String projectName, String subProjectName) {
+        try {
+            return fileSystemUnionView(false, pathFileSystem(PUBLIC_REPOS.resolve(projectName))
+                    , pathFileSystem(PUBLIC_REPOS.resolve(projectName + "/projects/" + subProjectName + "/target/classes/" + subProjectName + ".resources")));
+        } catch (Throwable t) {
+            throw execException("The project " + projectName + " probably needs to be build first, before you run the dev mode.", t);
+        }
+    }
+
     private FileSystemView publicSubSourceCodeFilesystem(String projectName) {
         try {
             return fileSystemUnionView(false, pathFileSystem(PUBLIC_ROOT_SUB_PROJECTS.resolve(projectName))
@@ -134,8 +143,8 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(NetworkPresentationsFileSystem.class, publicSourceCodeFilesystem("net.splitcells.network.presentations"))
                 .withConfigValue(CinTextFileSystem.class, publicSourceCodeFilesystem("net.splitcells.cin.text"))
                 .withConfigValue(SymbiosisFileSystem.class, publicSourceCodeFilesystem("net.splitcells.symbiosis"))
-                .withConfigValue(NetworkHubFileSystem.class, fileSystemUnionView(false, pathFileSystem(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub"))
-                        , pathFileSystem(PUBLIC_REPOS.resolve("net.splitcells.network.hub/projects/net.splitcells.network.hub/target/classes/net.splitcells.network.hub.resources"))))
+                .withConfigValue(NetworkHubFileSystem.class
+                        , publicSubSourceCodeFilesystem("net.splitcells.network.hub", "net.splitcells.network.hub"))
         ;
     }
 
