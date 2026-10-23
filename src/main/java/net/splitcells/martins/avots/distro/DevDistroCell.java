@@ -137,7 +137,7 @@ public class DevDistroCell implements Cell {
                 .withConfigValue(NetworkCommunityFileSystem.class, publicSourceCodeFilesystem("net.splitcells.network.community"))
                 .withConfigValue(DistroFileSystem.class, publicSourceCodeFilesystem("net.splitcells.martins.avots.distro"))
                 .withConfigValue(NetworkDistroFileSystem.class
-                        , pathFileSystem(PUBLIC_REPOS.resolve("net.splitcells.network.distro/projects/net.splitcells.network.distro")))
+                        , publicSubSourceCodeFilesystem("net.splitcells.network.distro", "net.splitcells.network.distro"))
                 .withConfigValue(ProjectFileSystem.class
                         , publicSubSourceCodeFilesystem("net.splitcells.project"))
                 .withConfigValue(NetworkPresentationsFileSystem.class, publicSourceCodeFilesystem("net.splitcells.network.presentations"))
